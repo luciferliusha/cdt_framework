@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjcds.om.data.dao.OMUserDao">
+	<resultMap type="com.zjcds.om.data.bean.OMUserData" id="BaseResultMap">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="TYPE" property="type" jdbcType="DECIMAL" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+		<result column="PHONE" property="phone" jdbcType="VARCHAR" />
+		<result column="MOBILEPHONE" property="mobilePhone" jdbcType="VARCHAR" />
+		<result column="EMAIL" property="email" jdbcType="VARCHAR" />
+		<result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+		<result column="CREATETIME" property="createTime" jdbcType="DATE" />
+		<result column="UPDATETIME" property="updateTime" jdbcType="DATE" />
+		<result column="KIND" property="kind" jdbcType="DECIMAL" />
+		<result column="XZQHDM" property="xzqhdm" jdbcType="VARCHAR" />
+		<result column="XZQHMC" property="xzqhmc" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!-- 登录用结果集 -->
+	<resultMap type="java.util.Map" id="loginResultMap">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="KIND" property="kind" jdbcType="DECIMAL" />
+		<result column="XZQHDM" property="xzqhdm" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- 取得可分享用户集 -->
+	<resultMap type="java.util.Map" id="getShareMap">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="NAME" property="text" jdbcType="VARCHAR" />
+		<result column="ICONCLS" property="iconCls" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID,TYPE,STATUS,NAME,PASSWORD,PHONE,MOBILEPHONE,EMAIL,ADDRESS,CREATETIME,UPDATETIME,XZQHDM,XZQHMC
+	</sql>
+	<!-- 根据组织ID关联用户信息 -->
+	<select id="getUserByOrganizationId" parameterType="com.zjcds.om.data.bean.OMOrganizationData"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from T_USER
+		<if test="id != null">
+			where id in
+			(select userId from T_USER_ORGANIZATION where
+			organizationId =
+			#{id,jdbcType=DECIMAL})
+		</if>
+		<if test="id == null">
+			where id in
+			(select userId from T_USER_ORGANIZATION where
+			organizationId = 0)
+		</if>
+		order by nlssort(name,'NLS_SORT=SCHINESE_PINYIN_M')
+	</select>
+	<!-- 修改用户信息 -->
+	<update id="omUpdateUser" parameterType="com.zjcds.om.data.bean.OMOrganizationData">
+		update T_USER
+		<set>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=DECIMAL},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				PASSWORD = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				PHONE = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="mobilePhone != null">
+				MOBILEPHONE = #{mobilePhone,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				EMAIL = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				ADDRESS = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				UPDATETIME = #{updateTime,jdbcType=DATE},
+			</if>
+			<if test="xzqhdm != null">
+				XZQHDM = #{xzqhdm,jdbcType=VARCHAR},
+			</if>
+			<if test="xzqhmc != null">
+				XZQHMC = #{xzqhmc,jdbcType=VARCHAR}
+			</if>
+		</set>
+		<where>
+			ID = #{id,jdbcType=DECIMAL}
+		</where>
+	</update>
+	<!-- 根据ID删除用户 -->
+	<delete id="omDeleteUser" parameterType="int">
+		delete from T_USER where
+		id = #{id,jdbcType=DECIMAL}
+	</delete>
+	<!-- 新增用户 -->
+	<insert id="omAddUser" parameterType="com.zjcds.om.data.bean.OMOrganizationData">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			T_ORGANIZATION_sequence.NEXTVAL FROM DUAL
+		</selectKey>
+		insert into
+		T_USER(ID,TYPE,STATUS,NAME,PASSWORD,PHONE,MOBILEPHONE,EMAIL,ADDRESS,CREATETIME,XZQHDM,XZQHMC)
+		values(#{id,jdbcType=DECIMAL},#{type,jdbcType=DECIMAL},#{status,jdbcType=DECIMAL},#{name,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},#{mobilePhone,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},
+		#{address,jdbcType=VARCHAR},#{createTime,jdbcType=DATE},#{xzqhdm,jdbcType=VARCHAR},#{xzqhmc,jdbcType=VARCHAR})
+	</insert>
+	<!-- 创建用户与组织的关系 -->
+	<insert id="omAddUserRelationWithOrganization" parameterType="com.zjcds.om.data.bean.OMOrganizationData">
+		insert into T_USER_ORGANIZATION(organizationId,userId)
+		values(#{parentId,jdbcType=DECIMAL},#{id,jdbcType=DECIMAL})
+	</insert>
+	<!-- 根据用户ID删除用户与组织的关系 -->
+	<delete id="omDeleteUserRelationWithOrganization" parameterType="com.zjcds.om.data.bean.OMOrganizationData">
+		delete from T_USER_ORGANIZATION where userId = #{id,jdbcType=DECIMAL}
+	</delete>
+	<!-- 根据用户ID删除用户与角色的关系 -->
+	<delete id="omDeleteUserRelationWithRole" parameterType="com.zjcds.om.data.bean.OMOrganizationData">
+		delete
+		from T_USER_ROLE where userId = #{id,jdbcType=DECIMAL}
+	</delete>
+	<!-- 根据用户ID和组织ID删除用户与组织关系 -->
+	<delete id="omDeleteRelationByIds" parameterType="java.util.Map">
+		delete from
+		T_USER_ORGANIZATION where userId = #{userId,jdbcType=DECIMAL}
+		and
+		organizationId = #{organizationId,jdbcType=DECIMAL}
+	</delete>
+	<!-- 根据用户ID查询与之关联的组织数量 -->
+	<select id="omGetRelationCount" parameterType="int" resultType="int">
+		select count(organizationId) from T_USER_ORGANIZATION where
+		userId=#{userId,jdbcType=DECIMAL}
+	</select>
+	<!-- 登录验证 -->
+	<select id="omLogin" parameterType="com.zjcds.om.data.bean.OMUserData"
+		resultMap="loginResultMap">
+		select id,name,kind,xzqhdm from t_user where email
+		=#{email,jdbcType=VARCHAR}
+		and password = #{password,jdbcType=VARCHAR}
+	</select>
+	<!-- 验证用户是否存在 -->
+	<select id="omUserIsExit" parameterType="java.lang.String"
+		resultType="int">
+		select count(email) from T_USER where email =
+		#{email,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 用户搜索 -->
+	<select id="omSearchUser" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_user t where t.name like <![CDATA[ CONCAT(CONCAT('%', #{name}), '%') ]]>
+	</select>
+	<!-- 取得所有用户 -->
+	<select id="omGetAllUser" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from T_USER order by nlssort(name,'NLS_SORT=SCHINESE_PINYIN_M')
+	</select>
+	<!-- 根据组织取得所包含的用户 -->
+	<select id="omGetUserByOrganization" parameterType="int"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from T_USER
+		where id in
+		(select userId from T_USER_ORGANIZATION where
+		organizationId =
+		#{organizationId,jdbcType=DECIMAL})
+	</select>
+	<!-- 将用户赋予组织,0代表赋予,1代表取消 -->
+	<select id="omAwardOrganization" parameterType="java.util.Map">
+		<if test="type == 0">
+			insert into T_USER_ORGANIZATION(organizationId,userId)
+			select #{organizationId,jdbcType=DECIMAL},#{userId,jdbcType=DECIMAL}
+			from dual where
+			not exists (select t.organizationid from
+			T_USER_ORGANIZATION t where
+			t.organizationid=#{organizationId,jdbcType=DECIMAL} and
+			t.userId=#{userId,jdbcType=DECIMAL})
+		</if>
+		<if test="type == 1">
+			delete from T_USER_ORGANIZATION where
+			organizationId=#{organizationId,jdbcType=DECIMAL} and
+			userId=#{userId,jdbcType=DECIMAL}
+		</if>
+	</select>
+	<!-- 取得可分享用户列表 -->
+	<select id="omGetShareUser" parameterType="com.zjcds.om.data.bean.OMUserData"
+		resultMap="getShareMap">
+		<if test="id != null">
+			select ID,NAME,'icon-user' as ICONCLS from t_user where id
+			&lt;&gt; #{id}
+			and kind=0 order by NAME
+		</if>
+		<if test="id == null">
+			select ID,NAME,'icon-user' as ICONCLS from t_user where
+			kind=0 order by
+			NAME
+		</if>
+	</select>
+	<!-- 用户注册 -->
+	<insert id="omUserRegister" parameterType="com.zjcds.om.data.bean.OMUserData">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			T_ORGANIZATION_sequence.NEXTVAL FROM DUAL
+		</selectKey>
+		insert into
+		T_USER(ID,TYPE,STATUS,NAME,PASSWORD,PHONE,MOBILEPHONE,EMAIL,ADDRESS,CREATETIME,XZQHDM,XZQHMC)
+		values(#{id,jdbcType=DECIMAL},#{type,jdbcType=DECIMAL},#{status,jdbcType=DECIMAL},#{name,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},#{mobilePhone,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},
+		#{address,jdbcType=VARCHAR},#{createTime,jdbcType=DATE},#{xzqhdm,jdbcType=VARCHAR},#{xzqhmc,jdbcType=VARCHAR})
+	</insert>
+	<!-- 查询用户密码是否正确 -->
+	<select id="omGetUserPassword" parameterType="int" resultType="java.lang.String">
+		select password from T_USER where id = #{id,jdbcType=DECIMAL}
+	</select>
+	<!-- 修改用户密码 -->
+	<update id="omUpdateUserPassword" parameterType="java.util.Map">
+	   update T_USER set password = #{new,jdbcType=VARCHAR} where id = #{id,jdbcType=DECIMAL}
+	</update>
+	<!-- 获取当前用户信息 -->
+	<select id="omGetUserInfo" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select ID,TYPE,STATUS,NAME,PHONE,MOBILEPHONE,EMAIL,ADDRESS,CREATETIME,UPDATETIME,XZQHDM,XZQHMC from T_USER 
+			where email = #{email,jdbcType=VARCHAR}
+	</select>
+</mapper>

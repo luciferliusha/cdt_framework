@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="version" namespace="/" extends="struts-default">
+		<!-- 检查licence -->
+		<action name="checkLicence" class="login" method="checkLicence"></action>
+		
+		<!-- 登录、注销、检测action -->
+		<!--	登录action	-->
+		<action name="login" class="login" method="login">
+			<result name="success">/framework/main.jsp</result>
+			<result name="error">/framework/login.jsp</result>
+		</action>
+		
+		<!--	单点对外登录接口action	-->
+		<action name="loginSSO" class="login" method="loginSSO">
+			<result name="success">/framework/framework.jsp</result>
+			<result name="error">/</result>
+		</action>
+
+		<!-- 判断权限 -->
+		<action name="checkPriv" class="login" method="checkPriv"></action>
+		<!-- 分享获取用户列表 -->
+		<action name="getShareUserList" class="login" method="getShareUserList"></action>
+
+		<!--	注销action	-->
+		<action name="logout" class="login" method="logout">
+			<result name="success">/framework/QFReport.jsp</result>
+		</action>
+		<!--	注册action	-->
+		<action name="register" class="login" method="register">
+		</action>
+		<!--	主页action	-->
+		<action name="main" class="login" method="main">
+			<result name="success">/framework/main.jsp</result>
+			<result name="error">/framework/login.jsp</result>
+		</action>
+
+		<!-- 平台接口 -->
+		<action name="getSubPFDir" class="platFormAction" method="getSubPFDir"></action>
+		<action name="getSubPFDirNum" class="platFormAction" method="getSubPFDirNum"></action>
+		<action name="getSubPFFile" class="platFormAction" method="getSubPFFile"></action>
+		<action name="getAllPFInfo" class="platFormAction" method="getAllPFInfo"></action>
+		<action name="getSubPFInfo" class="platFormAction" method="getSubPFInfo"></action>
+		<action name="addPlatFormFile" class="platFormAction" method="addPlatFormFile"></action>
+		<action name="savePlatFormFile" class="platFormAction" method="savePlatFormFile"></action>
+		<action name="deletePlatFormFile" class="platFormAction"
+			method="deletePlatFormFile"></action>
+		<action name="updatePlatFormFile" class="platFormAction"
+			method="updatePlatFormFile"></action>
+		<action name="readPFFile" class="platFormAction" method="readPFFile"></action>
+		<action name="addPlatFormDir" class="platFormAction" method="addPlatFormDir"></action>
+		<action name="deletePlatFormDir" class="platFormAction" method="deletePlatFormDir"></action>
+		<action name="updatePlatFormDir" class="platFormAction" method="updatePlatFormDir"></action>
+		<action name="searchPlatForm" class="platFormAction" method="searchPlatForm"></action>
+		<action name="searchAllPlatForm" class="platFormAction" method="searchAllPlatForm"></action>
+		<action name="getAllPlatFormFile" class="platFormAction"
+			method="getAllPlatFormFile"></action>
+		<action name="updateDescribeById" class="platFormAction"
+			method="updateDescribeById"></action>
+		<action name="cdtPlatFormSort" class="platFormAction" method="cdtPlatFormSort"></action>
+		<action name="setPFClickCount" class="platFormAction" method="setPFClickCount"></action>
+		
+		<!-- 解决方案组树 -->
+		<action name="getPFDirTree" class="platFormAction" method="getPFDirTree"></action>
+		<!-- 解决方案整个树 -->
+		<action name="getPFTree" class="platFormAction" method="getPFTree"></action>
+		<!-- 获取用户的解决方案喜好(订阅)信息 -->
+		<action name="getFavoritePlatForm" class="platFormAction" method="getFavoritePlatForm"></action>
+		<!-- 递归取得其解决方案喜好(订阅)信息及其所有的父解决方案,为了导航栏的展现 -->
+		<action name="getFavPlatFormList" class="platFormAction" method="getFavPlatFormList"></action>
+		<!-- 保存用户的解决方案喜好(订阅)信息 -->
+		<action name="saveFavoritePlatForm" class="platFormAction" method="saveFavoritePlatForm"></action>
+		<!-- 获取平台全部菜单及父ID -->
+		<action name="getPlatMenus" class="platFormAction" method="getPlatMenus"></action>
+		<!-- 获取第一级菜单 -->
+		<action name="getPlatMenu" class="platFormAction" method="getPlatMenu"></action>
+		<!-- 根据平台名称获取父ID -->
+		<action name="getPlatFormParentIdByName" class="platFormAction" method="getPlatFormParentIdByName"></action>
+		
+		<!-- 解决方案访问日志 -->
+		<!-- 解决方案保存访问日志 -->
+		<action name="savePlatFormLog" class="platFormAction" method="savePlatFormLog"></action>
+		<!-- 获取解决方案访问日志(组装成easyui) -->
+		<action name="getPlatFormLog" class="platFormAction" method="getPlatFormLog"></action>
+		<!-- 获取解决方案访问日志次数统计(组装成饼图) -->
+		<action name="getPlatFormLogNum" class="platFormAction" method="getPlatFormLogNum"></action>
+		
+		<!-- 分享平台 -->
+		<action name="operateSharedPF" class="platFormAction" method="operateSharedPF"></action>
+		<action name="getSharedUsersByPF" class="platFormAction"
+			method="getSharedUsersByPF"></action>
+		<!-- 构件接口 -->
+		<action name="getSubAppDir" class="appAction" method="getSubAppDir"></action>
+		<action name="getSubAppFile" class="appAction" method="getSubAppFile"></action>
+		<action name="getSubAppInfo" class="appAction" method="getSubAppInfo"></action>
+		<action name="deleteAppFile" class="appAction" method="deleteAppFile"></action>
+		<action name="addAppFile" class="appAction" method="addAppFile"></action>
+		<action name="updateAppFile" class="appAction" method="updateAppFile"></action>
+		<action name="addAppDir" class="appAction" method="addAppDir"></action>
+		<action name="updateAppDir" class="appAction" method="updateAppDir"></action>
+		<action name="deleteAppDir" class="appAction" method="deleteAppDir"></action>
+		<action name="searchApp" class="appAction" method="searchApp"></action>
+		<action name="searchAllApp" class="appAction" method="searchAllApp"></action>
+		<action name="getAppTree" class="appAction" method="getAppTree"></action>
+		<action name="getAppInfo" class="appAction" method="getAppInfo"></action>
+		
+		<!-- 构件使用记录 -->
+		<action name="addAppUsedLog" class="appAction" method="addAppUsedLog"></action>
+		<action name="getAppUsedGrid" class="appAction" method="getAppUsedGrid"></action>
+		<action name="getAppUsedPie" class="appAction" method="getAppUsedPie"></action>
+		
+		<!-- 注册 -->
+		<action name="userRegister" class="registerAction" method="userRegister"></action>
+		<!-- 权限 -->
+		<action name="getUserPopedom" class="popedomAction" method="getUserPopedom"></action>
+		<!-- 权限 -->
+		<action name="getUserRight" class="popedomAction" method="getUserRight"></action>
+
+		<!--	用户action	-->
+		<action name="getUserInfo" class="userAction" method="getUserInfo"></action>
+		<action name="updateUserInfo" class="userAction" method="updateUserInfo"></action>
+		<action name="updateUserPassword" class="userAction" method="updateUserPassword"></action>
+		<action name="isUserExit" class="userAction" method="isUserExit"></action>
+		
+
+		<!-- 模板库action -->
+		<action name="addTemplate" class="templateAction" method="addTemplate"></action>
+		<action name="deleteTemplate" class="templateAction" method="deleteTemplate"></action>
+		<action name="deleteTemplateById" class="templateAction" method="deleteTemplateById"></action>
+		<action name="updateTemplate" class="templateAction" method="updateTemplate"></action>
+		<action name="getAllTemplate" class="templateAction" method="getAllTemplate"></action>
+
+		<!-- 配置action -->
+		<action name="addConfig" class="configAction" method="addConfig"></action>
+		<action name="updateConfig" class="configAction" method="updateConfig"></action>
+		<action name="deleteConfig" class="configAction" method="deleteConfig"></action>
+		<action name="deleteConfigById" class="configAction" method="deleteConfigById"></action>
+		<action name="getConfigByNameEn" class="configAction" method="getConfigByNameEn"></action>
+		<action name="getAllConfig" class="configAction" method="getAllConfig"></action>
+		<action name="getConfigList" class="configAction" method="getConfigList"></action>
+		<action name="getConfigsByName" class="configAction" method="getConfigsByName"></action>
+		<action name="getConfigById" class="configAction" method="getConfigById"></action>
+		<action name="isConfigNameEnExist" class="configAction" method="isConfigNameEnExist"></action>
+		<action name="getParamType" class="configAction" method="getParamType"></action>
+		<action name="getDataType" class="configAction" method="getDataType"></action>
+	</package>
+</struts>

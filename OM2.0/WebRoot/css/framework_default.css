@@ -1,0 +1,147 @@
+@CHARSET "UTF-8";
+/**
+ ** 默认颜色样式的CSS
+ **/
+/**表单控件 start**/
+/**搜索输入框背景**/
+.search_input_bg_n{
+	background-image: url("../images/common/search-input-n.png");
+}
+.search_input_bg_f{
+	background-image: url("../images/common/search-input-p.png");
+}
+/**搜索按钮**/
+.search_button_n{
+	background-image: url("../images/button/search-button-n.png");
+}
+.search_button:hover{
+	background-image: url("../images/button/search-button-f.png");
+}
+.search_button:active{
+	background-image: url("../images/button/search-button-p.png");
+}
+/**选择分类按钮**/
+.search_category_n{
+	background-image: url("../images/button/search-category-n.png");
+}
+.search_category:hover{
+	background-image: url("../images/button/search-category-f.png");
+}
+.search_category:active{
+	background-image: url("../images/button/search-category-p.png");
+}
+.button_01_n{
+	background-image: url("../images/button/button-01-n.png");
+}
+.button_01:hover{
+	background-image: url("../images/button/button-01-f.png");
+}
+.button_01:active{
+	background-image: url("../images/button/button-01-p.png");
+}
+.checkbox_n{
+	background: url("../images/common/checkbox-n.png");
+}
+.checkbox_s{
+	background: url("../images/common/checkbox-s.png");
+}
+/**表单控件 end**/
+/**顶部样式 start**/
+#search_category_menu{
+	background-image: url("../images/common/drop-dowm box-01.png");
+}
+.menu_li_f{
+	background-color: #19bc9d;
+}
+.menu_li:hover{
+	background-color: #19bc9d;
+}
+.search_close_n{
+	background-image: url("../images/button/tag-close-n.png");
+}
+.search_close:hover{
+	background-image: url("../images/button/tag-close-f.png");
+}
+/**顶部样式 end**/
+/**主体样式 start**/
+.page-shadow{
+	border-left: 1px solid #1abc9b;
+}
+#resource_operate{
+	border: 1px solid #1abc9b;
+}
+/**主体样式 end**/
+/**弹出框样式 strat**/
+.win_title{
+	background: #F2FAF8;
+}
+.cut-off{
+	background-color: #8AD0C2;
+}
+.textInput-n{
+	background: url("../images/common/StandardInput-01-n.png") no-repeat;
+}
+.textInput-f{
+	background: url("../images/common/StandardInput-01-f.png") no-repeat;
+}
+.confirmBtn_n{
+	background: url("../images/button/StandardButton-01-n.png") no-repeat;
+}
+.confirmBtn:hover{
+	background: url("../images/button/StandardButton-01-f.png") no-repeat;
+}
+.confirmBtn:active{
+	background: url("../images/button/StandardButton-01-p.png") no-repeat;
+}
+.cancelBtn_n{
+	background: url("../images/button/StandardButton-02-n.png") no-repeat;
+}
+.cancelBtn:hover{
+	background: url("../images/button/StandardButton-02-f.png") no-repeat;
+}
+.cancelBtn:active{
+	background: url("../images/button/StandardButton-02-p.png") no-repeat;
+}
+.win_close_n{
+	background: url("../images/button/tag-close-n.png") no-repeat;
+}
+.win_close:hover{
+	background: url("../images/button/tag-close-f.png") no-repeat;
+}
+.hugeButton_01_n{
+	background: url("../images/button/HugeButton-01-n.png") no-repeat;
+}
+.hugeButton_01:hover{
+	background: url("../images/button/HugeButton-01-f.png") no-repeat;
+}
+.hugeButton_01:active{
+	background: url("../images/button/HugeButton-01-p.png") no-repeat;
+}
+.standardButton_04_n{
+	background: url("../images/button/StandardButton-04-n.png") no-repeat;
+}
+.standardButton_04:hover{
+	background: url("../images/button/StandardButton-04-f.png") no-repeat;
+}
+.standardButton_04:active{
+	background: url("../images/button/StandardButton-04-p.png") no-repeat;
+}
+.containUser_n{
+	background: url("../images/button/IconButton-02-n.png") no-repeat;
+}
+.containUser:hover{
+	background: url("../images/button/IconButton-02-n.png") no-repeat;
+}
+.containUser:active{
+	background: url("../images/button/IconButton-02-n.png") no-repeat;
+}
+.relieveOrganization_n{
+	background: url("../images/button/IconButton-01-n.png") no-repeat;
+}
+.relieveOrganization:hover{
+	background: url("../images/button/IconButton-01-f.png") no-repeat;
+}
+.relieveOrganization:active{
+	background: url("../images/button/IconButton-01-p.png") no-repeat;
+}
+/**弹出框样式 end**/

@@ -1,0 +1,232 @@
+@CHARSET "UTF-8";
+/**自定义展开按钮样式**/
+.ztree li span.button.noline_open{
+	background: url("./img/arrow-expanded.png");
+}
+/**自定义关闭按钮样式**/
+.ztree li span.button.noline_close{
+	background: url("./img/arrow-collapsed.png");
+}
+/**自定义展开关闭按钮的宽高和边距**/
+.ztree li span.button.switch{
+	height: 16px;
+	width: 16px;
+	margin: 7px 0 6px 4px;
+}
+/**自定义checkbox宽高和间距**/
+.ztree li span.button.chk{
+	width: 16px;
+	height: 16px;
+	margin: 7px 0 6px 4px;
+}
+/**自定义checkbox 默认情况下样式**/
+.ztree li span.button.chk.checkbox_false_full{
+	background: url("./img/checkbox-n.png");
+}
+/**自定义checkbox 默认情况下获得焦点时样式**/
+.ztree li span.button.chk.checkbox_false_full_focus{
+	background: url("./img/checkbox-n.png");
+}
+/**自定义checkbox 半选中情况下样式**/
+.ztree li span.button.chk.checkbox_true_part{
+	background: url("./img/checkbox-noall.png");
+}
+/**自定义checkbox 半选中情况下获得焦点时样式**/
+.ztree li span.button.chk.checkbox_true_part_focus{
+	background: url("./img/checkbox-noall.png");
+}
+/**自定义checkbox 选中情况下样式**/
+.ztree li span.button.chk.checkbox_true_full{
+	background: url("./img/checkbox-s.png");
+}
+/**自定义checkbox 选中情况下获得焦点样式**/
+.ztree li span.button.chk.checkbox_true_full_focus{
+	background: url("./img/checkbox-s.png");
+}
+/**父子节点勾选状态不联动情况下需要设置这些样式 start**/
+/**为防止父子节点勾选状态不联动情况下选中父节点显示的图标是半选中图标**/
+#allOrganizationZTree.ztree li span.button.chk.checkbox_true_part{
+	background: url("./img/checkbox-s.png");
+}
+#allOrganizationZTree.ztree li span.button.chk.checkbox_true_part_focus{
+	background: url("./img/checkbox-s.png");
+}
+/**自定义checkbox 在父子节点不关联情况下半选中的样式**/
+#allOrganizationZTree.ztree li span.button.chk.checkbox_false_part{
+	background: url("./img/checkbox-n.png");
+}
+/**自定义checkbox 在父子节点不关联情况下半选中获得焦点的样式**/
+#allOrganizationZTree.ztree li span.button.chk.checkbox_false_part_focus{
+	background: url("./img/checkbox-n.png");
+}
+/**父子节点勾选状态不联动情况下需要设置这些样式 end**/
+/**自定义图标和文字的高度和内间距**/
+.ztree li a{
+	height: 31px;
+	padding: 0;
+	line-height: 31px;
+}
+/**自定义节点鼠标移入样式**/
+.ztree li a:hover{
+	text-decoration: none;
+	background: #effaf8;
+}
+/**自定义图标和文字选中状态下的背景**/
+.ztree li a.curSelectedNode{
+	background-color: #FFE6B0;
+	border: none;
+	height: 31px;
+}
+/**自定义图标的间距**/
+.ztree li span.button{
+	margin: 7px 0 6px 4px;
+}
+/**自定义文字的间距**/
+.ztree li span{
+	margin: 0 0 0 4px;
+}
+/**************自定义图标 start***********************/
+/**自定义组织父节点图标**/
+.ztree li span.button.icon-organization-double_ico_open, .ztree li span.button.icon-organization-double_ico_close{
+	background: url(./img/icon-organization-double-n.png) no-repeat scroll 0 0 transparent; 
+	vertical-align:top;
+	*vertical-align:middle
+}
+/**自定义组织父节点选中图标**/
+.ztree li span.button.icon-organization-double-s_ico_open, .ztree li span.button.icon-organization-double-s_ico_close{
+	background: url(./img/icon-organization-double-s.png) no-repeat scroll 0 0 transparent; 
+	vertical-align:top;
+	*vertical-align:middle
+}
+/**自定义组织叶子节点图标**/
+.ztree li span.button.icon-organization-single_ico_docu{
+	background: url(./img/icon-organization-single-n.png) no-repeat scroll 0 0 transparent; 
+	vertical-align:top;
+	*vertical-align:middle
+}
+/**自定义组织叶子节点选中图标**/
+.ztree li span.button.icon-organization-single-s_ico_docu{
+	background: url(./img/icon-organization-single-s.png) no-repeat scroll 0 0 transparent; 
+	vertical-align:top;
+	*vertical-align:middle
+}
+/**自定义用户叶子节点图标**/
+.ztree li span.button.icon-user_ico_docu{
+	background: url(./img/icon-user-n.png) no-repeat scroll 0 0 transparent; 
+	vertical-align:top;
+	*vertical-align:middle
+}
+/**自定义组织叶子节点选中图标**/
+.ztree li span.button.icon-user-s_ico_docu{
+	background: url(./img/icon-user-s.png) no-repeat scroll 0 0 transparent; 
+	vertical-align:top;
+	*vertical-align:middle
+}
+
+/**自定义角色父节点图标**/
+.ztree li span.button.icon-role-double_ico_open, .ztree li span.button.icon-role-double_ico_close{
+	background: url(./img/icon-role-double-n.png) no-repeat scroll 0 0 transparent; 
+	vertical-align:top;
+	*vertical-align:middle
+}
+/**自定义角色父节点选中图标**/
+.ztree li span.button.icon-role-double-s_ico_open, .ztree li span.button.icon-role-double-s_ico_close{
+	background: url(./img/icon-role-double-s.png) no-repeat scroll 0 0 transparent; 
+	vertical-align:top;
+	*vertical-align:middle
+}
+/**自定义角色叶子节点图标**/
+.ztree li span.button.icon-role-single_ico_docu{
+	background: url(./img/icon-role-single-n.png) no-repeat scroll 0 0 transparent; 
+	vertical-align:top;
+	*vertical-align:middle
+}
+/**自定义角色叶子节点选中图标**/
+.ztree li span.button.icon-role-single-s_ico_docu{
+	background: url(./img/icon-role-single-s.png) no-repeat scroll 0 0 transparent; 
+	vertical-align:top;
+	*vertical-align:middle
+}
+
+/**自定义资源父节点图标**/
+.ztree li span.button.icon-resource-double_ico_open, .ztree li span.button.icon-resource-double_ico_close{
+	background: url(./img/icon-resource-double-n.png) no-repeat scroll 0 0 transparent; 
+	vertical-align:top;
+	*vertical-align:middle
+}
+/**自定义资源父节点选中图标**/
+.ztree li span.button.icon-resource-double-s_ico_open, .ztree li span.button.icon-resource-double-s_ico_close{
+	background: url(./img/icon-resource-double-s.png) no-repeat scroll 0 0 transparent; 
+	vertical-align:top;
+	*vertical-align:middle
+}
+/**自定义资源叶子节点图标**/
+.ztree li span.button.icon-resource-single_ico_docu{
+	background: url(./img/icon-resource-single-n.png) no-repeat scroll 0 0 transparent; 
+	vertical-align:top;
+	*vertical-align:middle
+}
+/**自定义资源叶子节点选中图标**/
+.ztree li span.button.icon-resource-single-s_ico_docu{
+	background: url(./img/icon-resource-single-s.png) no-repeat scroll 0 0 transparent; 
+	vertical-align:top;
+	*vertical-align:middle
+}
+/**************自定义图标 end***********************/
+/**自定义组织用户树节点选中样式**/
+#organizationZTree li a.curSelectedNode{
+	background-color: #1BBC9B;
+	color: #fff;
+}
+/**自定义角色树节点选中样式**/
+#roleZTree li a.curSelectedNode{
+	background-color: #fff;
+	color: #44CBAD;
+}
+/**自定义资源树节点选中样式**/
+#resourceZTree li a.curSelectedNode{
+	background-color: #fff;
+	color: #44CBAD;
+}
+/**自定义所有用户树节点选中样式**/
+#allUserZTree li a.curSelectedNode{
+	background-color: #fff;
+}
+/**自定义所有组织树节点选中样式**/
+#allOrganizationZTree li a.curSelectedNode{
+	background-color: #fff;
+}
+/**自定义所有用户树节点移入样式**/
+#allUserZTree.ztree li a:hover{
+	text-decoration: none;
+	background: #fff;
+}
+/**自定义所有组织树节点移入样式**/
+#allOrganizationZTree.ztree li a:hover{
+	text-decoration: none;
+	background: #fff;
+}
+/**自定义资源树操作div样式**/
+.resource_operate_div{
+	display: inline;
+}
+/**自定义资源树操作checkbox样式**/
+.ztree li .resource_operate_checkbox{
+	height: 16px;
+	width: 16px;
+	margin: 7px 0 6px 4px;
+	display: inline-block;
+	vertical-align: top;
+}
+/**自定义资源树操作checkbox默认样式**/
+.resource_operate_checkbox_false_full{
+	background: url("./img/checkbox-n.png");
+}
+/**自定义资源树操作checkbox选中样式**/
+.resource_operate_checkbox_true_full{
+	background: url("./img/checkbox-s.png");
+}
+/**自定义树节点搜索结果样式**/
+.search_node_color{
+	color: #F9A55A;
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configs>
+	<!-- 
+	merge-rule: 合并规则
+      * order: 对default location 和 extends location 按照顺序查找, 找到第一个就返回
+      * replace: 对default location 和 extends location 按照 1 + N 合并(返回最后一个N配置)
+      * merge: 对default location 和 extends location 读取为配置列表(仅针对XML, 合并Document)
+      * default: replace
+	type: 配置类型
+      * properties: Properties files 
+      * xml:        XML documents 
+	-->
+	<config domain="CDS.COMMON" description="协同公共平台配置项" merge-rule="default">
+		<default type="properties" location="default/common/cds.bmp.config.properties"/>
+	</config>
+	
+	<config domain="CDS.DB.UPGRADE" description="协同数据库升级配置" merge-rule="merge">
+		<default type="xml" location="upgrade/common/common_db_upgrade.xml"/>
+	</config>
+</configs>

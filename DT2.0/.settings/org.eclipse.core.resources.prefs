@@ -1,0 +1,10 @@
+#Tue Sep 15 10:43:55 CST 2015
+eclipse.preferences.version=1
+encoding//WebRoot/framework/componentManager.jsp=UTF-8
+encoding//WebRoot/js/common/util.js=UTF-8
+encoding//conf/config.properties=UTF-8
+encoding//conf/jdbc.properties=GBK
+encoding//conf/spring/cds.portal.service.xml=UTF-8
+encoding//src/com/zjcds/portal/config/ConfigManager.java=UTF-8
+encoding//src/com/zjcds/portal/config/SysConfig.java=UTF-8
+encoding/<project>=UTF-8

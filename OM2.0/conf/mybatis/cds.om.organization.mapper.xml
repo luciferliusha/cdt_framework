@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjcds.om.data.dao.OMOrganizationDao">
+	<resultMap type="com.zjcds.om.data.bean.OMOrganizationData"
+		id="BaseResultMap">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="PARENTID" property="parentId" jdbcType="DECIMAL" />
+		<result column="TYPE" property="type" jdbcType="DECIMAL" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+		<result column="PHONE" property="phone" jdbcType="VARCHAR" />
+		<result column="MOBILEPHONE" property="mobilePhone" jdbcType="VARCHAR" />
+		<result column="EMAIL" property="email" jdbcType="VARCHAR" />
+		<result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+		<result column="CREATETIME" property="createTime" jdbcType="DATE" />
+		<result column="UPDATETIME" property="updateTime" jdbcType="DATE" />
+		<result column="STATE" property="state" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID,PARENTID,TYPE,STATUS,NAME,PASSWORD,PHONE,MOBILEPHONE,EMAIL,ADDRESS,CREATETIME,UPDATETIME
+	</sql>
+
+    <sql id="User_Column_List">
+		ID,TYPE,STATUS,NAME,PASSWORD,PHONE,MOBILEPHONE,EMAIL,ADDRESS,CREATETIME,UPDATETIME
+	</sql>
+	<!-- 获取组织树 -->
+	<select id="omGetOrganizationTree" parameterType="com.zjcds.om.data.bean.OMOrganizationData"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from T_ORGANIZATION
+		<where>
+			<if test="id == null">
+				PARENTID = 0
+			</if>
+			<if test="id != null">
+				PARENTID = #{id,jdbcType=DECIMAL}
+			</if>
+		</where>
+		order by NAME
+	</select>
+	<!-- 获取组织 一层 -->
+	<select id="omGetOrganizationOne" parameterType="com.zjcds.om.data.bean.OMOrganizationData"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		,STATE from V_ORGANIZATION
+		<where>
+			<if test="id == null">
+				PARENTID = 0
+			</if>
+			<if test="id != null">
+				PARENTID = #{id,jdbcType=DECIMAL}
+			</if>
+		</where>
+	</select>
+
+	<!-- 获取子节点 -->
+	<select id="getChildrenOrganization" parameterType="int"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from T_ORGANIZATION where PARENTID = #{id,jdbcType=DECIMAL}
+	</select>
+	<!-- 修改组织 -->
+	<update id="omUpdateOrganization" parameterType="com.zjcds.om.data.bean.OMOrganizationData">
+		update T_ORGANIZATION
+		<set>
+			<if test="parentId != null">
+				PARENTID = #{parentId,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=DECIMAL},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				PASSWORD = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				PHONE = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="mobilePhone != null">
+				MOBILEPHONE = #{mobilePhone,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				EMAIL = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				ADDRESS = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				UPDATETIME = #{updateTime,jdbcType=DATE}
+			</if>
+		</set>
+		<where>
+			ID = #{id,jdbcType=DECIMAL}
+		</where>
+	</update>
+	<!-- 根据组织ID删除组织与用户的关系 -->
+	<delete id="omDeleteRelationWithUser" parameterType="int">
+		delete from
+		T_USER_ORGANIZATION where organizationId = #{id,jdbcType=DECIMAL}
+	</delete>
+	<!-- 根据组织ID删除组织与角色的关系 -->
+	<delete id="omDeleteRelationWithRole" parameterType="int">
+		delete from
+		T_ORGANIZATION_ROLE where organizationId =
+		#{id,jdbcType=DECIMAL}
+	</delete>
+	<!-- 根据组织ID删除组织 -->
+	<delete id="omDeleteOrganization" parameterType="int">
+		delete from
+		T_ORGANIZATION where id = #{id,jdbcType=DECIMAL}
+	</delete>
+	<!-- 新增组织 -->
+	<insert id="omAddOrganization" parameterType="com.zjcds.om.data.bean.OMOrganizationData">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			T_ORGANIZATION_sequence.NEXTVAL FROM DUAL
+		</selectKey>
+		insert into
+		T_ORGANIZATION(ID,PARENTID,TYPE,STATUS,NAME,PASSWORD,PHONE,MOBILEPHONE,EMAIL,ADDRESS,CREATETIME)
+		values(#{id,jdbcType=DECIMAL},#{parentId,jdbcType=DECIMAL},#{type,jdbcType=DECIMAL},#{status,jdbcType=DECIMAL},#{name,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},#{mobilePhone,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},
+		#{address,jdbcType=VARCHAR},#{createTime,jdbcType=DATE})
+	</insert>
+	<!-- 根据ID取得组织或用户 -->
+	<select id="omGetOrganization" parameterType="com.zjcds.om.data.bean.OMOrganizationData"
+		resultType="com.zjcds.om.data.bean.OMOrganizationData">
+		<if test="type == 0">
+			select
+			<include refid="Base_Column_List" />
+			from T_ORGANIZATION where id = #{id,jdbcType=DECIMAL}
+		</if>
+		<if test="type ==1">
+			select
+			<include refid="User_Column_List" />
+			from T_USER where id = #{id,jdbcType=DECIMAL}
+		</if>
+	</select>
+
+	<!-- 角色搜索SQL -->
+	<sql id="searchOrgSql">
+		select distinct tor.id from t_user_organization tuor
+		inner join
+		t_organization tor on tuor.organizationid = tor.id
+		inner join
+		t_user tu
+		on tuor.userid = tu.id
+		where tu.name like <![CDATA[ CONCAT(CONCAT('%', #{name}), '%') ]]>
+	</sql>
+
+    <sql id="searchOrgSqlConver">
+       select distinct tor.id from t_user_organization tuor
+		inner join
+		t_organization tor on tuor.organizationid = tor.id
+		inner join
+		t_user tu
+		on tuor.userid = tu.id
+		where tu.name like <![CDATA[ CONCAT(CONCAT(CONCAT('%','/'), #{name}), '%') ]]> escape '/'
+    </sql>
+	<!-- 组织搜索(组织查询到顶层的父亲和到底层的孩子，用户所属的组织只查询到顶层的父亲) -->
+	<select id="omSearchOrg" parameterType="com.zjcds.om.data.bean.OMOrganizationData"
+		resultMap="BaseResultMap">
+		<if test="status == 1">
+			select
+			<include refid="Base_Column_List" />
+			,state
+			from (
+			select
+			<include refid="Base_Column_List" />,state
+			from V_ONLY_ORGANIZATION t start with t.name like <![CDATA[ CONCAT(CONCAT(CONCAT('%','/'), #{name}), '%') ]]>
+			escape '/'
+			connect by prior t.id=t.parentid
+			union
+			select
+			<include refid="Base_Column_List" />,state
+			from V_ONLY_ORGANIZATION t start with t.name like <![CDATA[ CONCAT(CONCAT(CONCAT('%','/'), #{name}), '%') ]]>
+			escape '/'
+			connect by prior t.parentid=t.id
+			union
+			(
+			select
+			<include refid="Base_Column_List" />
+			,state
+			from V_ONLY_ORGANIZATION t start with t.id in (
+			<include refid="searchOrgSqlConver" />)
+			connect by prior t.parentid=t.id
+			)
+			union
+			select tu.id,tuor.organizationid
+			as PARENTID,tu.type,tu.status,tu.name,tu.password,tu.phone,
+			tu.mobilephone,tu.email,tu.address,tu.createtime,tu.updatetime,'' as
+			STATE
+			from t_user tu inner join t_user_organization tuor on tu.id =
+			tuor.userid
+			where tu.name like <![CDATA[ CONCAT(CONCAT(CONCAT('%','/'), #{name}), '%') ]]>
+			escape '/'
+			)
+			order by parentid,id,type
+		</if>
+		<if test="status != 1">
+
+			select
+			<include refid="Base_Column_List" />
+			,state
+			from (
+			select
+			<include refid="Base_Column_List" />,state
+			from V_ONLY_ORGANIZATION t start with t.name like <![CDATA[ CONCAT(CONCAT('%', #{name}), '%') ]]>
+			connect by prior t.id=t.parentid
+			union
+			select
+			<include refid="Base_Column_List" />,state
+			from V_ONLY_ORGANIZATION t start with t.name like <![CDATA[ CONCAT(CONCAT('%', #{name}), '%') ]]>
+			connect by prior t.parentid=t.id
+			union
+			(
+			select
+			<include refid="Base_Column_List" />
+			,state
+			from V_ONLY_ORGANIZATION t start with t.id in (
+			<include refid="searchOrgSql" />)
+			connect by prior t.parentid=t.id
+			)
+			union
+			select tu.id,tuor.organizationid
+			as PARENTID,tu.type,tu.status,tu.name,tu.password,tu.phone,
+			tu.mobilephone,tu.email,tu.address,tu.createtime,tu.updatetime,'' as
+			STATE
+			from t_user tu inner join t_user_organization tuor on tu.id =
+			tuor.userid
+			where tu.name like <![CDATA[ CONCAT(CONCAT('%', #{name}), '%') ]]>
+			)
+			order by parentid,id,type
+		</if>
+	</select>
+	<!-- 取得所有的组织数据 -->
+	<select id="omGetAllOrganization" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		,state
+		from v_only_organization
+	</select>
+	<!-- 根据用户取得组织列表 -->
+	<select id="omGetOrganizationByUser" resultMap="BaseResultMap"
+		parameterType="int">
+		select
+		<include refid="Base_Column_List" />
+		from T_ORGANIZATION
+		where id in
+		(select organizationId from
+		T_USER_ORGANIZATION where userId =
+		#{userId,jdbcType=DECIMAL})
+	</select>
+	<!-- 将用户赋予组织,0代表赋予,1代表取消 -->
+	<select id="omAwardOrganization" parameterType="java.util.Map">
+		<if test="type == 0">
+			insert into T_USER_ORGANIZATION(organizationId,userId)
+			select #{organizationId,jdbcType=DECIMAL},#{userId,jdbcType=DECIMAL}
+			from dual where
+			not exists (select t.organizationid from
+			T_USER_ORGANIZATION t where
+			t.organizationid=#{organizationId,jdbcType=DECIMAL} and
+			t.userId=#{userId,jdbcType=DECIMAL})
+		</if>
+		<if test="type == 1">
+			delete from T_USER_ORGANIZATION where
+			organizationId=#{organizationId,jdbcType=DECIMAL} and
+			userId=#{userId,jdbcType=DECIMAL}
+		</if>
+	</select>
+	<!-- 取得该组织的子节点 -->
+	<select id="omGetSubCount" parameterType="int" resultType="int">
+		select (select count(id) from T_ORGANIZATION where parentId
+		=#{id,jdbcType=DECIMAL})+
+		(select count(userId) from
+		T_USER_ORGANIZATION where organizationId =
+		#{id,jdbcType=DECIMAL}) from
+		dual	
+	</select>
+	<!-- 根据组织名查询组织 -->
+	<select id="omOrganizationIsExit" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select count(id) from T_ORGANIZATION where name = #{name,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- zTree新增 strat -->
+		<!-- 搜索组织用户 -->
+	<select id="omSearchOrgZTree" parameterType="com.zjcds.om.data.bean.OMOrganizationData"
+		resultMap="BaseResultMap">
+			select id from(
+				select  id from T_ORGANIZATION where name like CONCAT(CONCAT('%',#{name,jdbcType=VARCHAR}),'%') escape '\'
+				union
+				select  id from T_USER where name like CONCAT(CONCAT('%',#{name,jdbcType=VARCHAR}),'%') escape '\'
+			) order by id
+	</select>
+	<!-- zTree新增 end -->
+</mapper>

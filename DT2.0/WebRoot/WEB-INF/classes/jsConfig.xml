@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configs>
+	<!-- 外部JS配置，在这里配置后会自动引入这些外部JS到main.jsp中  -->
+	<!-- GIS的JS -->
+	<!-- <mapper value="http://192.168.0.7:8889/CdsGisMonitorPortal/apis"></mapper>
+	<mapper value="http://192.168.0.7:8889/CdsGisMonitorPortal/js/com/zjcds/action/apps/cljg/ycgj/AggregationAlarm.js"></mapper>
+	<mapper value="http://localhost:8080/framework/js/gis/warning.js"></mapper>-->
+	
+	<!-- ORM的JS -->
+	
+	<!-- <mapper value="http://172.18.16.9:7002/orm/orm/jsapi"></mapper>
+	<mapper value="http://172.18.16.60:8094/framework/js/framework/common/ormImport.js"></mapper> -->
+	
+	<!-- 外部OM（昊天） -->
+	<!-- <mapper value="http://172.20.97.46:8080/framework/js/framework/service/outOmPermissionService.js"></mapper>
+	<mapper value="http://172.20.97.46:8080/framework/js/framework/common/getOutOmPermisson.js"></mapper> -->
+	
+	<!-- 衢州的JS -->
+	<!-- <mapper value="http://localhost:8080/framework/js/gis/warning_quz.js"></mapper> -->
+</configs>

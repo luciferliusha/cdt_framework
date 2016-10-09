@@ -1,0 +1,119 @@
+@CHARSET "UTF-8";
+@CHARSET "UTF-8";
+.top_div {
+	background: #292ff7;
+}
+.control_n {
+	background: #292ff7;
+	border-right: #cccccc 1px solid;
+}
+.settingDiv_n {
+	height: 40px;
+	float: left;
+	margin: 0px;
+	cursor: pointer;
+}
+.settingDiv_s {
+	height: 40px;
+	float: left;
+	margin: 0px;
+	background: #090fe4;
+	cursor: pointer;
+}
+#solution_div_sidebar > li.active > .sidebar_div{
+	background: #292ff7;
+	color: white;
+	/*box-shadow: inset -1px 0 0 0 rgba(0, 0, 0, 0.1);*/
+}
+
+.tools-rename-n{
+/*	background-image: url("../images/common/blue/tools-rename.png");*/
+	color: #292ff7;
+}
+.tools-rename-s{
+/*	background-image: url("../images/common/tools-rename-s.png");*/
+	color: #fff;
+}
+.tools-delete-n{
+/*	background-image: url("../images/common/blue/tools-delete.png");*/
+	color: #292ff7;
+}
+.tools-delete-s{
+/*	background-image: url("../images/common/tools-delete-s.png");*/
+	color: #fff;
+}
+#menu_operate{
+	border: 1px solid #ccc;
+	border-radius: 2px;
+}
+.menu_operate_left>#solutions{
+/*	background: url("../images/button/blue/Toggle-Switch_left.png");*/
+	background: #292ff7;
+	border-radius: 2px;
+	color: #fff;
+}
+.menu_operate_right>#components{
+/*	background: url("../images/button/blue/Toggle-Switch_right.png");*/
+	background: #292ff7;
+	border-radius: 2px;
+	color: #fff;
+}
+.solutions_add{
+/*	background: url("../images/button/blue/tools-add.png") no-repeat;*/
+	color: #292ff7;
+}
+.solutions_add:hover{
+	color: #5a5ff9;
+}
+.solutions_add:active{
+	color: #090fe4;
+}
+
+.button-03-n{
+	background: #292ff7;
+}
+.button-03-f{
+	background: #5a5ff9;
+}
+.button-03-p{
+	background: #090fe4;
+}
+.buttonX-n{
+	background: #292ff7;
+}
+.buttonX-n:hover{
+	background: #5a5ff9;
+}
+.buttonX-n:active{
+	background: #090fe4;
+}
+.textInput-n{
+	border: 1px solid #bbc2c7;
+}
+.textInput-p{
+	border: 1px solid #292ff7;
+}
+.button-group button:hover {
+	background-color: #5a5ff9;
+	text-shadow: 0 1px hsla(0, 0%, 100%, 0.5);
+	color: #fff;
+}
+.button-group button:active, .button-group button.is-checked {
+	background-color: #292ff7;
+}
+/**新建解决方案（组）下拉树选中行样式**/
+.combo-panel .tree .tree-node-selected{
+	background: #e5e7e9;
+}
+/**喜好设置中树选中行样式**/
+#solution_tree .tree-node-selected{
+	background: #e5e7e9;
+}
+/**喜好设置中树勾选样式**/
+#solution_tree .tree-checkbox1{
+	background: url("../images/button/dark/checkbox-s.png") no-repeat
+}
+/**选择模板下拉框样式**/
+.combobox-item-selected{
+	background: #e5e7e9;
+}

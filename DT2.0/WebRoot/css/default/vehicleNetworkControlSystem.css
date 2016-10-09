@@ -1,0 +1,96 @@
+@CHARSET "UTF-8";
+body{
+	font-family: 'Source Sans Pro','Segoe UI','Droid Sans',Tahoma,Arial,sans-serif;
+	font-size: 12px;
+	line-height: 1.428571429;
+	color: #4D4D4D;
+	margin: 0;
+	padding: 0;
+}
+.button-small{
+	width: 72px;
+	height: 27px;
+	color: white;
+	line-height: 27px;
+	text-align: center;
+	font-weight: bold;
+	cursor: pointer;
+	float: left;
+	color: white;
+}
+.button-small-01-f{
+	background: #43d5bd;
+	border-radius: 6px;
+}
+.button-small-01-n{
+	background: #2abba3;
+	border-radius: 6px;
+}
+.button-small-01-p{
+	background: #21917f;
+	border-radius: 6px;
+}
+#toolbar a span span{
+	background-position: left center;
+	padding-left: 20px;
+}
+.vehicleSystem{
+	margin-left: 20px;
+}
+.tabledetail{
+	border-left: 1px solid #cccccc;border-top: 1px solid #cccccc;
+}
+.tabledetail td{
+	border-right: 1px solid #cccccc;border-bottom: 1px solid #cccccc;
+
+}
+.vehicleBtn{
+	width: 64px;
+	height: 24px;
+	background-size: 64px 24px;
+	line-height: 24px;
+	margin: 1px 0;
+}
+.vehicleSystem .combo{
+	border: 1px solid #bbc2c7
+}
+/* start input */
+.textInput{
+	border: 0 none;
+	font-family: "宋体",Verdana,Arial,Sans;
+	font-size: 12px;
+	height: 20px;
+	line-height: 20px;
+	padding: 0;
+	outline: medium none;
+}
+.textInput_n{
+	border: 1px solid #bbc2c7;
+}
+.textInput_p{
+	border: 1px solid #2abba3
+}
+.window_texInput{
+	width: 198px;
+}
+input{
+	outline: none;
+}
+/* end input */
+/* start textarea */
+.textarea_input_text{
+	outline: none;
+	width: 509px;
+	height: 86px;
+	overflow: auto;
+	resize: none;
+	padding: 0;
+	margin: 0;
+}
+.textarea_input_text_n{
+	border: 1px solid #bbc2c7;
+}
+.textarea_input_text_p{
+	border: 1px solid #2abba3;
+}
+/* end textarea */

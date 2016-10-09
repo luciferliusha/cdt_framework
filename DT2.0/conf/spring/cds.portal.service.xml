@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+ 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<!-- action配置start -->
+	<!-- 此处放针对action的配置 -->
+	<!-- 登录action -->
+	<bean id="login" class="com.zjcds.portal.action.login.LoginAction"
+		scope="prototype">
+		<property name="loginService" ref="loginService" />
+		<!-- wangwenliang add 2015-09-15 start -->
+		<property name="userRoleService" ref="userRoleService" />
+		<!-- wangwenliang add 2015-09-15 end -->
+	</bean>
+	<!-- 平台(解决方案)Action -->
+	<bean id="platFormAction" class="com.zjcds.portal.action.platform.PlatformAction"
+		scope="prototype">
+		<property name="platformService" ref="platformService" />
+	</bean>
+	<!-- 构件Action -->
+	<bean id="appAction" class="com.zjcds.portal.action.app.AppAction"
+		scope="prototype">
+		<property name="appService" ref="appService" />
+	</bean>
+	<!-- 注册Action -->
+	<bean id="registerAction" class="com.zjcds.portal.action.register.RegisterAction"
+		scope="prototype">
+		<property name="registerService" ref="registerService"></property>
+	</bean>
+	<bean id="popedomAction" class="com.zjcds.portal.action.popedom.PopedomAction"
+		scope="prototype">
+		<property name="popedomService" ref="popedomService"></property>
+	</bean>
+	<!-- 用户action -->
+	<bean id="userAction" class="com.zjcds.portal.action.user.UserAction"
+		scope="prototype">
+		<property name="userService" ref="userService" />
+	</bean>
+	
+	<!-- 图标库 action-->
+	<bean id="iconsAction" class="com.zjcds.portal.action.icons.IconsAction"
+		scope="prototype">
+		<property name="iconsService" ref="iconsService" />
+	</bean>
+	
+	<!-- 模板库 action-->
+	<bean id="templateAction" class="com.zjcds.portal.action.template.TemplateAction"
+		scope="prototype">
+		<property name="templateService" ref="templateService" />
+	</bean>
+
+	<!-- 配置 action-->
+	<bean id="configAction" class="com.zjcds.portal.action.config.ConfigAction"
+		scope="prototype">
+		<property name="configService" ref="configService" />
+	</bean>
+	
+	<!-- 图片库 action-->
+	<bean id="picsAction" class="com.zjcds.portal.action.pics.PicsAction"
+		scope="prototype">
+		<property name="picService" ref="picsService" />
+	</bean>
+	
+	<!-- 系统配置 action-->
+	<bean id="settingAction" class="com.zjcds.portal.action.setting.SettingAction"
+		scope="prototype">
+		<property name="settingService" ref="settingService" />
+	</bean>
+	<!-- action配置end -->
+
+
+	<!-- service配置start -->
+	<!-- 此处放针对Service的配置 -->
+	<!-- wangwenliang add 2015-09-14 start -->
+	<bean id="userRoleService"
+		class="com.zjcds.portal.service.user.impl.UserRoleServiceImpl">
+		<property name="userRoleDao" ref="userRoleDao" />
+	</bean>
+	<!-- wangwenliang add 2015-09-14 end -->
+	<!-- 登录service -->
+	<bean id="loginService" class="com.zjcds.portal.service.login.impl.LoginServiceImpl">
+	</bean>
+	<!-- 平台(解决方案)service -->
+	<bean id="platformService"
+		class="com.zjcds.portal.service.platform.impl.PlatformServiceImpl">
+		<property name="platformDao" ref="platformDao" />
+	</bean>
+	<!-- 构件service -->
+	<bean id="appService" class="com.zjcds.portal.service.app.impl.AppServiceImpl">
+		<property name="appDao" ref="appDao" />
+	</bean>
+	<bean id="registerService"
+		class="com.zjcds.portal.service.register.impl.RegisterServiceImpl"></bean>
+	<bean id="popedomService"
+		class="com.zjcds.portal.service.popedom.impl.PopedomServiceImpl"></bean>
+	<!-- 用户service -->
+	<bean id="userService" class="com.zjcds.portal.service.user.impl.UserServiceImpl"></bean>
+	
+	<!-- 图标库service -->
+	<bean id="iconsService" class="com.zjcds.portal.service.icons.impl.IconsServiceImpl">
+		<property name="iconDao" ref="iconDao" />
+	</bean>
+	
+	<!-- 模板库service -->
+	<bean id="templateService" class="com.zjcds.portal.service.template.impl.TemplateServiceImpl">
+		<property name="templateDao" ref="templateDao" />
+	</bean>
+	
+	<!-- 配置service -->
+	<bean id="configService" class="com.zjcds.portal.service.config.impl.ConfigServiceImpl">
+		<property name="configDao" ref="configDao" />
+	</bean>
+	
+	<!-- 图标库service -->
+	<bean id="picsService" class="com.zjcds.portal.service.pics.impl.PicsServiceImpl">
+		<property name="picDao" ref="picsDao" />
+	</bean>
+
+	<!-- 系统配置service -->
+	<bean id="settingService" class="com.zjcds.portal.service.setting.impl.SettingServiceImpl"></bean>
+	<!-- service配置end -->
+
+	<!-- MyBatis Mapper配置DAO start -->
+	<!-- 此处放针对DAO的配置 -->
+	<!-- wangwenliang add 2015-09-14 start -->
+	<bean id="userRoleDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.zjcds.portal.mybatis.dao.UserRoleDao" />
+	</bean>
+	<!-- wangwenliang add 2015-09-14 end -->
+	<bean id="platformDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.zjcds.portal.mybatis.dao.PlatformDao" />
+	</bean>
+	<bean id="appDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.zjcds.portal.mybatis.dao.AppDao" />
+	</bean>
+	
+	<!-- 图标库dao -->
+	<bean id="iconDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.zjcds.portal.mybatis.dao.IconsDao" />
+	</bean>
+	
+	<!-- 模板库dao -->
+	<bean id="templateDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.zjcds.portal.mybatis.dao.TemplateDao" />
+	</bean>
+	
+	<!-- 配置dao -->
+	<bean id="configDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.zjcds.portal.mybatis.dao.ConfigDao" />
+	</bean>
+	
+	<!-- 图片库dao -->
+	<bean id="picsDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.zjcds.portal.mybatis.dao.PicsDao" />
+	</bean>
+	<!-- MyBatis Mapper配置DAO end -->
+
+</beans>

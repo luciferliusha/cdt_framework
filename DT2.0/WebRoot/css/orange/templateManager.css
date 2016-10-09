@@ -1,0 +1,249 @@
+@CHARSET "UTF-8";
+body{
+	margin: 0px;
+	overflow-x: hidden;
+	font-size: 14px;
+}
+
+/* 遮罩 */
+.all_background {
+	position: fixed;
+	margin: auto;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: #000000;
+	-moz-opacity: 0.2;  
+	opacity:.20;
+	filter:Alpha(opacity=20);
+	z-index: 100; 
+	display: none;
+}
+
+/* ope_win start */
+.ope_win {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	background: white;
+	overflow: hidden;
+	z-index: 200;
+}
+.ope_win .ope_win_title {
+	line-height: 29px;
+	height: 29px;
+	border-bottom: 1px solid rgb(246, 246, 247);
+	margin: 0 10px;
+	font-weight: bold;
+}
+.ope_win .ope_win_title span{
+	display: block;
+	float: left;
+	margin-left: 0px;
+	padding-left: 0px;
+	font-size: 12px;
+	color: #323A45
+}
+.ope_win .ope_win_close {
+	float: right;
+	cursor: default;
+	width: 13px;
+	height: 13px;
+	margin-top: 8px;
+	background: url('../../images/button/Insidepages-close-n.png') no-repeat;
+}
+.ope_win .ope_win_close:hover {
+	background: url('../../images/button/Insidepages-close-f.png') no-repeat;
+}
+/* end ope_win */
+
+#div_wrap {
+	padding: 0 10px 10px;
+	overflow:hidden;
+	width: 815px;
+}
+
+/* 模板列表 start */
+#templateTree {
+	float: left;
+	width: 230px;
+	padding: 0 5px 5px;
+}
+#templateTree_ul .tree-node span {
+	float:left;
+}
+#templateTree_ul .tree-checkbox1{
+	background: url("../../images/button/dark/checkbox-s.png") no-repeat;
+}
+#templateTree_ul .tree-node .tree-title {
+	width: 192px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+#templateTree_ul .tree-node {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+#templateTree_ul .tree-node-selected{
+	background: #f78a29;
+}
+#templateTree_ul .tree-indent, #templateTree_ul .tree-icon {
+	display: none;
+}
+#templateTree_ul {
+	margin-top: 45px;
+}
+#templateEdit {
+	float: left;
+	width: 510px;
+	padding: 60px 15px 15px 50px;
+}
+#template_ope {
+	overflow: hidden;
+	padding: 10px 0;
+	background-color: white;
+	border-bottom: 1px solid #ababab;
+	margin-bottom: 5px;
+	position: fixed;
+	width: 230px;
+}
+.template_edit_title{
+	padding: 10px 0;
+	background-color: white;
+	border-bottom: 1px solid #ababab;
+	margin-bottom: 5px;
+	position: fixed;
+	width: 510px;
+	height: 27px;
+	top: 0px;
+	text-align: center;
+	line-height: 27px;
+	color: gray;
+	font-size: 18px;
+	font-weight: bold;
+}
+/* 模板列表 end */
+
+/* 按钮 start */
+.normal_btn {
+	background: #f78a29;
+	border-radius: 6px;
+	height: 27px;
+	line-height: 27px;
+	width: 72px;
+	border: 0px;
+	font-family: 'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: rgb(255, 255, 255);
+	cursor: pointer;
+}
+.normal_btn:hover{
+	background: #f9a55a;
+}
+.normal_btn:active{
+	background: #e47009;
+}
+.cancel_btn {
+	background: #bdc3c7;
+	border-radius: 6px;
+	height: 27px;
+	line-height: 27px;
+	width: 72px;
+	border: 0px;
+	font-family: 'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: rgb(255, 255, 255);
+	cursor: pointer;
+}
+.del_btn {
+	float: right;
+}
+.add_btn {
+	float: left;
+}
+#submitEdit {
+	float: right;
+	margin-right: 10px;
+	margin-top: 10px;
+}
+/* end 按钮 */
+
+.template_del_list {
+	margin: 0;
+	padding: 10px 16px 0;
+}
+
+/* 编辑界面  start */
+#temp_help_link{
+	cursor: pointer;
+	color: #3b73af;
+}
+
+.txt_info {
+	color: gray;
+	font-size: 12px;
+}
+.txt_error, .txt_must {
+	color: red;
+	font-size: 12px;
+}
+#titleEdit {
+	outline: none;
+	margin-top: 8px;
+}
+#contextEdit, #memoEdit{
+	width: 500px;
+	/*margin-left: 70px;*/
+	resize: none;
+	height: 100px;
+	margin-top: 8px;
+	outline: none;
+	overflow: auto;
+}
+#cke_contextEdit{
+	margin-top: 8px;
+	width: 504px;
+	outline: none;
+}
+/* end 编辑界面 */
+/* start input */
+.textInput{
+    border: 0 none;
+    font-family: "宋体",Verdana,Arial,Sans;
+    font-size: 12px;
+    height: 14px;
+    line-height:14px;
+    outline: medium none;
+    padding: 5px 6px;
+    width: 490px;
+    border-radius: 6px;
+}
+.textInput_n{
+	border: 1px solid #bbc2c7;
+}
+.textInput_p{
+	border: 1px solid #f78a29;
+}
+/* end input */
+/* start textarea */
+#memoEdit{
+	width: 490px;
+}
+.textarea_input_text{
+	font-family: "宋体",Verdana,Arial,Sans;
+	outline: none;
+	height: 90px;
+	overflow: auto;
+	border-radius: 6px;
+	resize: none;
+	padding: 5px 6px;
+}
+.textarea_input_text_n{
+	border: 1px solid #bbc2c7;
+}
+.textarea_input_text_p{
+	border: 1px solid #f78a29;
+}
+/* end textarea */

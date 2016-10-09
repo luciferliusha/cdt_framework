@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjcds.portal.mybatis.dao.TemplateDao">
+
+	<resultMap id="BaseResultMap" type="com.zjcds.portal.mybatis.bean.Template">
+		<id column="ID" property="id" jdbcType="DECIMAL"></id>
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="CONTEXT" property="context" jdbcType="VARCHAR" />
+		<result column="MEMO" property="memo" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+	<!-- 获取所有的模板 -->
+	<select id="getAllTemplate" resultMap="BaseResultMap">
+		select
+		ID, NAME, CONTEXT, MEMO
+		from T_CDT_TEMPLATE
+		order by ID
+	</select>
+
+	<!-- 根据模板ID修改模板 -->
+	<update id="updateTemplate" parameterType="com.zjcds.portal.mybatis.bean.Icons">
+		update T_CDT_TEMPLATE
+		<set>
+			<if test="name != null">
+				NAME=#{name,jdbcType=VARCHAR},
+		    </if>
+		    <if test="context != null">
+				CONTEXT=#{context,jdbcType=VARCHAR},
+		    </if>
+		    <if test="memo != null">
+				MEMO=#{memo,jdbcType=VARCHAR}
+		    </if>
+		</set>
+		where ID=#{id,jdbcType=DECIMAL}
+	</update>
+
+	<!-- 批量删除模板 -->
+	<delete id="deleteTemplate">
+		delete from
+		T_CDT_TEMPLATE where ID IN 
+		<foreach item="idItem" collection="array" open="(" separator="," close=")">
+			#{idItem}
+		</foreach>
+    </delete>
+    
+    <!-- 根据模板ID删除模板 -->
+	<delete id="deleteTemplateById" parameterType="com.zjcds.portal.mybatis.bean.Template">
+		delete from
+		T_CDT_TEMPLATE where ID = #{id,jdbcType=DECIMAL}
+    </delete>
+
+	<!-- 增加模板 -->
+	<insert id="addTemplate" parameterType="com.zjcds.portal.mybatis.bean.Template">
+		<!-- 从序列中查询出模板ID -->
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT T_CDT_INCON_TMP_SEQUENCE.NEXTVAL FROM DUAL
+    	</selectKey>
+		insert into
+		T_CDT_TEMPLATE(ID,NAME,CONTEXT,MEMO)
+		values
+		(#{id,jdbcType=DECIMAL},#{name,jdbcType=VARCHAR},#{context,jdbcType=VARCHAR},#{memo,jdbcType=VARCHAR})
+	</insert>
+	
+	<!-- 根据模板ID获取模板 -->
+	<select id="getTemplateById" resultMap="BaseResultMap" parameterType="com.zjcds.portal.mybatis.bean.Template">
+		select
+		ID, NAME, CONTEXT, MEMO
+		from T_CDT_TEMPLATE
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+
+</mapper>

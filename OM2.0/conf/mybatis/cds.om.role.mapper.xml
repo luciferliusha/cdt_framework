@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjcds.om.data.dao.OMRoleDao">
+	<resultMap type="com.zjcds.om.data.bean.OMRoleData" id="BaseResultMap">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="PARENTID" property="parentId" jdbcType="DECIMAL" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="CREATETIME" property="createTime" jdbcType="DATE" />
+		<result column="UPDATETIME" property="updateTime" jdbcType="DATE" />
+		<result column="STATE" property="state" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap type="com.zjcds.om.data.bean.OMRoleData" id="allRoleResultMap">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="PARENTID" property="parentId" jdbcType="DECIMAL" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="CREATETIME" property="createTime" jdbcType="DATE" />
+		<result column="UPDATETIME" property="updateTime" jdbcType="DATE" />
+		<result column="STATE" property="state" jdbcType="VARCHAR" />
+		<collection property="children" column="id" select="omGetRoleTreeSub" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID,PARENTID,NAME,STATUS,CREATETIME,UPDATETIME
+	</sql>
+
+	<!-- 查询角色树   返回一层数据 -->
+	<select id="omGetRoleTreeOne" parameterType="com.zjcds.om.data.bean.OMRoleData"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		,STATE
+		from V_ROLE
+		<where>
+			<if test="id == null">
+				PARENTID = 0
+	     </if>
+			<if test="id != null">
+				PARENTID = #{id,jdbcType=DECIMAL}
+	     </if>
+		</where>
+	</select>
+	<!-- 查询角色树   返回子层数据 -->
+	<select id="omGetRoleTree" parameterType="com.zjcds.om.data.bean.OMRoleData"
+		resultMap="allRoleResultMap">
+		select
+		<include refid="Base_Column_List" />
+		,STATE
+		from V_ROLE
+		<where>
+			<if test="id == null">
+				PARENTID = 0
+	     	</if>
+			<if test="id != null">
+				PARENTID = #{id,jdbcType=DECIMAL}
+	     	</if>
+		</where>
+	</select>
+
+	<select id="omGetRoleTreeSub" parameterType="int" resultMap="allRoleResultMap">
+		select
+		<include refid="Base_Column_List" />
+		,STATE
+		from V_ROLE
+		where PARENTID = #{id}
+	</select>
+
+	<!-- 根据组织ID，查询该组织的角色 -->
+	<select id="omGetOrganizationRole" parameterType="int"
+		resultMap="BaseResultMap">
+		select
+		tr.id,tr.parentid,tr.name,tr.status,tr.createtime,tr.updatetime
+		from
+		t_organization_role tor left join t_role tr on tor.roleid = tr.id
+		where tor.organizationid = #{orgId}
+	</select>
+
+	<!-- 根据用户ID，查询该用户的角色 -->
+	<select id="omGetUserRole" parameterType="int" resultMap="BaseResultMap">
+		select
+		tr.id,tr.parentid,tr.name,tr.status,tr.createtime,tr.updatetime
+		from
+		t_user_role tur left join t_role tr on tur.roleid = tr.id
+		where
+		tur.userid = #{userId}
+	</select>
+
+	<!-- 根据用户ID，获取用户所属的角色和用户所属组织的角色 -->
+	<select id="omGetUserAllRoles" parameterType="int" resultMap="BaseResultMap">
+		select tr.id,tr.parentid,tr.name,tr.status,tr.createtime,tr.updatetime
+		from t_user_role tur left join t_role tr on tur.roleid = tr.id
+		where
+		tur.userid = #{userId}
+		union
+		select
+		tr.id,tr.parentid,tr.name,tr.status,tr.createtime,tr.updatetime
+		from
+		t_organization_role tor
+		left join t_role tr on tor.roleid = tr.id
+		left
+		join t_user_organization uo on tor.organizationid = uo.organizationid
+		where uo.userid = #{userId}
+	</select>
+
+	<!-- 获取子角色 -->
+	<select id="getChildRole" parameterType="int" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from T_ROLE where PARENTID=#{id,jdbcType=DECIMAL}
+	</select>
+	<!-- 修改角色 -->
+	<update id="omUpdateRole" parameterType="com.zjcds.om.data.bean.OMRoleData">
+		update T_ROLE
+		<set>
+			<if test="parentId != null">
+				PARENTID = #{parentId,jdbcType=DECIMAL},
+	  </if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+	  </if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=DECIMAL},
+	  </if>
+			<if test="updateTime != null">
+				UPDATETIME = #{updateTime,jdbcType=DATE}
+	  </if>
+		</set>
+		<where>
+			ID = #{id,jdbcType=DECIMAL}
+		</where>
+	</update>
+	<!-- 根据ID删除角色信息 -->
+	<delete id="omDeleteRole" parameterType="int">
+		delete from T_ROLE where
+		ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<!-- 根据角色ID删除角色与组织的关系 -->
+	<delete id="omDeleteRelationWithOrganization" parameterType="int">
+		delete from T_ORGANIZATION_ROLE where roleId = #{id,jdbcType=DECIMAL}
+	</delete>
+	<!-- 根据角色ID删除角色与用户的关系 -->
+	<delete id="omDeleteRelationWithUser" parameterType="int">
+		delete from
+		T_USER_ROLE where roleId = #{id,jdbcType=DECIMAL}
+	</delete>
+	<!-- 根据角色ID删除角色与资源的关系 -->
+	<delete id="omDeleteRelationWithResource" parameterType="int">
+		delete
+		from T_RESOURCE_ROLE where roleId = #{id,jdbcType=DECIMAL}
+	</delete>
+	<!-- 新增角色 -->
+	<insert id="omAddRole" parameterType="com.zjcds.om.data.bean.OMRoleData">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			T_ROLE_sequence.NEXTVAL FROM DUAL
+	    </selectKey>
+		insert into T_ROLE(ID,PARENTID,NAME,STATUS,CREATETIME)
+		values(#{id,jdbcType=DECIMAL},#{parentId,jdbcType=DECIMAL},#{name,jdbcType=VARCHAR},
+		#{status,jdbcType=DECIMAL},#{createTime,jdbcType=DATE})
+	</insert>
+
+	<!-- 把角色授权给组织   type为0赋予权限;1取消权限 -->
+	<select id="omAwardOrganization" parameterType="java.util.Map">
+		<if test="type == 0">
+			insert into T_ORGANIZATION_ROLE(organizationId,roleId)
+			select #{organizationId,jdbcType=DECIMAL},#{roleId,jdbcType=DECIMAL}
+			from dual where
+			not exists (select t.organizationid from
+			t_organization_role t where
+			t.organizationid=#{organizationId,jdbcType=DECIMAL} and
+			t.roleid=#{roleId,jdbcType=DECIMAL})
+		</if>
+		<if test="type == 1">
+			delete from T_ORGANIZATION_ROLE where
+			organizationId=#{organizationId,jdbcType=DECIMAL} and
+			roleId=#{roleId,jdbcType=DECIMAL}
+
+		</if>
+	</select>
+	<!-- 把角色授权给用户   type为0赋予权限;1取消权限 -->
+	<select id="omAwardUser" parameterType="java.util.Map">
+		<if test="type == 0">
+			insert into T_USER_ROLE(userId,roleId)
+			select
+			#{organizationId,jdbcType=DECIMAL},#{roleId,jdbcType=DECIMAL}
+			from
+			dual where
+			not exists (select t.userId from T_USER_ROLE t where
+			t.userid=#{organizationId,jdbcType=DECIMAL} and
+			t.roleid=#{roleId,jdbcType=DECIMAL})
+		</if>
+		<if test="type == 1">
+			delete from T_USER_ROLE where
+			userId=#{organizationId,jdbcType=DECIMAL} and
+			roleId=#{roleId,jdbcType=DECIMAL}
+
+		</if>
+	</select>
+	<!-- 取得角色信息 -->
+	<select id="omGetRole" parameterType="com.zjcds.om.data.bean.OMRoleData"
+		resultType="com.zjcds.om.data.bean.OMRoleData">
+		select
+		<include refid="Base_Column_List" />
+		from T_ROLE where id = #{id,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 角色搜索 -->
+	<select id="omSearchRole" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		,state
+		from (
+		select
+		<include refid="Base_Column_List" />,state
+		from V_ROLE t start with t.name like <![CDATA[ CONCAT(CONCAT('%', #{name}), '%') ]]>
+		connect by prior t.id=t.parentid
+		union
+		select
+		<include refid="Base_Column_List" />,state
+		from V_ROLE t start with t.name like <![CDATA[ CONCAT(CONCAT('%', #{name}), '%') ]]>
+		connect by prior t.parentid=t.id
+		)
+		order by parentid,id
+	</select>
+	<!-- 角色搜索,不拼装层次结构 -->
+	<select id="omSearchRole2" parameterType="com.zjcds.om.data.bean.OMRoleData"  resultMap="BaseResultMap">
+	   select  id from T_ROLE where name like CONCAT(CONCAT('%',#{name,jdbcType=VARCHAR}),'%') escape '\' order by id
+	</select>
+</mapper>

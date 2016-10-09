@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configs>
+	<!-- 系统相关配置  -->
+	<mapper key="omServer" value="http://localhost:8080/OM/"></mapper>	<!-- OM地址http://42.121.194.20:8080/OM/ts/omLogin -->
+	<mapper key="styleName" value="default"></mapper>								<!-- 样式default、blue -->
+</configs>

@@ -1,0 +1,207 @@
+@CHARSET "UTF-8";
+.index_content_div {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: #f3f4f5;
+	overflow: hidden;
+	z-index: 999;
+}
+.index_content{
+	margin-left: 0px;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 40px;
+	background: #f3f4f5;
+	overflow: hidden;
+}
+.containerpage{
+	float: left;
+	width: 848px;
+	height: 600px;
+	margin-top: 10px;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 40px;
+	padding-left: 88px;
+	padding-right: 88px;
+}
+.item{
+	width: 200px;
+	height: 180px;
+	float: left;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	position: relative;
+	left: 0px;
+	top: 0px;
+	overflow: hidden;
+	background-color: #f3f4f5;
+	cursor: pointer;
+}
+.item-image{
+	width: 200px;
+	height: 150px;
+	background-repeat: round;
+	background-size: 200px 150px;
+	border: 1px solid #e5e5e5;
+	box-shadow: inset -2px 0 0 0 rgba(0,0,0,0.1);
+	background-color: white;
+}
+.item-text{
+	width: 200px;
+	height: 32px;
+	line-height: 32px;
+	text-align: center;
+	font-family: 'microsoft yahei';
+	font-weight: bold;
+}
+#pre_page {
+	position: fixed;
+	top: 372px;
+	left: 0px;
+	width: 40px;
+	height: 40px;
+	cursor: pointer;
+	z-index: 999;
+}
+.pre_page_n {
+	background: url("../images/button/2l-n.png") no-repeat;
+}
+#pre_page:hover {
+	background: url("../images/button/2l-f.png") no-repeat;
+}
+#next_page {
+	position: fixed;
+	top: 372px;
+	right: 0px;
+	width: 40px;
+	height: 40px;
+	cursor: pointer;
+	z-index: 999;
+}
+.next_page_n {
+	background: url("../images/button/2r-n.png") no-repeat;
+}
+#next_page:hover {
+	background: url("../images/button/2r-f.png") no-repeat;
+}
+#solutionBox{
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+	position: absolute;
+	top: 450px;
+	left: 163px;
+	z-index: 999;
+}
+#solutionBox li{
+	width: 100px;
+	height: 20px;
+	margin: 2px;
+	border-radius: 5px;
+	float: left;
+	border: 1px solid #cdcdcd;
+	cursor: pointer;
+	text-align: center;
+}
+#solutionBox li.active{
+	border: 1px solid red;
+}
+#solutionBox li:hover{
+	background-color: #55b0dd;
+}
+.itemArrayMode{
+	width: 20px;
+	height: 20px;
+	margin: 10px;
+	background-color: #55b0dd;
+	float: left;
+	cursor: pointer;
+}
+.itemShapeMode{
+	width: 20px;
+	height: 20px;
+	margin: 10px;
+	background-color: red;
+	float: left;
+	cursor: pointer;
+}
+.itemArrayModeBox{
+	display: none;
+	list-style-type: none;
+	position: absolute;
+	top: 40px;
+	left: -112px;
+	border-bottom: 0px;
+	padding: 0px;
+	margin: 0px;
+	-webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.itemArrayModeBox li{
+	width: 150px;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	background-color: white;
+	cursor: pointer;
+}
+.itemArrayModeBox li:hover{
+	background-color: #55b0dd;
+}
+.itemShapeModeBox{
+	display: none;
+	list-style-type: none;
+	position: absolute;
+	top: 40px;
+	left: -95px;
+	padding: 0px;
+	margin: 0px;
+}
+.itemShapeModeBox li{
+	width: 86px;
+	height: 86px;
+	float: left;
+	border-left: 0px;
+	background-color: white;
+	cursor: pointer;
+}
+.itemShapeModeBox li:hover{
+	border: 1px solid #55b0dd;
+}
+.itemShapeModeBoxSquare{
+	display: block;
+	width: 76px;
+	height: 76px;
+	margin: 5px;
+	border-radius: 6px;
+	background-color: #55b0dd;
+}
+.itemShapeModeBoxCircle{
+	display: block;
+	width: 76px;
+	height: 76px;
+	margin: 5px;
+	border-radius: 38px;
+	background-color: #55b0dd;
+}
+#itemModeTool{
+	position: absolute;
+	z-index: 999;
+	right: 128px;
+	top: 40px;
+}
+#itemModeTool ul:before {
+	position: absolute;
+	top: -10px;
+	right: 8px;
+	display: inline-block;
+	border-right: 10px solid transparent;
+	border-bottom: 10px solid white;
+	border-left: 10px solid transparent;
+	content: '';
+}

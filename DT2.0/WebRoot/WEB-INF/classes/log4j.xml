@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration threshold="debug"
+	xmlns:log4j='http://jakarta.apache.org/log4j/'>
+
+	<!-- 应用于控制台 -->
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<param name="threshold" value="debug" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss}|%p| %m | %l%n" />
+		</layout>
+	</appender>
+
+	<!-- 应用于文件 -->
+	<appender name="DEBUG_LOG" class="org.apache.log4j.RollingFileAppender">
+		<param name="threshold" value="debug" />
+		<param name="file" value="./logs/debug.log" />
+		<param name="maxFileSize" value="20MB" />
+		<param name="maxBackupIndex" value="2" />
+		<param name="append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%-d{yyyy-MM-dd yyyy-MM-dd HH:mm:ss.SSS} [%-5p] | %m | %l%n" />
+		</layout>
+	</appender>
+
+	<appender name="RUNTIME_LOG" class="org.apache.log4j.RollingFileAppender">
+		<param name="threshold" value="info" />
+		<param name="file" value="./logs/runtime.log" />
+		<param name="maxFileSize" value="5MB" />
+		<param name="maxBackupIndex" value="7" />
+		<param name="append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-d{yyyy-MM-dd HH:mm:ss.SSS} [%-5p] | %m | %l%n" />
+		</layout>
+	</appender>
+
+	<!-- 应用于文件回滚 达到指定大小写新文件 -->
+	<appender name="OPERATION_LOG" class="org.apache.log4j.RollingFileAppender">
+		<param name="threshold" value="info" />
+		<param name="file" value="./logs/operation.log" />
+		<param name="maxFileSize" value="10MB" />
+		<param name="maxBackupIndex" value="7" />
+		<param name="append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-d{yyyy-MM-dd HH:mm:ss.SSS} [%-5p] | %m | %l%n" />
+		</layout>
+	</appender>
+
+	<category name="com.package1" additivity="true">
+		<priority value="INFO" />
+		<appender-ref ref="CONSOLE" />
+	</category>
+
+	<category name="com.package2" additivity="true">
+		<priority value="DEBUG" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="DEBUG_LOG" />
+	</category>
+	
+	<logger name="com.ibatis" additivity="true">
+		<level value="DEBUG" />
+	</logger>
+	<logger name="java.sql.Connection" additivity="true">
+		<level value="DEBUG" />
+	</logger>
+	<logger name="java.sql.Statement" additivity="true">
+		<level value="DEBUG" />
+	</logger>
+	<logger name="java.sql.PreparedStatement" additivity="true">
+		<level value="DEBUG" />
+	</logger>
+	<logger name="java.sql.ResultSet" additivity="true">
+		<level value="DEBUG" />
+	</logger>
+
+	<root>
+		<level value="INFO" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="DEBUG_LOG" />
+		<!--
+			<appender-ref ref="RUNTIME_LOG" /> <appender-ref ref="OPERATION_LOG"
+			/>
+		-->
+	</root>
+</log4j:configuration>

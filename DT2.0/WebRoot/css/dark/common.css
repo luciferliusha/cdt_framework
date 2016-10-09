@@ -1,0 +1,6 @@
+@CHARSET "UTF-8";
+.l-loading
+{
+    position: absolute;z-index: 91000;  top:45%; left:50%; overflow:hidden;
+    background:url('../../images/common/loading.gif') no-repeat 0px 0px;width:24px; height:24px; 
+}

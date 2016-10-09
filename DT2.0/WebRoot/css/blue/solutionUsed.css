@@ -1,0 +1,86 @@
+@CHARSET "UTF-8";
+/** solutionUsed.jsp start*/
+body{
+	margin: 0;
+	padding:0;
+	overflow-x: hidden;
+}
+.main{
+	padding:8px;
+	width:100%;
+}
+/*表格*/
+#gridDiv{
+	float:left;
+	height:476px;
+	width:49%;
+	overflow:hidden;
+	border:0px solid #CCCCCC;
+}
+#pieDiv{
+	float:left;
+	height:476px;
+	width:49%;
+	overflow:hidden;
+	border:0px solid #CCCCCC;
+}
+/*垂左右间隙*/
+.v_space{
+	float:left;
+	width:1%;
+	height:1px;
+	overflow:hidden;
+}
+ /*构建title*/
+.panel_title{
+	height:24px;
+}
+.panel_title2 {
+	height:2px;
+}
+.panel_title_content{
+	float:left;
+	color:white;
+	font-family: 'Microsoft YaHei' ;
+	line-height:24px;
+	font-size:12px;
+	margin-right:6px;
+	margin-left:8px;
+	font-weight:bold;
+}
+
+#gridDiv .panel_title{
+	background-color:#F9A65A;
+}
+#pieDiv .panel_title{
+	background-color:#EF8EDC;
+}
+
+#search-condition{
+	height: 28px; 
+	list-style-type: none;
+}
+#search-condition li{
+	float: left;
+	margin-right: 10px;
+	font-family: "microsoft yahei";
+	font-size: 14px;
+}
+#search-condition .search-button{
+	cursor: pointer;
+}
+
+.buttonX-n{
+	background: #2a9cd5;
+	border-radius: 6px;
+}
+.buttonX-n:hover{
+	background: #55b0dd;
+}
+.buttonX-n:active{
+	background: #227daa;
+}
+#solutionUsedPie{
+	height: 305px;
+	border: 1px solid #D3D3D3;
+}

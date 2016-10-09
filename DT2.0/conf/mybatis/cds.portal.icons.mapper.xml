@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjcds.portal.mybatis.dao.IconsDao">
+
+	<resultMap id="BaseResultMap" type="com.zjcds.portal.mybatis.bean.Icons">
+		<id column="ICON_ID" property="iconId" jdbcType="DECIMAL"></id>
+		<result column="ICON_NAME" property="iconName" jdbcType="VARCHAR" />
+		<result column="ICON_NORMAL" property="iconNormal" jdbcType="VARCHAR" />
+		<result column="ICON_SELECTED" property="iconSelected" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+	<!-- 获取所有的图标 -->
+	<select id="getAllIcons" resultMap="BaseResultMap">
+		select
+		ICON_ID, ICON_NAME, ICON_NORMAL, ICON_SELECTED
+		from T_CDT_ICONS
+		order by ICON_ID
+	</select>
+
+	<!-- 根据图标ID修改图标 -->
+	<update id="updateIcons" parameterType="com.zjcds.portal.mybatis.bean.Icons">
+		update T_CDT_ICONS
+		<set>
+			<if test="iconName != null">
+				ICON_NAME=#{iconName,jdbcType=VARCHAR},
+		    </if>
+		    <if test="iconNormal != null">
+				ICON_NORMAL=#{iconNormal,jdbcType=VARCHAR},
+		    </if>
+		    <if test="iconSelected != null">
+				ICON_SELECTED=#{iconSelected,jdbcType=VARCHAR}
+		    </if>
+		</set>
+		where ICON_ID=#{iconId,jdbcType=DECIMAL}
+	</update>
+
+	<!-- 批量删除图标 -->
+	<delete id="deleteIcons">
+		delete from
+		T_CDT_ICONS where ICON_ID IN 
+		<foreach item="idItem" collection="array" open="(" separator="," close=")">
+			#{idItem}
+		</foreach>
+    </delete>
+
+	<!-- 增加图标 -->
+	<insert id="addIcons" parameterType="com.zjcds.portal.mybatis.bean.Icons">
+		<!-- 从序列中查询出图标PFID -->
+		<selectKey keyProperty="iconId" resultType="int" order="BEFORE">
+			SELECT T_CDT_INCON_TMP_SEQUENCE.NEXTVAL FROM DUAL
+    	</selectKey>
+		insert into
+		T_CDT_ICONS(ICON_ID,ICON_NAME,ICON_NORMAL,ICON_SELECTED)
+		values
+		(#{iconId,jdbcType=DECIMAL},#{iconName,jdbcType=VARCHAR},#{iconNormal,jdbcType=VARCHAR},#{iconSelected,jdbcType=VARCHAR})
+	</insert>
+	
+	<!-- 根据图标ID获取图标 -->
+	<select id="getIconById" resultMap="BaseResultMap" parameterType="com.zjcds.portal.mybatis.bean.Icons">
+		select
+		ICON_ID, ICON_NAME, ICON_NORMAL, ICON_SELECTED
+		from T_CDT_ICONS
+		where ICON_ID = #{iconId,jdbcType=DECIMAL}
+	</select>
+
+</mapper>

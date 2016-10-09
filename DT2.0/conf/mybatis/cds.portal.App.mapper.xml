@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjcds.portal.mybatis.dao.AppDao">
+	<resultMap type="com.zjcds.portal.mybatis.bean.App" id="BaseResultMap">
+		<id column="APPID" property="appId" jdbcType="DECIMAL" />
+		<result column="PARENTID" property="parentId" jdbcType="DECIMAL"/>
+		<result column="APPNAME" property="appName" jdbcType="VARCHAR" />
+		<result column="USERID" property="userId" jdbcType="VARCHAR" />
+		<result column="DIRID" property="dirId" jdbcType="VARCHAR" />
+		<result column="KEYWORD" property="keyWord" jdbcType="VARCHAR" />
+		<result column="FILENAME" property="fileName" jdbcType="VARCHAR" />
+		<result column="MODULEID" property="moduleId" jdbcType="VARCHAR" />
+		<result column="APPTYPE" property="appType" jdbcType="VARCHAR" />
+		<result column="VISIBLE" property="visible" jdbcType="DECIMAL" />
+		<result column="ORDERBY" property="orderBy" jdbcType="DECIMAL" />
+		<result column="PICNAME" property="picName" jdbcType="VARCHAR" />
+		<result column="CREATEUSER" property="createUser" jdbcType="VARCHAR" />
+		<result column="CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="UPDATEUSER" property="updateUser" jdbcType="VARCHAR" />
+		<result column="UPDATETIME" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="TYPE" property="type" jdbcType="DECIMAL"/>
+		<result column="DESCRIBE" property="describe" jdbcType="VARCHAR"/>
+		<result column="STATE" property="state" jdbcType="VARCHAR"/>
+	</resultMap>
+
+	<!-- 构件使用情况结果MAP -->
+	<resultMap id="appHotMap" type="com.zjcds.portal.mybatis.bean.AppHot">
+		<id column="APPID" property="appId" jdbcType="DECIMAL"></id>
+		<result column="HOTNUM" property="hotNum" jdbcType="DECIMAL"/>
+	</resultMap>
+
+	<!-- T_APP表中字段 update 2013-4-9 -->
+	<sql id="Base_Column_List">
+		APPID,APPNAME,USERID,DIRID,KEYWORD,FILENAME,MODULEID,APPTYPE,VISIBLE,ORDERBY,PICNAME
+		,CREATEUSER,CREATETIME,UPDATEUSER,UPDATETIME,PARENTID,TYPE,DESCRIBE
+	</sql>
+
+	<!-- 增加构件  update 2013-4-9-->
+	<insert id="addAppFile" parameterType="com.zjcds.portal.mybatis.bean.App">
+		<!-- 查询序列T_APP_sequence,用于主键自增 -->
+		<selectKey keyProperty="appId" resultType="int" order="BEFORE">
+			select T_APP_sequence.NEXTVAL FROM DUAL
+	    </selectKey>
+		insert into
+		T_APP(APPID,APPNAME,USERID,DIRID,KEYWORD,FILENAME,MODULEID,APPTYPE,VISIBLE,ORDERBY,PICNAME,
+		CREATEUSER,PARENTID,TYPE,DESCRIBE)
+		values
+		(#{appId,jdbcType=DECIMAL},#{appName,jdbcType=VARCHAR},#{userId,jdbcType=VARCHAR},#{dirId,jdbcType=VARCHAR},
+		#{keyWord,jdbcType=VARCHAR},#{fileName,jdbcType=VARCHAR},#{moduleId,jdbcType=VARCHAR},#{appType,jdbcType=VARCHAR},
+		#{visible,jdbcType=DECIMAL},#{orderBy,jdbcType=DECIMAL},#{picName,jdbcType=VARCHAR},#{createUser,jdbcType=VARCHAR},
+		#{parentId,jdbcType=DECIMAL},#{type,jdbcType=DECIMAL},#{describe,jdbcType=VARCHAR})
+	</insert>
+
+	<!-- 根据appId删除构件  update 2013-4-9-->
+	<delete id="deleteAppFile" parameterType="java.lang.String">
+		delete from T_APP where
+		APPID=#{appId,jdbcType=DECIMAL}
+	</delete>
+
+	<!-- 修改构件 -->
+	<update id="updateAppFile" parameterType="com.zjcds.portal.mybatis.bean.App">
+		update T_APP
+		<set>
+			<if test="appName != null">
+				APPNAME=#{appName,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				USERID=#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="dirId != null">
+				DIRID=#{dirId,jdbcType=VARCHAR},
+			</if>
+			<if test="keyWord != null">
+				KEYWORD=#{keyWord,jdbcType=VARCHAR},
+			</if>
+			<if test="fileName != null">
+				FILENAME=#{fileName,jdbcType=VARCHAR},
+			</if>
+			<if test="moduleId != null">
+				MODULEID=#{moduleId,jdbcType=VARCHAR},
+			</if>
+			<if test="appType != null">
+				APPTYPE=#{appType,jdbcType=VARCHAR},
+			</if>
+			<if test="visible != null">
+				VISIBLE=#{visible,jdbcType=DECIMAL},
+			</if>
+			<if test="orderBy != null">
+				ORDERBY=#{orderBy,jdbcType=DECIMAL},
+			</if>
+			<if test="picName != null">
+				PICNAME=#{picName,jdbcType=VARCHAR},
+			</if>
+			<if test="updateUser != null">
+				UPDATEUSER=#{updateUser,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				UPDATETIME=#{updateTime,jdbcType=DATE},
+			</if>
+	     	<if test="parentId != null">
+	            PARENTID = #{parentId,jdbcType=DECIMAL},
+	     	</if>
+	     	<if test="type != null">
+	            TYPE = #{type,jdbcType=DECIMAL},
+	     	</if>
+	     	<if test="describe != null">
+	            DESCRIBE = #{describe,jdbcType=VARCHAR}
+	     	</if>
+		</set>
+		where APPID=#{appId,jdbcType=DECIMAL}
+	</update>
+    <!--  根据构件目录ID取得下一级目录 add 2013-4-9-->
+    <select id="getSubAppDir" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from T_APP where PARENTID=#{appId,jdbcType=DECIMAL} and TYPE = 0 and VISIBLE=1 order
+		by ORDERBY
+	</select>
+	
+	<!-- 根据构件目录ID取得该目录下的构件 -->
+	<select id="getSubAppFile" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from T_APP where PARENTID=#{appId,jdbcType=DECIMAL} and VISIBLE=1 order
+		by ORDERBY
+	</select>
+	<!-- 根据关键字搜索构件 -->
+	<select id="searchApp" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from T_APP
+		where (APPNAME like CONCAT(CONCAT('%',#{key}),'%') or KEYWORD like CONCAT(CONCAT('%',#{key}),'%')) and VISIBLE=1
+		order by ORDERBY
+
+	</select>
+	<!-- 获取构件目录下构件数量 -->
+	<select id="getSubAppFileCount" resultType="int" parameterType="java.lang.String">
+		select count(1)
+		from T_APP
+		where DIRID=#{dirId,jdbcType=VARCHAR} and VISIBLE=1
+	</select>
+	<!-- 根据构件目录ID取得该构件的下一级目录和构件 -->
+	<select id="getSubAppInfo" resultMap="BaseResultMap" parameterType="java.lang.String">
+	 select 
+	 <include refid="Base_Column_List"/>,state
+	 from V_APP where PARENTID = #{appId,jdbcType=DECIMAL} ORDER BY ORDERBY
+	</select>
+	<!-- 根据目录ID取得下一级目录和构件的总数目 -->
+	<select id="getSubAppInfoCount" resultType="int" parameterType="java.lang.String">
+	select count(1) from T_APP where PARENTID = #{parentId,jdbcType=DECIMAL}
+	</select>
+	<!-- 取得构件信息 -->
+	<select id="getAppInfo" parameterType="int" resultType="com.zjcds.portal.mybatis.bean.App">
+	select <include refid="Base_Column_List"/> from T_APP t where t.appId = #{appId,jdbcType=DECIMAL}
+	</select>
+	
+	<!-- 新增构件使用次数-->
+	<insert id="addAppHot" parameterType="com.zjcds.portal.mybatis.bean.AppHot">
+		insert into T_CDT_APPHOT(APPID, HOTNUM) values(#{appId,jdbcType=DECIMAL},#{hotNum,jdbcType=DECIMAL})
+	</insert>
+	
+	<!-- 根据appId删除构件的使用记录 -->
+	<delete id="deleteAppHot" parameterType="int">
+		delete from T_CDT_APPHOT where
+		APPID=#{appId,jdbcType=DECIMAL}
+	</delete>
+	
+	<!-- 更新构件使用次数 -->
+	<update id="updateAppHot" parameterType="com.zjcds.portal.mybatis.bean.AppHot">
+		UPDATE T_CDT_APPHOT t
+		<set>
+			<if test="hotNum != null">
+				t.HOTNUM=#{hotNum,jdbcType=DECIMAL}
+			</if>
+		</set>
+		WHERE t.APPID = #{appId,jdbcType=DECIMAL}
+	</update>
+	
+	<!-- 累加构件使用次数 -->
+	<update id="addUpAppHot" parameterType="com.zjcds.portal.mybatis.bean.AppHot">
+		UPDATE T_CDT_APPHOT t
+		<set>
+			t.HOTNUM=t.HOTNUM + 1
+		</set>
+		WHERE t.APPID = #{appId,jdbcType=DECIMAL}
+	</update>
+	
+	<!-- 根据appId查找AppHot -->
+	<select id="getAppHotByAppId" parameterType="com.zjcds.portal.mybatis.bean.AppHot" resultMap="appHotMap">
+		SELECT t.APPID,t.HOTNUM
+		FROM T_CDT_APPHOT t
+		WHERE t.APPID = #{appId,jdbcType=DECIMAL}
+	</select>
+	
+	<!-- 构件使用情况列表 -->
+	<select id="getAppHotList" resultMap="appHotMap">
+		SELECT t.APPID, t.APPNAME, nvl(t2.HOTNUM, 0) HOTNUM
+		FROM T_APP t left join T_CDT_APPHOT t2 on t2.APPID = t.APPID
+		WHERE t.type = 1
+		order by HOTNUM desc
+	</select>
+</mapper>

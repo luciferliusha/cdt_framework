@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configs>
+	<!-- 外部OM的接口相关配置  -->
+	<mapper key="login" value="ts/omLogin"></mapper>	<!-- 登录接口 -->
+	<mapper key="userList" value="ts/omGetShareUser"></mapper>  <!-- 分享时的用户列表接口 -->
+	<mapper key="userRegister" value="ts/omUserRegister"></mapper> <!-- 用户注册 -->
+	<mapper key="userPopedom" value="ts/omGetUserPopedom"></mapper><!-- 用户权限 -->
+	<mapper key="userInfo" value="ts/omGetOrganization"></mapper><!-- 取得用户信息 -->
+	<mapper key="updateUserInfo" value="ts/omOperateOrganization"></mapper><!-- 更新用户信息 -->
+	<mapper key="updateUserPassword" value="ts/omUpdatePassword"></mapper><!-- 更新密码 -->
+	<mapper key="isUserExit" value="ts/omUserIsExit"></mapper><!-- 判断用户是否存在 -->
+</configs>

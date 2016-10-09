@@ -1,0 +1,456 @@
+body{
+	padding: 0;
+	margin: 0;
+	color: #333333;
+	min-width: 800px;
+	min-height: 600px;
+	overflow: hidden; 
+}
+#top{
+	position: fixed;
+	width: 100%;
+	height: 40px;
+	background-image: url('../images/top/head-bg-bg-green.png');
+	z-index: 9999;
+}
+#logo{
+	float: left;
+	width: 50px;
+	height: 40px;
+}
+.logo-n{
+	width: 50px;
+	height: 40px;
+	background-image: url('../images/top/head-bg-logobutton-n-green.png');
+}
+.logo-f{
+	width: 50px;
+	height: 40px;
+	background-image: url('../images/top/head-bg-logobutton-f-green.png');
+}
+.logo-p{
+	width: 50px;
+	height: 40px;
+	background-image: url('../images/top/head-bg-logobutton-p-green.png');
+}
+#setting{
+	float: right;
+	margin-right: 10px;
+	height: 40px;
+	width: 17px;
+	background-image: url("../images/button/setting.png");
+}
+#set_list_div{
+	position:absolute;
+	z-index: 2;
+	background: url("../images/common/option-menubg.png");	
+	width: 128px;
+	height: 55px;
+	top: 35px;
+	right: 5px;
+	font-size: 12px;
+	overflow: hidden;
+	display: none;
+	cursor: default;
+	outline: none;
+}
+#set_list{		
+	list-style-type: none;
+	padding-bottom: 2px;
+	padding-top: 8px;
+	padding-left: 8px;
+	padding-right: 8px;
+	margin: 0;
+}
+#set_list .user{
+	margin-top: 4px;
+	height: 23px;
+	line-height: 23px;
+	padding-left: 15px;
+	color: #227179;		
+}
+.set_list_n{
+	height: 22px;
+	line-height: 24px;
+	padding-left: 15px;	
+}
+.set_list_f{
+	height: 22px;
+	line-height: 24px;
+	padding-left: 15px;
+	background: #c9cdd4;
+}
+.top-text{
+	float: left; 
+	padding-left: 20px; 
+	padding-top: 2px;
+	color: white; 
+	line-height: 40px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 16px;
+	font-weight: bold;
+}
+#body{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+}
+#organization_operate{
+	background: #ffffff;
+	height: 100%;
+	width: 320px;
+	float: left;
+	padding-top: 10px;
+	overflow-y: auto;
+}
+.operate_title_bg{
+	width: 320px;
+	height: 20px;
+	background: #DFE3E6;
+}
+.organization_groups_title{
+	height: 31px;
+	width: 320px;
+	border-bottom: #a3a5a8 1px solid;
+	margin-bottom: 7px;
+}
+.groups_title_text{
+	padding-left: 10px; 
+	color: #4D4C4D; 
+	line-height: 35px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	font-weight: bold;
+}
+.page-shadow{
+	position: absolute;
+	left: 320px;
+	height: inherit;
+	width: 0px;
+	border-left: 1px solid #1abc9b;
+	border-right: 1px solid #1abc9b;
+	margin-top: 10px;
+}
+#working-bg{
+	background: #ffffff;
+	float: left;
+/* 	overflow: auto; */
+}
+#role_operate{
+	background: #ffffff;
+	height: 100%;
+	width: 320px;
+	float: left;
+	padding: 10px;
+	padding-left: 0;
+	padding-right: 0;
+	overflow-y: auto;
+}
+#resource_operate{
+	background: #ffffff;
+	height: 100%;
+	width: 507px;
+	float: left;
+	border: 1px solid #1abc9b;
+	margin-top: 10px;
+	overflow-y: auto;
+}
+.cut-line{
+	width: 100%;
+	height: 1px;
+	border-bottom: 1px solid #A2A2A2;
+}
+
+/* ===============================================================
+	搜索框和保存按钮
+   =============================================================*/
+#searchView{
+	height: 45px;
+	width: 100%;
+	background-color: #ecf0f1;
+}
+#omsearch{
+	float: left;
+	width: auto;
+	height: 35px;
+	left: 0px;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+#search_input_bg{
+	float: left;
+	height: 35px;
+	width: 269px;
+}
+.search_input_bg_n{
+	background-image: url("../images/common/search-input-n.png");
+}
+.search_input_bg_f{
+	background-image: url("../images/common/search-input-p.png");
+}
+#search_input{
+	margin: 10px;
+	width: 100%;
+	border: 0px;
+	font-size: 12px;
+	outline: none;
+	color: #9a9a9a;
+}
+#search_button{
+	float: left;
+	height: 35px;
+	width: 48px;
+}
+.search_button_n{
+	background-image: url("../images/button/search-button-n.png");
+}
+.search_button_f{
+	background-image: url("../images/button/search-button-f.png");
+}
+.search_button_p{
+	background-image: url("../images/button/search-button-p.png");
+}
+#search_category{
+	float: left;
+	height: 35px;
+	width: 51px;
+}
+.search_category_n{
+	background-image: url("../images/button/search-category-n.png");
+}
+.search_category_f{
+	background-image: url("../images/button/search-category-f.png");
+}
+.search_category_p{
+	background-image: url("../images/button/search-category-p.png");
+}
+.search_category_font{
+	display:inline-block;
+	margin-top:11px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: #ffffff;
+	cursor: default;
+}
+#search_category .search_category_font{
+	margin-left: 6px;
+}
+#search_category_menu{
+	position: absolute;
+	height: 113px;
+	width: 234px;
+/* 	padding-top: 5px;
+	margin-left: -183px; */
+	margin-top: 40px;
+	margin-left: 135px;
+	z-index: 999;
+	background-image: url("../images/common/drop-dowm box-01.png");
+	display: none; 
+}
+#search_category_menu ul{
+	padding: 0px;
+	margin: 0px;
+	margin-top: 11px;
+	margin-left: 3px;
+}
+.menu_li_n{
+	margin-top: 3px;
+	height:22px;
+	padding-top:9px;
+	width: 218px;
+	padding-left:10px;
+	list-style: none;
+	color: #ffffff;
+	font-size: 12px;
+	cursor: default;
+}
+.menu_li_f{
+	margin-top: 3px;
+	height:22px;
+	padding-top:9px;
+	width: 218px;
+	padding-left:10px;
+ 	background-color: #19bc9d; 
+	list-style: none;
+	color: #ffffff;
+	font-size: 12px;
+	cursor: default;
+}
+.menu_span_n{
+	line-height: 38px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	cursor: default;
+	color: #ffffff;
+	margin-left: 10px;
+}
+.menu_span_d{
+	line-height: 38px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	cursor: default;
+	color: #333333;
+	margin-left: 15px;
+}
+
+#omsave{
+	height: 35px;
+	width: 67px;
+	float: right;
+	margin-top: 10px;
+	margin-right: 20px;
+}
+.omsave_n{
+	background-image: url("../images/button/button-01-n.png");
+}
+.omsave_f{
+	background-image: url("../images/button/button-01-f.png");
+}
+.omsave_p{
+	background-image: url("../images/button/button-01-p.png");
+}
+.omsave_d{
+	background-image: url("../images/button/button-01-d.png");
+}
+#omsave .search_category_font{
+	margin-left: 10px;
+}
+
+/* ===============================================================
+	搜索结果、角色、资源
+   =============================================================*/
+#resultView{
+	height: 35px;
+	width: 100%;
+	background-color: #ecf0f1;
+}
+#resultView span{
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	font-weight: bold;
+	cursor:default;
+}
+.search_name{
+	position: absolute;	
+	margin-top: 4px;
+	background: #d4d8d8;
+	height: 27px;
+	line-height: 27px;
+	padding-left:3px;
+	width: 120px;
+	display: none;
+}
+#organization_search_name_div{
+	left: 10px;
+}
+#organization_search_name{
+	display: inline-block;
+}
+.search_close{
+	display: inline-block;
+	position:absolute;
+	top:6px;
+	right:3px;
+	width: 16px;
+	height: 16px;
+}
+.search_close_n{
+	background-image: url("../images/button/tag-close-n.png");
+}
+.search_close_f{
+	background-image: url("../images/button/tag-close-f.png");
+}
+.organization_result_span{
+	position:absolute;
+	left: 44px;
+	margin-top: 15px;
+}
+.organization_result_span_tip{
+	position:absolute;
+	left: 154px;
+	display: none;
+	color: red;
+	margin-top: 15px;
+}
+#role_search_name_div{
+	left: 344px;
+}
+.role_result_span{
+	position:absolute;
+	left: 364px;
+	margin-top: 15px;
+}
+.role_result_span_tip{
+	position:absolute;
+	left: 474px;
+	display: none;
+	color: red;
+	margin-top: 15px;
+}
+#resource_search_name_div{
+	left: 664px;
+}
+.resource_result_span{
+	position:absolute;
+	left: 684px;
+	margin-top: 15px;
+}
+.resource_result_span_tip{
+	position:absolute;
+	left: 794px;
+	display: none;
+	color: red;
+	margin-top: 15px;
+}
+
+/* ===============================================================
+	横向阴影
+   =============================================================*/
+.horizontal_shadow{
+	height: 5px;
+	width: 100%;
+	background-image: url("../images/common/shadow.png");
+}
+/* ===============================================================
+	搜索框和保存按钮
+   =============================================================*/
+   
+/* ============================================
+	正在加载
+   ==========================================*/
+.loading{
+	position: absolute;
+	top: 50%;
+	z-index: 998;
+	width: 80px;
+	height: 20px;
+	font-size: 12px;
+}
+
+#searchRecord{
+	position:absolute; 
+	width:269px; 
+	height:0px; 
+	margin-left:10px; 
+	margin-top:45px; 
+	padding: 0px; 
+	border-top:1px solid #DCE0E3; 
+	border-left:1px solid #DCE0E3; 
+	border-right:1px solid #DCE0E3; 
+	background-color: white; 
+	z-index: 999; 
+	display: none;
+}
+#searchRecord li{
+	list-style: none;
+	width:259px; 
+	height:34px; 
+	line-height: 34px; 
+	padding-left: 5px;
+	padding-right: 5px;
+	border-bottom:1px solid #DCE0E3;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	font-weight: bold;
+	color: #333333;
+}

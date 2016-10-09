@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>login.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <script src="js/libs/jquery/jquery-1.8.3.min.js"></script>
+	<script src="js/libs/underscore/underscore-min.js"></script>
+	<script src="js/libs/backbone/backbone-min.js"></script>
+	
+	
+	
+	
+	<script src="js/model/userModel.js"></script>
+	<script src="js/collection/loginCollection.js"></script>
+	<script src="js/view/loginView.js"></script>
+	<script src="js/main/login.js"></script>
+	
+  </head>
+  
+  <body>
+  <div id="login_wd">
+  </div>
+  
+  <!-- Templates -->
+  <script type="text/template" id="login_template">
+	<div id="loginDiv">
+		<input id="loginName" placeholder="用户名" type="text"/><br/>
+    	<input id="pwd" placeholder="密码" type="password" />
+    	<input id="loginBtn" class="loginBtnStyle" type="button" value="登录"/>
+	</div>
+  </script>
+
+  </body>
+</html>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="DT2.0"
+  id="myeclipse.1336619458265"
+  context-root="/framework"
+  j2ee-spec="6.0"
+  archive="DT2.0.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

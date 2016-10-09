@@ -1,0 +1,621 @@
+@CHARSET "UTF-8";
+/**
+ ** 通用的CSS，即所有不会改变样式的CSS
+ **/
+body{
+	padding: 0;
+	margin: 0;
+	color: #333333;
+	min-width: 1000px;
+	min-height: 500px;
+}
+.blackboard-css{
+	position: fixed;
+	margin: auto;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: #000000;
+	-moz-opacity: 0.2;  
+	opacity:.20;
+	filter:Alpha(opacity=20);
+	z-index: 998; 
+	display: none;
+}
+.checkbox{
+	display: inline-block;
+	vertical-align: middle;
+	height: 16px;
+	width: 16px;
+}
+/**顶部样式 start**/
+#searchRecord{
+	position: absolute; 
+	width: 269px; 
+	height: 0px; 
+	margin-left: 10px; 
+	margin-top: 45px; 
+	padding: 0px; 
+	border-top: 1px solid #DCE0E3; 
+	border-left: 1px solid #DCE0E3; 
+	border-right: 1px solid #DCE0E3; 
+	background-color: white; 
+	z-index: 999; 
+	display: none;
+	outline: 0;
+}
+#searchRecord li{
+	list-style: none;
+	width: 259px; 
+	height: 34px; 
+	line-height: 34px; 
+	padding-left: 5px;
+	padding-right: 5px;
+	border-bottom: 1px solid #DCE0E3;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	font-weight: bold;
+	color: #333333;
+	cursor: pointer;
+}
+#searchView{
+	height: 45px;
+	width: 100%;
+	background-color: #ecf0f1;
+}
+#omsearch{
+	float: left;
+	width: auto;
+	height: 35px;
+	left: 0px;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+.search_input_bg{
+	float: left;
+	height: 35px;
+	width: 269px;
+}
+#search_input{
+	margin: 10px;
+	width: 249px;
+	border: 0px;
+	font-size: 12px;
+	outline: none;	
+}
+.input_hint{
+	color: #9a9a9a;
+}
+.input_normal{
+	color: #000;
+}
+.search_button{
+	float: left;
+	height: 35px;
+	width: 48px;
+	cursor: pointer;
+}
+.search_category{
+	float: left;
+	height: 35px;
+	width: 51px;
+	cursor: pointer;
+}
+#search_category_span{
+	display: inline-block;
+	margin-top: 11px;
+	font-family: 'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: #ffffff;
+	cursor: default;
+	margin-left: 6px;
+}
+#omsave{
+	float: right;
+}
+.button_01{
+	font-family: 'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: #ffffff;
+	cursor: default;
+	height: 35px;
+	line-height: 35px;
+	text-align: center;
+	width: 67px;
+	margin-top: 10px;
+	margin-right: 20px;
+	cursor: pointer;
+}
+/**搜索组织，角色和资源 start**/
+#resultView{
+	background-color: #ECF0F1;
+    height: 35px;
+    width: 100%;
+}
+.search_name{
+	position: absolute;	
+	margin-top: 4px;
+	background: #d4d8d8;
+	height: 27px;
+	line-height: 27px;
+	padding-left:3px;
+	width: 120px;
+	display: none;
+}
+.search_close{
+	display: inline-block;
+	position:absolute;
+	top:6px;
+	right:3px;
+	width: 16px;
+	height: 16px;
+}
+.search_tip{
+	position:absolute;	
+	display: none;
+	color: red;
+	margin-top: 15px;
+}
+#organization_search_name_div{
+	left: 10px;
+}
+#organization_result_span_tip{
+	left: 140px;
+}
+#role_search_name_div{
+	left: 344px;
+}
+#role_result_span_tip{
+	left: 474px;
+}
+#resource_search_name_div{
+	left: 664px;
+}
+#resource_result_span_tip{
+	left: 794px;
+}
+#resultView span{
+	cursor: default;
+    font-size: 12px;
+    font-weight: bold;
+}
+.organization_result_span{
+	left: 44px;
+	margin-top: 15px;
+	position: absolute;
+}
+.role_result_span{
+	left: 364px;
+	margin-top: 15px;
+	position: absolute;
+}
+.resource_result_span{
+	left: 684px;
+	margin-top: 15px;
+	position: absolute;
+}
+.horizontal_shadow{
+	background-image: url("../images/common/shadow.png");
+    height: 5px;
+    width: 100%;
+}
+#search_category_menu{
+	position: absolute;
+	height: 113px;
+	width: 234px;
+	margin-top: 40px;
+	margin-left: 135px;
+	z-index: 999;
+	display: none;
+	outline: 0;
+}
+#search_category_menu ul{
+	padding: 0px;
+	margin: 0px;
+	margin-top: 11px;
+	margin-left: 3px;
+}
+.menu_li{
+	margin-top: 3px;
+	height:22px;
+	padding-top:9px;
+	width: 218px;
+	padding-left:10px;
+	list-style: none;
+	color: #ffffff;
+	font-size: 12px;
+	cursor: pointer;
+}
+/**搜索组织，角色和资源 end**/
+/**顶部样式 end**/
+/**主体样式 start**/
+#body{
+	 width: 100%;
+	 padding: 0;
+	 margin: 0;
+}
+.page-shadow{
+	position: absolute;
+	left: 320px;
+	width: 0px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+#organization_operate{
+	background: #ffffff;
+	height: 100%;
+	width: 320px;
+	float: left;
+	padding-top: 10px;
+	overflow-y: auto;
+}
+#role_operate{
+	background: #ffffff;
+	height: 100%;
+	width: 320px;
+	float: left;
+	padding: 10px;
+	padding-left: 0;
+	padding-right: 0;
+	overflow-y: auto;
+}
+#resource_operate{
+	background: #ffffff;
+	height: 100%;
+	width: 507px;
+	float: left;
+	margin-top: 10px;
+	overflow-y: auto;
+}
+/**主体样式 end**/
+/**弹出框样式 strat**/
+.win_css{
+	position: absolute;
+  	z-index: 999;
+  	top: 50%;
+  	left: 50%;
+  	background: white;
+  	font-size: 12px;
+  	display: none;
+}
+.win_title{
+	height: 37px;
+	line-height: 37px;
+	padding-left: 20px;
+	font-size: 12px;
+	font-weight: bold;
+	margin: 0;
+}
+.cut-off{
+	width: 100%;
+	height: 1px;
+}
+.win_content{
+	margin: 20px 20px 30px 20px;
+}
+.error_tip_tr{
+	height: 20px;
+	vertical-align: middle;
+}
+.win_input_title{
+	display: block;
+	height: 24px;
+	font-size: 12px;
+}
+.textInput{
+	vertical-align:top;
+	height: 14px;
+	padding-top:7px;
+	padding-bottom:6px;
+	font-size:12px;
+	width: 334px;
+	border: 0px;
+	padding-left: 10px;
+	padding-right:6px;
+	outline: none;
+	font-family: "宋体",Verdana, Arial,Sans;
+}
+.input_error_tip{
+	height: 20px;
+	color: red;
+	font-size: 12px;
+}
+.confirmBtn{
+	height: 27px;
+	line-height: 27px;
+	width: 72px;
+	border: 0px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: white;
+	text-align: center;
+	margin-right: 10px;
+	float: left;
+	cursor: pointer;
+}
+.cancelBtn{
+	height: 27px;
+	line-height: 27px;
+	width: 72px;
+	border: 0px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: white;
+	text-align: center;
+	float: left;
+	cursor: pointer;
+}
+.win_close{
+	position: absolute;
+	height: 16px;
+	width: 16px;
+	top: 11px;
+	right: 15px;
+	cursor: pointer;
+}
+#renameWin{
+	height: 186px;
+	width: 391px;
+	margin-top: -93px;
+  	margin-left: -196px;
+}
+#deleteWin{
+	height: 193px;
+	width: 391px;
+	margin-top: -97px;
+  	margin-left: -196px;
+}
+#win_delte_title{
+	height: 24px;
+	font-weight: bold;
+}
+#win_delte_content{
+	height: 54px;
+}
+#newResourceWin{
+	height: 257px;
+	width: 391px;
+	margin-top: -129px;
+  	margin-left: -196px;
+}
+#newChooseWin{
+	width: 391px;
+	height: 186px;
+	margin-top: -93px;
+  	margin-left: -196px;
+}
+.hugeButton_01{
+	height: 33px;
+	width: 130px;
+	line-height: 33px;
+	text-align: center;
+	border: 0px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: white;
+	vertical-align: middle;
+	cursor: pointer;
+}
+.standardButton_04{
+	height: 27px;
+	width: 115px;
+	line-height: 27px;
+	text-align: center;
+	border: 0px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: white;
+	vertical-align: middle;
+	margin-left: 10px;
+	float: left;
+	cursor: pointer;
+}
+#chooseNewOrganization{
+	float: left;
+	margin-left: 20px;
+	margin-top: 37px;
+}
+#chooseNewUser{
+	float: right;
+	margin-right: 20px;
+	margin-top: 37px;
+}
+#newSimpleOrganizationWin{
+	height: 186px;
+	width: 391px;
+	margin-top: -93px;
+  	margin-left: -196px;
+}
+#newDetailOrganizationWin{
+	height: 470px;
+	width: 391px;
+	margin-top: -235px;
+  	margin-left: -196px;
+}
+#newSimpleUserWin{
+	height: 328px;
+	width: 391px;
+	margin-top: -164px;
+  	margin-left: -196px;
+}
+#newSimpleUserPassword{
+	display: none;;
+}
+#containUserWin{
+	height: 410px;
+	width: 391px;
+	margin-top: -205px;
+  	margin-left: -196px;
+}
+#allUserZTreeDiv{
+	height: 260px;
+	width: 100%;
+	border: 1px solid #E9E9E9;
+	overflow: auto;
+}
+#selectAllUserDiv{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	height: 16px;
+	line-height: 16px;
+}
+#selectAllUser_text{
+	vertical-align: middle;
+}
+#relieveOrganizationWin{
+	height: 394px;
+	width: 391px;
+	margin-top: -197px;
+  	margin-left: -196px;
+}
+#allOrganizationZTreeDiv{
+	height: 260px;
+	width: 100%;
+	border: 1px solid #E9E9E9;
+	overflow: auto;
+	margin-bottom: 20px;
+}
+#userSelectOrganization_tip{
+	color: red;
+	font-size: 12px;
+	position: absolute;
+	right: 128px;
+	height: 37px;
+	line-height: 37px;
+	top: 0;
+	display: none;
+}
+#moreInformationWin{
+	height: 405px;
+	width: 391px;
+	margin-top: -203px;
+  	margin-left: -196px;
+}
+#moreInformationWin .win_content{
+	height:355px;
+	overflow: auto;
+	margin: 0 0 10px 20px;
+}
+#moreInformationTable{
+	margin-top: 20px;
+}
+#moreInformationTable tr{
+	height: 30px;
+}
+#moreInformationTable .td_tile{
+	color: #4D4D4D;
+	vertical-align: top;
+	width: 70px;	
+}
+#moreInformationTable .td_content{
+	color: #4D4D4D;
+	vertical-align: top;
+	width: 281px;
+	word-break: break-all;
+}
+#moreInformationEditBtn{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	float: left;
+}
+#updateUserPasswordBtn{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	float: left;
+	display: none;
+}
+#local_title{
+	font-size: 12px;
+	clear: both;
+	margin-bottom: 10px;
+}
+#organization_list_div{
+	clear: both;
+}
+#organization_list_ul{
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	float: left;
+	margin-left: -10px;
+}
+.organization_item{
+	width: 110px;
+	background-color: #ebedee;
+	height:31px;
+	line-height:31px;
+	float: left;	
+	margin-bottom: 10px;
+	margin-left: 10px;
+}
+.userItem_img{
+	float:left;
+	width: 16px;
+	height: 16px;
+	margin-top: 8px;
+	background: url("../images/common/icon-client-single-n.png") no-repeat;
+}
+.organizationItem_img{
+	float:left;
+	width: 16px;
+	height: 16px;
+	margin-top: 8px;
+	background: url("../images/common/icon-organization-double-n.png") no-repeat;
+}
+.organizationItem_name{
+	float: left;
+}
+.organization_jump_item{
+	background: none;
+	float: left;
+	margin-left: 10px;
+}
+.containUser{
+	height: 31px;
+	width: 31px;
+}
+.relieveOrganization{
+	height: 31px;
+	width: 31px;
+}
+#moreInformationWin.user_detail_win{
+	height: 465px;
+	width: 391px;
+	margin-top: -232px;
+  	margin-left: -195px;
+}
+#moreInformationWin.user_detail_win .win_content{
+	height:415px;
+}
+.user_detail_win #moreInformationTable .td_tile{
+	color: #4D4D4D;
+	vertical-align: top;
+	width: 90px;	
+}
+.user_detail_win #moreInformationTable .td_content{
+	color: #4D4D4D;
+	vertical-align: top;
+	width: 261px;	
+}
+#newDetailUserWin{
+	height: 491px;
+	width: 480px;
+	margin-top: -246px;
+	margin-left: -240px;
+}
+#newDetailUserWin .user_td_title{
+	width: 90px;
+}
+#newDetailUserWin.update_detail_user_win{
+	height: 444px;
+	width: 480px;
+	margin-top: -222px;
+	margin-left: -240px;
+}
+#changePasswordWin{
+	height: 257px;
+	width: 391px;
+	margin-left: -196px;
+	margin-top: -129px;
+}
+/**弹出框样式 end**/

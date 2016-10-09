@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configs>
+	<!-- 系统相关配置  -->
+	<mapper key="omServer" value="http://192.168.0.168:6004/omserver/"></mapper>	<!-- OM地址 -->
+	<mapper key="xtcmsDir" value="E:/xtcms4"></mapper>								<!-- 知识库文件存放目录 -->
+	<mapper key="styleName" value="default"></mapper>								<!-- 样式 -->
+</configs>

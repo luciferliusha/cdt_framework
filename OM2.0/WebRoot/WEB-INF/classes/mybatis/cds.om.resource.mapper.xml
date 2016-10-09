@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjcds.om.data.dao.OMResourceDao">
+	<resultMap type="com.zjcds.om.data.bean.OMResourceData" id="BaseResultMap">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="PARENTID" property="parentId" jdbcType="DECIMAL" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="NO" property="no" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="CREATETIME" property="createTime" jdbcType="DATE" />
+		<result column="UPDATETIME" property="updateTime" jdbcType="DATE" />
+		<result column="STATE" property="state" jdbcType="VARCHAR" />
+		<result column="PERMISSION" property="permission" jdbcType="DECIMAL" />
+	</resultMap>
+
+	<resultMap type="com.zjcds.om.data.bean.OMUserPermissionData"
+		id="userPermissionMap">
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="NO" property="no" jdbcType="VARCHAR" />
+		<result column="PERMISSION" property="role" jdbcType="DECIMAL" />
+		<result column="ID" property="id" jdbcType="DECIMAL"/>
+		<result column="PARENTID" property="parentId" jdbcType="DECIMAL"/>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID,PARENTID,NAME,STATUS,CREATETIME,UPDATETIME,NO
+	</sql>
+	<!-- 取得资源树 获取一层数据 -->
+	<select id="omGetResourceTreeOne" parameterType="com.zjcds.om.data.bean.OMResourceData"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		,STATE
+		from V_RESOURCE
+		<where>
+			<if test="id != null">
+				PARENTID=#{id,jdbcType=DECIMAL}
+			</if>
+			<if test="id == null">
+				PARENTID = 0
+			</if>
+		</where>
+	</select>
+	<!-- 取得子资源 -->
+	<select id="getChildrenResource" parameterType="int" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from T_RESOURCE
+		<where>
+			PARENTID = #{id,jdbcType=DECIMAL}
+		</where>
+	</select>
+
+	<!-- 根据角色ID，取得该角色的资源 -->
+	<select id="omGetRoleResource" parameterType="int" resultMap="BaseResultMap">
+		select
+		tr.id,tr.parentid,tr.name,tr.status,tr.createtime,tr.updatetime,trr.permission
+		from t_resource_role trr left join t_resource tr on trr.resourceid =
+		tr.id
+		where trr.roleid = #{roleId}
+	</select>
+
+	<sql id="getUserAllResourceSql">
+		select distinct
+		tr.id,tr.parentid,tr.name,tr.no,tr.status,tr.createtime,tr.updatetime,trr.permission
+		from
+		(
+		select
+		tr.id,tr.parentid,tr.name,tr.status,tr.createtime,tr.updatetime
+		from
+		t_user_role tur left join t_role tr on tur.roleid = tr.id
+		where
+		tur.userid = #{userId,jdbcType=DECIMAL}
+		union
+		select
+		tr.id,tr.parentid,tr.name,tr.status,tr.createtime,tr.updatetime
+		from
+		t_organization_role tor
+		left join t_role tr on tor.roleid = tr.id
+		left
+		join t_user_organization uo on tor.organizationid = uo.organizationid
+		where uo.userid = #{userId,jdbcType=DECIMAL}
+		) ur
+		inner join
+		t_resource_role trr on trr.roleid = ur.id
+		inner join t_resource
+		tr on
+		trr.resourceid = tr.id
+		<where>
+			<if test="resourceName != null and resourceName != ''">
+				tr.name = #{resourceName,jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by tr.parentid, tr.id
+	</sql>
+
+	<!-- 根据用户ID，取得该用户的资源权限 -->
+	<select id="omGetUserAllResource" parameterType="java.util.Map"
+		resultMap="userPermissionMap">
+		<include refid="getUserAllResourceSql" />
+	</select>
+
+	<!-- 根据用户ID，取得该用户的资源权限 -->
+	<select id="omGetUserAllResourceInfo" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		<include refid="getUserAllResourceSql" />
+	</select>
+
+	<!-- 修改资源 -->
+	<update id="omUpdateresource" parameterType="com.zjcds.om.data.bean.OMResourceData">
+		update T_RESOURCE
+		<set>
+			<if test="parentId != null">
+				PARENTID = #{parentId,jdbcType=DECIMAL},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=DECIMAL},
+			</if>
+			<if test="updateTime != null">
+				UPDATETIME = #{updateTime,jdbcType=DATE}
+			</if>
+			<if test="no != null">
+				NO = #{no,jdbcType=VARCHAR}
+			</if>
+		</set>
+		<where>
+			ID = #{id,jdbcType=DECIMAL}
+		</where>
+	</update>
+	<!-- 根据资源ID删除资源与角色的关系 -->
+	<delete id="omDeleteRelationWithRole" parameterType="int">
+		delete from
+		T_RESOURCE_ROLE where resourceId = #{id,jdbcType=DECIMAL}
+	</delete>
+	<!-- 根据资源ID删除资源信息 -->
+	<delete id="omDeleteResource" parameterType="int">
+		delete from
+		T_RESOURCE where id = #{id,jdbcType=DECIMAL}
+	</delete>
+	<!-- 新增资源信息 -->
+	<insert id="omAddResource" parameterType="com.zjcds.om.data.bean.OMResourceData">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			T_RESOURCE_sequence.NEXTVAL FROM DUAL
+		</selectKey>
+		insert into T_RESOURCE(ID,PARENTID,NAME,STATUS,CREATETIME,NO)
+		values(#{id,jdbcType=DECIMAL},#{parentId,jdbcType=DECIMAL},#{name,jdbcType=VARCHAR},
+		#{status,jdbcType=DECIMAL},#{createTime,jdbcType=DATE},#{no,jdbcType=VARCHAR})
+	</insert>
+	<!-- 将资源赋予给角色 type为0则赋予权限,1则取消权限 -->
+	<select id="omAwardRole" parameterType="java.util.Map">
+		<if test="type == 0">
+		<!-- 判断记录是否存在,如果存在,更新;不存在则新增 -->
+		 declare 
+		        recodeExit int := 0;
+		     begin 
+		        select count(*) into recodeExit from  T_RESOURCE_ROLE  where roleId =#{roleId,jdbcType=DECIMAL} 
+		                                                               and resourceId = #{resourceId,jdbcType=DECIMAL};
+		     if recodeExit != 0 then
+		                  update T_RESOURCE_ROLE set permission = #{permission,jdbcType=DECIMAL} where roleId =#{roleId,jdbcType=DECIMAL} 
+		                                                               and resourceId = #{resourceId,jdbcType=DECIMAL};
+		     else 
+		         insert into T_RESOURCE_ROLE(roleId,resourceId,permission)
+			values(#{roleId,jdbcType=DECIMAL},#{resourceId,jdbcType=DECIMAL},#{permission,jdbcType=DECIMAL});
+			 end if;
+             commit;
+             end;
+           <!--  
+			insert into T_RESOURCE_ROLE(roleId,resourceId,permission)
+			values(#{roleId,jdbcType=DECIMAL},#{resourceId,jdbcType=DECIMAL},#{permission,jdbcType=DECIMAL})-->  	
+		</if>
+		<if test="type == 1">
+			delete from T_RESOURCE_ROLE where roleId =
+			#{roleId,jdbcType=DECIMAL} and
+			resourceId =
+			#{resourceId,jdbcType=DECIMAL}
+		</if>
+	</select>
+	<!-- 根据ID取得资源信息 -->
+	<select id="omGetResource" parameterType="com.zjcds.om.data.bean.OMResourceData"
+		resultType="com.zjcds.om.data.bean.OMResourceData">
+		select
+		<include refid="Base_Column_List" />
+		from T_RESOURCE where id = #{id,jdbcType=DECIMAL}
+	</select>
+	<!-- 资源搜索 -->
+	<select id="omSearchResource" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		,state
+		from (
+		select
+		<include refid="Base_Column_List" />,state
+		from V_RESOURCE t start with t.name like <![CDATA[ CONCAT(CONCAT('%', #{name}), '%') ]]>
+		connect by prior t.id=t.parentid
+		union
+		select
+		<include refid="Base_Column_List" />,state
+		from V_RESOURCE t start with t.name like <![CDATA[ CONCAT(CONCAT('%', #{name}), '%') ]]>
+		connect by prior t.parentid=t.id
+		)
+		order by parentid,id
+	</select>
+	<!-- 搜索资源 不返回层次结构数据 -->
+	<select id="omSearchResource2" parameterType="com.zjcds.om.data.bean.OMResourceData"
+		resultMap="BaseResultMap">
+			select id from t_resource where name like CONCAT(CONCAT('%',#{name,jdbcType=VARCHAR}),'%') escape '\' order by id
+	</select>
+	<!-- 检查资源编号是否存在 -->
+	<select id="omCheckNoIsExit" parameterType="com.zjcds.om.data.bean.OMResourceData" resultType="int">
+	  select count(no) from t_resource where no = #{no,jdbcType=VARCHAR}
+	</select>
+	<select id="getParentResource" parameterType="int" resultType="com.zjcds.om.data.bean.OMResourceData">
+	 select <include refid="Base_Column_List"/> from T_RESOURCE where id = #{parentId}
+	</select>
+</mapper>

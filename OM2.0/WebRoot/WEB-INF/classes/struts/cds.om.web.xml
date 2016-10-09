@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="version" namespace="/ts" extends="struts-default">
+		<!-- 组织动作 start -->
+		<action name="omGetOrganizationTree" class="omOrganizationAction"
+			method="omGetOrganizationTree"></action>
+		<action name="omOperateOrganization" class="omOrganizationAction"
+			method="omOperateOrganization"></action>
+		<action name="omGetOrganization" class="omOrganizationAction"
+			method="omGetOrganization"></action>
+		<action name="omSerachOrganization" class="omOrganizationAction"
+			method="omSerachOrganization"></action>
+		<action name="omGetAllOrganization" class="omOrganizationAction"
+			method="omGetAllOrganization"></action>
+		<action name="omGetOrganizationByUser" class="omOrganizationAction"
+			method="omGetOrganizationByUser"></action>
+		<action name="omOrganizationSelectUser" class="omOrganizationAction"
+			method="omOrganizationSelectUser"></action>
+		<action name="omGetSubCount" class="omOrganizationAction"
+			method="omGetSubCount"></action>
+
+		<action name="omGetOrganizationZTree" class="omOrganizationAction"
+			method="omGetOrganizationZTree"></action>
+		<action name="omSerachOrganizationZTree" class="omOrganizationAction"
+			method="omSerachOrganizationZTree"></action>
+		<action name="omGetZTreeAllOrganization" class="omOrganizationAction"
+			method="omGetZTreeAllOrganization"></action>
+		<!-- 组织动作 end -->
+
+		<!-- 角色动作 start -->
+		<action name="omGetRoleTree" class="omRoleAction" method="omGetRoleTree"></action>
+		<action name="omGetOrganizationRole" class="omRoleAction"
+			method="omGetOrganizationRole"></action>
+		<action name="omGetUserRole" class="omRoleAction" method="omGetUserRole"></action>
+		<action name="omOperateRole" class="omRoleAction" method="omOperateRole"></action>
+		<action name="omAwardPermission" class="omRoleAction" method="omAwardPermission"></action>
+		<action name="omGetRole" class="omRoleAction" method="omGetRole"></action>
+		<action name="omSerachRole" class="omRoleAction" method="omSerachRole"></action>
+		
+		<action name="omGetRoleZTree" class="omRoleAction" method="omGetRoleZTree"></action>
+		<!-- 角色动作 end -->
+
+		<!-- 资源动作 start -->
+		<action name="omGetResourceTree" class="omResourceAction"
+			method="omGetResourceTree">
+		</action>
+		<action name="omOperateResource" class="omResourceAction"
+			method="omOperateResource"></action>
+		<action name="omAwardResource" class="omResourceAction" method="omAwardResource"></action>
+		<action name="omGetRoleResource" class="omResourceAction"
+			method="omGetRoleResource"></action>
+		<action name="omGetResource" class="omResourceAction" method="omGetResource"></action>
+		<action name="omSearchResource" class="omResourceAction"
+			method="omSearchResource"></action>
+		<action name="omCheckNoIsExit" class="omResourceAction" method="omCheckNoIsExit"></action>
+
+		<action name="omGetResourceZTree" class="omResourceAction"
+			method="omGetResourceZTree">
+		</action>
+		<!-- 资源动作 end -->
+		<!-- 用户动作 start -->
+		<action name="omRemoveRelation" class="omUserAction" method="omRemoveRelation"></action>
+		<action name="omUserIsExit" class="omUserAction" method="omUserIsExit"></action>
+		<action name="omGetAllUser" class="omUserAction" method="omGetAllUser"></action>
+		<action name="omGetUserByOrganization" class="omUserAction"
+			method="omGetUserByOrganization"></action>
+		<action name="omUserSelectOrganization" class="omUserAction"
+			method="omUserSelectOrganization"></action>
+		<action name="omGetShareUser" class="omUserAction" method="omGetShareUser"></action>
+		<action name="omUserRegister" class="omUserAction" method="omUserRegister"></action>
+		<action name="omUpdatePassword" class="omUserAction" method="omUpdatePassword"></action>
+
+		<action name="omGetZTreeAllUser" class="omUserAction" method="omGetZTreeAllUser"></action>
+		<action name="omGetUserInfo" class="omUserAction" method="omGetUserInfo"></action>
+		<!-- 用户动作 end -->
+
+		<!-- 权限认证 start -->
+		<action name="omLogin" class="omAuthtAction" method="omLogin"></action>
+		<action name="omGetUserPopedom" class="omAuthtAction" method="omGetUserPopedom"></action>
+		<!-- 权限认证 end -->
+	</package>
+</struts>

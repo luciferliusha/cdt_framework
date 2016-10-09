@@ -1,0 +1,250 @@
+@CHARSET "UTF-8";
+body{
+	position: fixed;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	/* background-color: #F6F9FA; */
+}
+h4{
+	height: 37px;
+	line-height: 42px;
+	margin: 0px;
+	padding-left: 18px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	font-weight: bold;
+	color: #4D4D4D;
+	/*background-color: #f6faf9;*/
+}
+.cut-off{
+	width: 100%; 
+	height: 1px;
+	border-bottom: 1px solid #f3f4f5;
+}
+#login-leftView p{
+	font-family: "Microsoft yahei";
+	color: #d74737;font-size: 16px;
+	font-weight: bold;text-indent: 100px;letter-spacing: 2px;
+}
+.login-left-view {
+	width: 491px;
+	height: 235px;
+	/**background-image: url('../../images/login/cdtLoginPage.png');*/
+}
+.sysNameStyle {
+	width: auto; height: 70px; line-height: 70px; margin-bottom: 6px; color: #b73325; font-size: 32px; font-weight: bold; font-family: 'Microsoft YaHei' !important;
+}
+#login-leftView ul{
+	padding: 0px;
+	margin: 0px;
+}
+#login-leftView ul li{
+	height: 54px;
+	margin-bottom: 35px;
+}
+.image-css{
+	width: 54px; height: 54px; float:left;
+	margin-right: 28px;
+}
+.info-head{
+	color: #323a45; font-size: 14px;
+	font-family: 'Microsoft YaHei' !important;
+}
+.info-content{
+	width: 386px;
+	font-size: 12px;
+}
+.login-input-n{
+	width: 363px;
+	font-size:12px; 
+	height: 20px;
+	line-height: 20px;
+	border: 1px solid #bbc2c7;
+	border-radius: 6px;
+	padding-top: 13px; padding-bottom: 13px;
+	padding-left: 6px; padding-right:6px;
+	margin-top: 15px;
+	outline: none;
+	color: #999999;
+}
+.login-input-change{
+	color: #333333;
+}
+.login-input-f{
+	width: 363px;
+	font-size:12px; 
+	height: 20px;
+	line-height: 20px;
+	border: 1px solid #d74737;
+	border-radius: 6px;
+	padding-top: 13px; padding-bottom: 13px;
+	padding-left: 6px; padding-right:6px;
+	margin-top: 15px;
+	outline: none;
+}
+.font-gray{
+	color: #808080; font-size: 12px;
+	font-family: 'Microsoft YaHei' !important;
+}
+.font-blue{
+	color: #2a9cd5;
+}
+#cdt-login{
+	outline: none;
+	border:0;
+}
+.cdt-login-n{
+	width: 138px; height: 44px; line-height: 44px; text-align:center;
+	background: #d74737;
+	border-radius: 6px;
+	font-size: 16px; font-weight: bold; color: #ffffff;
+	font-family: 'Microsoft YaHei' !important; cursor: pointer;
+}
+.cdt-login-f{
+	width: 138px; height: 44px; line-height: 44px; text-align:center;
+	background: #e06e62;
+	border-radius: 6px;
+	font-size: 16px; font-weight: bold; color: #ffffff;
+	font-family: 'Microsoft YaHei' !important; cursor: pointer;
+}
+.cdt-login-p{
+	width: 138px; height: 44px; line-height: 44px; text-align:center;
+	background: #b73325;
+	border-radius: 6px;
+	font-size: 16px; font-weight: bold; color: #ffffff;
+	font-family: 'Microsoft YaHei' !important; cursor: pointer;
+}
+#font-foot font{
+	color: #999999; font-size: 14px;
+	font-family: 'Microsoft YaHei' !important;
+}
+#checkbox-login{
+	width: 20px; height: 20px;
+	vertical-align: middle;
+	cursor: pointer;
+}
+.checkbox-login-n{
+	 width: 20px; height: 20px; float:left; cursor: pointer;
+}
+.checkbox-login-f{
+	 width: 20px; height: 20px; float:left; cursor: pointer;
+}
+.checkbox-login-p{
+	 width: 20px; height: 20px; float:left; cursor: pointer;
+}
+.checkbox-login-d{
+	 width: 20px; height: 20px; float:left; cursor: pointer;
+	 background-image: url('../../images/login/Item--Disabled.png');
+}
+a:hover {
+	text-decoration:underline;
+}
+#blackboard{
+	position: fixed;
+	margin: auto;
+	top: 40px;
+	width: 100%;
+	height: 100%;
+	background-color: #000000;
+	-moz-opacity: 0.2;  
+	opacity:.20;
+	filter:Alpha(opacity=20);
+	z-index: 998; 
+	display: none;
+}
+#signin_wd{
+	position: absolute;
+	height: auto;
+	width: 391px;
+	background: white;
+	z-index: 999;
+	top: 50%;
+	left: 50%;
+	margin-left:-195px;
+	margin-top:-195px;
+	display: none;
+}
+.addInformation_input_title{
+	margin-bottom: 10px;
+	cursor: default;
+}
+.register_textInput_n {
+	vertical-align:top;
+	background: url("../../images/common/StandardInput-01-n.png") no-repeat;
+	height: 14px;
+	padding-top:7px;
+	padding-bottom:6px;
+	font-size:12px;
+	width: 334px;
+	border: 0px;
+	padding-left: 10px;
+	padding-right:6px;
+	outline: none;
+	font-family: "宋体",Verdana, Arial,Sans;
+	color: #999999;
+}
+.register_textInput_p {
+	vertical-align:top;
+	background: url("../../images/common/StandardInput-01-f.png") no-repeat;
+	height: 14px;
+	padding-top:7px;
+	padding-bottom:6px;
+	font-size:12px;
+	width: 334px;
+	border: 0px;
+	padding-left: 10px;
+	padding-right:6px;
+	outline: none;
+	font-family: "宋体",Verdana, Arial,Sans;	
+}
+.register_textInput_change{
+	color: #333333;
+}
+.error_tip{
+	display:inline-block;
+	margin-top:4px;
+	margin-bottom:4px;
+	color: red;
+	font-size: 12px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	cursor: default;
+	display: none;
+}
+.top-text{
+	float: left; 
+	padding-left: 20px; 
+	padding-top: 2px;
+	color: white; 
+	line-height: 40px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 16px;
+	font-weight: bold;
+	cursor: default;
+}
+.signinBtn_n {
+	background: url("../../images/button/buttonX-n.png") no-repeat;
+	height: 25px;
+	line-height: 25px;
+	width: 72px;
+	border: 0px;
+	margin-right: 6px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: white;
+	cursor: pointer;
+}
+.signinBtn_f {
+	background: url("../../images/button/buttonX-f.png") no-repeat;
+	height: 25px;
+	line-height: 25px;
+	width: 72px;
+	border: 0px;
+	margin-right: 6px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: white;
+	cursor: pointer;
+}

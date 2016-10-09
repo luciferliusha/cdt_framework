@@ -1,0 +1,248 @@
+#userView h4{
+	height: 37px;
+	line-height: 42px;
+	margin: 0px;
+	padding-left: 20px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	font-weight: bold;
+	color: #4D4D4D;
+	background-color: #f6faf9;
+}
+
+/*
+#userView .cut-off{
+	width: 100%; 
+	height: 1px;
+	background-color: #8AD0C2;
+}*/
+
+#userView .blackboard-css{
+	position: fixed;
+	margin: auto;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: #000000;
+	-moz-opacity: 0.2;  
+	opacity:.20;
+	filter:Alpha(opacity=20);
+	/*z-index: 999;*/
+	z-index: 10000; 
+}
+
+#userView .confirm_close_n{
+	position: absolute;
+	height: 16px;
+	width: 16px;
+	top: 11px;
+	right: 15px;
+	background: url("../../images/button/blue/tag-close-n.png") no-repeat;
+}
+
+#userView .confirm_close_f{
+	position: absolute;
+	height: 16px;
+	width: 16px;
+	top: 11px;
+	right: 15px;
+	background: url("../../images/button/blue/tag-close-f.png") no-repeat;
+}
+
+#userView .cancelBtn_n {
+	background: url("../../images/button/StandardButton-02-n.png") no-repeat;
+	height: 27px;
+	line-height: 27px;
+	width: 72px;
+	border: 0px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: white;
+}
+
+#userView .cancelBtn_f {
+	background: url("../../images/button/StandardButton-02-f.png") no-repeat;
+	height: 27px;
+	line-height: 27px;
+	width: 72px;
+	border: 0px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: white;
+}
+
+#userView .cancelBtn_p{
+	background: url("../../images/button/StandardButton-02-p.png") no-repeat;
+	height: 27px;
+	line-height: 27px;
+	width: 72px;
+	border: 0px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: white;
+}
+
+#userView .textInput_n {
+	vertical-align:top;
+	background: url("../../images/common/blue/StandardInput-01-n.png") no-repeat;
+	height: 14px;
+	padding-top:7px;
+	padding-bottom:6px;
+	font-size:12px;
+	width: 334px;
+	border: 0px;
+	padding-left: 10px;
+	padding-right:6px;
+	outline: none;
+	font-family: "宋体",Verdana, Arial,Sans;
+	color: #999999;
+}
+
+#userView .saveBtn_n {
+	background: url("../../images/button/blue/StandardButton-01-n.png") no-repeat;
+	height: 27px;
+	line-height: 27px;
+	width: 72px;
+	border: 0px;
+	margin-right: 6px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: white;
+}
+
+#userView .saveBtn_f {
+	background: url("../../images/button/blue/StandardButton-01-f.png") no-repeat;
+	height: 27px;
+	line-height: 27px;
+	width: 72px;
+	border: 0px;
+	margin-right: 6px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: white;
+}
+
+#userView .saveBtn_p {
+	background: url("../../images/button/blue/StandardButton-01-p.png") no-repeat;
+	height: 27px;
+	line-height: 27px;
+	width: 72px;
+	border: 0px;
+	margin-right: 6px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: white;
+}
+
+#userView .textInput_p {
+	vertical-align:top;
+	background: url("../../images/common/blue/StandardInput-01-f.png") no-repeat;
+	height: 14px;
+	padding-top:7px;
+	padding-bottom:6px;
+	font-size:12px;
+	width: 334px;
+	border: 0px;
+	padding-left: 10px;
+	padding-right:6px;
+	outline: none;
+	font-family: "宋体",Verdana, Arial,Sans;	
+}
+
+#userView .textInput_change{
+	color: #333333;
+}
+
+#userView .error_tip{
+	display:inline-block;
+	margin-top:4px;
+	margin-bottom:4px;
+	color: red;
+	font-size: 12px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	cursor: default;
+	display: none;
+}
+
+#userView .userBox-css{
+	position: absolute; 
+	width: 390px; 
+	/*height: 420px;*/
+	height:300px;
+	background: white;
+	/*z-index: 999;*/
+	z-index: 10001;
+	top: 50%;
+	left: 50%;
+	margin-left: -195px;
+	margin-top: -150px;
+}
+
+#userView .userBox_content{
+	width: 100%;
+	/*height: 370px;*/
+	overflow: auto;
+	color: #4d4d4d;
+}
+
+#userView .user_title{
+	width: 70px;
+	height: 31px;
+}
+
+#userView .user_content{
+	width: 280px;
+	height: 31px;
+}
+
+#userView .edit_userBox-css{
+	position: absolute; 
+	width: 390px; 
+	height: 450px;
+	background: white;
+	/*z-index: 999;*/
+	z-index: 10001;
+	top: 50%;
+	left: 50%;
+	margin-left: -195px;
+	margin-top: -225px;
+	display: none;
+}
+
+#userView .edit_userBox_content{
+	width: 100%;
+	height: 500px;
+	overflow: auto;
+	color: #4d4d4d;
+}
+
+#userView .edit_userBtn_div{
+	margin: 20px;
+	margin-top: 40px;
+	cursor: default;
+}
+
+#userView .changePassword_userBox-css{
+	position: absolute; 
+	width: 390px; 
+	height: 260px;
+	background: white;
+	/*z-index: 999;*/
+	z-index: 10001;
+	top: 50%;
+	left: 50%;
+	margin-left: -195px;
+	margin-top: -225px;
+	display: none;
+}
+
+#userView .changePassword_userBox_content{
+	width: 100%;
+	height: 223px;
+	overflow: auto;
+	color: #4d4d4d;
+}
+
+#userView .user_input_title{
+	margin-bottom:5px;
+}

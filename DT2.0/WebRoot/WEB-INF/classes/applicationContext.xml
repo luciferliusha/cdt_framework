@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+ 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-autowire="byName">
+
+
+	<context:property-placeholder location="classpath:jdbc.properties" />
+	<context:annotation-config />
+	<context:component-scan base-package="com" />
+
+	<!-- 这里配置系统的相关配置信息 -->
+	<!-- 配置信息 -->
+	<bean id="propertyConfigurer" class="com.zjcds.portal.config.ConfigureHolder" >
+	   <property name="platformAsResource">
+	      <value>true</value>
+	   </property> 
+	</bean>
+	<!-- 配置信息end -->
+
+<!-- 数据库方言工厂，拦截器使用此工厂产生的方言对象生成分页SQL -->
+	<bean id="paggingDialectFactory"
+		class="com.cds.framework.dao.paging.DefaultPaggingDialectFactory">
+	</bean>
+	<!-- 知识库 -->
+	<bean id="xtcms_dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${zjcds.xtcms.ds.driverClassName}" />
+		<property name="url" value="${zjcds.xtcms.ds.url}" />
+		<property name="username" value="${zjcds.xtcms.ds.username}" />
+		<property name="password" value="${zjcds.xtcms.ds.password}" />
+		<property name="testOnBorrow" value="true"/>    
+	    <property name="testWhileIdle" value="true"/>    
+	    <property name="testOnReturn" value="true"/>
+	    <property name="maxActive" value="20"/><!-- maxActive：最大连接数  -->
+        <property name="maxIdle" value="20"/> <!-- maxIdle：最大空闲连接  -->
+        <property name="minIdle" value="5" /><!-- 最小空闲值.当空闲的连接数少于阀值时，连接池就会预申请去一些连接，以免洪峰来时来不及申请 -->
+        <property name="maxWait" value="30000"/><!-- maxWait：超时等待时间以毫秒为单位 -->
+	    <property name="minEvictableIdleTimeMillis" value="300000" />    
+	    <property name="timeBetweenEvictionRunsMillis" value="120000" />   
+	    <property name="validationQuery" value="select 1 from dual" />
+	    <property name="removeAbandoned" value="true"></property>
+	</bean>
+	<!-- 业务库 -->
+	<bean id="bs_dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${zjcds.bs.ds.driverClassName}" />
+		<property name="url" value="${zjcds.bs.ds.url}" />
+		<property name="username" value="${zjcds.bs.ds.username}" />
+		<property name="password" value="${zjcds.bs.ds.password}" />
+		<property name="testOnBorrow" value="true"/>    
+	    <property name="testWhileIdle" value="true"/>    
+	    <property name="testOnReturn" value="true"/>   
+	    <property name="maxActive" value="20"/><!-- maxActive：最大连接数  -->
+        <property name="maxIdle" value="20"/> <!-- maxIdle：最大空闲连接  -->
+        <property name="minIdle" value="5" /><!-- 最小空闲值.当空闲的连接数少于阀值时，连接池就会预申请去一些连接，以免洪峰来时来不及申请 -->
+        <property name="maxWait" value="30000"/><!-- maxWait：超时等待时间以毫秒为单位 -->
+	    <property name="minEvictableIdleTimeMillis" value="300000" />    
+	    <property name="timeBetweenEvictionRunsMillis" value="120000" />   
+	    <property name="validationQuery" value="select 1 from dual" />
+	    <property name="removeAbandoned" value="true"></property>
+	</bean>
+
+	<bean id="dataSource" class="com.cds.framework.dao.MultiDataSource">
+		<property name="defaultDataSource" ref="xtcms_dataSource" />
+	</bean>
+	
+	<bean id="dataSource_bs" class="com.cds.framework.dao.MultiDataSource">
+		<property name="defaultDataSource" ref="bs_dataSource" />
+	</bean>
+
+	<!-- <bean id="dataSourceProxy" class="org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy"> 
+		<constructor-arg> <ref bean="dataSource" /> </constructor-arg> </bean> <bean 
+		id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" 
+		/> -->
+
+	<!-- MyBatis 配置加载与事务管理器 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis.cfg.xml" />
+		<property name="mapperLocations" value="classpath:mybatis/*.mapper.xml" />
+	</bean>
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- MyBatis 配置加载与事务管理器 -->
+	<bean id="sqlSessionFactory_bs" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource_bs" />
+		<property name="configLocation" value="classpath:mybatis.cfg.xml" />
+		<property name="mapperLocations" value="classpath:mybatis/*.mapper.xml" />
+	</bean>
+	<bean id="transactionManager_bs"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource_bs" />
+	</bean>
+	
+	<!-- Hibernate3 配置加载与事务管理器 <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean"> 
+		<property name="dataSource" ref="dataSource"/> <property name="mappingResources"> 
+		<list> <value>hibernate/VersionInfo.xml</value> </list> </property> <property 
+		name="hibernateProperties"> <props> <prop key="hibernate.dialect">org.hibernate.dialect.DerbyDialect</prop> 
+		<prop key="hibernate.hbm2ddl.auto">update</prop> <prop key="hibernate.format_sql">false</prop> 
+		<prop key="hibernate.show_sql">false</prop> </props> </property> </bean> 
+		<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager"> 
+		<property name="sessionFactory" ref="sqlSessionFactory" /> <property name="dataSource" 
+		ref="dataSource" /> </bean> -->
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED"
+				rollback-for="java.lang.RuntimeException" />
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="query*" read-only="true" />
+			<tx:method name="select*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<tx:advice id="txAdvice_bs" transaction-manager="transactionManager_bs">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED"
+				rollback-for="java.lang.RuntimeException" />
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="query*" read-only="true" />
+			<tx:method name="select*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut id="services"
+			expression="execution (* com.zjcds.portal.service.*.*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="services" />
+		<aop:advisor advice-ref="txAdvice_bs" pointcut-ref="services" />
+	</aop:config>
+	<!-- service 日志记录 -->
+	<bean id="serviceAspect" class="com.zjcds.portal.util.ServiceAspect">
+	</bean>
+		<aop:config>
+			<aop:pointcut expression="execution (* com.zjcds.portal.service.*.*.*(..))"
+				id="servicePointcut" />
+			<aop:aspect ref="serviceAspect">
+				<aop:before method="before" pointcut-ref="servicePointcut" arg-names="joinPoint"/>
+				<aop:after method="after" pointcut-ref="servicePointcut" arg-names="joinPoint" />
+			</aop:aspect>
+		</aop:config>
+	<!-- MyBatis 需要自动Mapper时, 需要配置 <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"> 
+		<property name="annotationClass" value="org.springframework.stereotype.Repository"/> 
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> <property name="basePackage" 
+		value="com.cds.*.dao"/> </bean> -->
+
+	<bean class="com.cds.framework.core.ContextHolder" />
+
+</beans>

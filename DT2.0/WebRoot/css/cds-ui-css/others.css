@@ -1,0 +1,94 @@
+@CHARSET "UTF-8";
+body{
+	background: #F3F4F5;
+	overflow-x: hidden;
+}
+.block {
+	width: 100%;
+	margin-bottom: 20px;
+}
+.block .info_bar{
+	color: #FFF;
+	background: #9FA8AF;
+	text-indent: 40px;
+	font-size: 14pt;
+	font-weight: bold;
+	padding: 3px 0;
+}
+.block .display{
+	background: #fff;
+	box-shadow: 0px 1px 2px 0px;
+	margin-bottom: 10px;
+}
+.block .display table{
+	width: 100%;
+}
+#basic-button tr td{
+	padding: 10px 75px;
+}
+#basic-button tr:nth-child(1) td{
+	font-weight: bold;
+}
+#checkbox-and-radio tr td{
+	padding: 15px 148px;
+}
+#switch-on tr td{
+	padding: 15px 275px;
+}
+#section-component tr td{
+	padding: 15px 275px;
+}
+#section-bar tr td{
+	padding: 15px 275px;
+}
+#search-box tr td{
+	padding: 15px 275px;
+}
+#text-input tr td{
+	padding: 15px 225px;
+}
+#textarea-input tr td{
+	padding: 15px 210px;
+}
+#text-link tr td{
+	padding: 15px 275px;
+}
+#select-list tr td{
+	padding: 15px 190px;
+}
+#info-list-box tr td{
+	padding: 15px 20px;
+}
+#info-list tr td{
+	padding: 15px 20px;
+}
+#cds-date-selection tr td{
+	padding: 15px 20px;
+}
+#cds-pagination tr td{
+	padding: 15px 170px;
+}
+#cds-scrollbar tr td{
+	padding: 15px 20px;
+}
+#cds-stepper tr td{
+	padding: 15px 20px;
+}
+#cds-slider tr td{
+	padding: 15px 20px;
+}
+#cds-progress tr td{
+	padding: 15px 20px;
+}
+#cds-progress .progress-control{
+	height: 30px;
+	margin: 5px 0;
+	margin-left: auto;
+	margin-right: auto;
+	width: 475px;
+}
+#cds-progress .progress-control li{
+	display: inline-block;
+	float: left;
+	margin: 0 5px;
+}

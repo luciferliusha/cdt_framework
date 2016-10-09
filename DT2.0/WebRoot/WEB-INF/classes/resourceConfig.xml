@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configs>
+	<!-- 系统资源信息配置，与OM3.0权限系统的资源对应  -->
+	<mapper key="login" value="CDT-01"></mapper>	
+	<mapper key="save" value="保存"></mapper>
+	<mapper key="publish" value="发布"></mapper>
+	<mapper key="solution" value="解决方案"></mapper>
+	<mapper key="app" value="构件"></mapper>
+</configs>

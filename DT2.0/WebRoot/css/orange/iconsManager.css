@@ -1,0 +1,235 @@
+@CHARSET "UTF-8";
+/** */
+body{
+	margin: 0px;
+	overflow-x: hidden;
+	font-size: 14px;
+}
+
+/* 遮罩 */
+.all_background {
+	position: fixed;
+	margin: auto;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: #000000;
+	-moz-opacity: 0.2;  
+	opacity:.20;
+	filter:Alpha(opacity=20);
+	z-index: 100; 
+	display: none;
+}
+
+/* 列表样式  start */
+.icon_config {
+	width: 96%;
+	margin: 0 2%;
+	overflow: hidden;
+}
+#icon_content {
+	margin-top: 50px;
+	overflow: auto;
+}
+#icon_title {
+	border-bottom: solid 1px rgb(171, 171, 171);
+	overflow: hidden;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 2%;
+	padding-right: 2%;
+	position: fixed;
+	width: 92%;
+	background-color: white;
+}
+
+.iconStyle {
+	width: 16px;
+	height: 16px;
+	background-position: center;
+	background-repeat: no-repeat;
+	margin: 5px;
+	background-size:16px 16px;
+}
+
+#icon_list {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+#icon_list li {
+	border: 1px solid rgb(171, 171, 171);
+	float: left;
+	width: 92px;
+	height: 48px;
+	padding: 5px;
+	margin: 10px;
+	cursor: pointer;
+}
+#icon_list li.selected {
+	border-color: #fda316;
+}
+#icon_list li.over {
+	border-color: #fcedb1;
+}
+
+#icon_list li .iconDiv {
+	float: left;
+	background: #e7e8e9;
+	height: 48px;
+}
+#icon_list li .iconSpan{
+	float: right;
+}
+.iconSpan {
+	width: 65px;
+	height: 48px;
+	text-align: center;
+	line-height: 48px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size: 12px;
+}
+/* end 列表样式 */
+
+/* 相关按钮 start  */
+.normal_btn {
+	background: #f78a29;
+	border-radius: 6px;
+	height: 27px;
+	line-height: 27px;
+	width: 72px;
+	border: 0px;
+	font-family: 'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: rgb(255, 255, 255);
+	cursor: pointer;
+}
+.normal_btn:hover{
+	background: #f9a55a;
+}
+.normal_btn:active{
+	background: #e47009;
+}
+.cancel_btn {
+	background: #bdc3c7;
+	border-radius: 6px;
+	height: 27px;
+	line-height: 27px;
+	width: 72px;
+	border: 0px;
+	font-family: 'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: rgb(255, 255, 255);
+	cursor: pointer;
+}
+.del_btn {
+	float: right;
+}
+.add_btn {
+	float: left;
+}
+/* end 相关按钮 */
+
+/* ope_win start */
+.ope_win {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	background: white;
+	overflow: hidden;
+	z-index: 200;
+}
+.ope_win .ope_win_title {
+	line-height: 29px;
+	height: 29px;
+	border-bottom: 1px solid rgb(246, 246, 247);
+	margin: 0 10px;
+	font-weight: bold;
+}
+.ope_win .ope_win_title span{
+	display: block;
+	float: left;
+	margin-left: 0px;
+	padding-left: 0px;
+	font-size: 12px;
+	color: #323A45
+}
+.ope_win .ope_win_close {
+	float: right;
+	cursor: default;
+	width: 13px;
+	height: 13px;
+	margin-top: 8px;
+	background: url('../../images/button/Insidepages-close-n.png') no-repeat;
+}
+/* end ope_win */
+
+/* add&edit ope win start */
+.txt_info {
+	color: gray;
+}
+.txt_error, .txt_must {
+	color: red;
+}
+#icon_add_form, #icon_edit_form {
+	font-size: 12px;
+}
+#icon_add_form table, #icon_edit_form table {
+	width: 100%;
+}
+#icon_add_form table tr, #icon_edit_form table tr {
+	height: 35px;
+}
+#icon_add_form table tr.help_message, #icon_edit_form table tr.help_message{
+	height: 16px;
+	color: gray;
+	font-size: 12px;
+}
+#add_icon_name, #add_icon_normal, #add_icon_selected,
+#edit_icon_name, #edit_icon_normal, #edit_icon_selected {
+	width: 95%;
+}
+.icon_preview_img {
+	width: 16px;
+	height: 16px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size:16px 16px;
+}
+#add_icon_nor_pre, #add_icon_sel_pre {
+	/*background-color: gray;*/
+}
+.icon_del_list {
+	margin: 0;
+	padding: 10px 16px 0;
+}
+.icon_preview_bg {
+	width:16px;
+	background: #e7e8e9;
+}
+/* end add&edit ope win */
+/* start input */
+#add_icon_name,#edit_icon_name{
+	width: 90%;
+}
+.textInput{
+    border: 0 none;
+    font-family: "宋体",Verdana,Arial,Sans;
+    font-size: 12px;
+    height: 14px;
+    line-height:14px;
+    outline: medium none;
+    padding: 5px 6px;
+    border-radius: 6px;
+}
+.textInput_n{
+	border: 1px solid #bbc2c7;
+}
+.textInput_p{
+	border: 1px solid #f78a29;
+}
+/* end input */

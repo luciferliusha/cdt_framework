@@ -1,0 +1,344 @@
+.confirmbox-css{
+	position: absolute; 
+	width: 392px; 
+	height: 193px;
+	background: white;
+	z-index: 999; 
+}
+
+h4{
+	height: 37px;
+	line-height: 42px;
+	margin: 0px;
+	padding-left: 9px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	font-weight: bold;
+	color: #4D4D4D;
+	background-color: #f6faf9;
+}
+
+.font-info-div {
+	height: 107px;
+	width: 100%;
+}
+
+.font-info{
+	padding-left: 60px;
+	padding-right: 60px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: #333333;
+	word-break:break-all;
+}
+
+.cut-off{
+	width: 100%; 
+	height: 1px;
+	border-bottom: 1px solid #9DB8D8;
+}
+
+.blackboard-css{
+	position: fixed;
+	margin: auto;
+	top: 40px;
+	width: 100%;
+	height: 100%;
+	background-color: #000000;
+	-moz-opacity: 0.2;  
+	opacity:.20;
+	filter:Alpha(opacity=20);
+	z-index: 998; 
+}
+
+.confirmButtonY_n {
+	background: url("../../images/button/blue/buttonX-n.png") no-repeat;
+	height: 25px;
+	line-height: 25px;
+	width: 72px;
+	border: 0px;
+	margin-right: 6px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: white;
+}
+
+.confirmButtonY_f {
+	background: url("../../images/button/blue/buttonX-f.png") no-repeat;
+	height: 25px;
+	line-height: 25px;
+	width: 72px;
+	border: 0px;
+	margin-right: 6px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: white;
+}
+
+.confirmButtonN_n {
+	background: url("../../images/button/button-01-n.png") no-repeat;
+	height: 25px;
+	line-height: 25px;
+	width: 72px;
+	border: 0px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: #333333;
+}
+
+.confirmButtonN_f {
+	background: url("../../images/button/button-01-f.png") no-repeat;
+	height: 25px;
+	line-height: 25px;
+	width: 72px;
+	border: 0px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: #333333;
+}
+
+.font-gray{
+	color: #808080; font-size: 12px;
+	font-family: 'Microsoft YaHei' !important;
+}
+.font-blue{
+	color: #292ff7;
+}
+
+.confirm_close_n{
+	position: absolute;
+	height: 13px;
+	width: 13px;
+	top: 15px;
+	right: 15px;
+	background: url("../../images/button/panel-close-n.png") no-repeat;
+}
+
+.confirm_close_f{
+	position: absolute;
+	height: 13px;
+	width: 13px;
+	top: 15px;
+	right: 15px;
+	background: url("../../images/button/panel-close-f.png") no-repeat;
+}
+
+.newWin-css{
+	position: absolute;
+	height: 192px;
+	width: 391px;
+	background: white;
+	z-index: 999;
+}
+
+.newWinChoose {
+	height: 153px;
+	line-height: 153px;
+	width: 100%;
+	text-align: center;
+}
+
+.solutionBtn_n {
+	background: url("../../images/button/blue/button-03-n.png") no-repeat;
+	height: 35px;
+	width: 132px;
+	border: 0px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: white;
+	vertical-align: middle;
+}
+
+.solutionBtn_f {
+	background: url("../../images/button/blue/button-03-f.png") no-repeat;
+	height: 35px;
+	width: 132px;
+	border: 0px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: white;
+	vertical-align: middle;
+}
+
+.renameWin-css {
+	position: absolute;
+	height: 192px;
+	width: 391px;
+	background: white;
+	z-index: 999;
+}
+
+.renameWinContent{
+	width:100%;
+	height: 153px;
+	line-height: 153px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.rename_text_n {
+	background: url("../../images/login/textInput_n.png") no-repeat;
+	height: 14px;
+	padding-top:5px;
+	padding-bottom:5px;
+	font-size:12px;
+	width: 192px;
+	border: 0px;
+	padding-left: 6px;
+	padding-right:6px;
+	outline: none;
+	margin-left: 5px;
+	margin-bottom: 3px;
+	font-family: "宋体",Verdana, Arial,Sans;
+}
+
+.rename_text_f {
+	background: url("../../images/login/textInput_p.png") no-repeat;
+	height: 14px;
+	padding-top:5px;
+	padding-bottom:5px;
+	font-size:12px;
+	width: 192px;
+	border: 0px;
+	padding-left: 6px;
+	padding-right:6px;
+	outline: none;
+	margin-left: 5px;
+	margin-bottom: 3px;
+	font-family: "宋体",Verdana, Arial,Sans;
+}
+
+/** 分享 */
+.shareWin-css {
+	position: absolute;
+	height: 430px;
+	width: 392px;
+	background: white;
+	z-index: 999;
+	left:50%;
+	top:50%;
+	margin-left: -215px;
+	margin-top: -196px;
+}
+.shareWinContent {
+	width:392px;
+ 	height: 330px;
+}
+.shareUserTree {
+	margin-left:20px;
+	margin-top:20px;
+	width:270px;
+	height: 300px;
+	border:#e9e9e9 1px solid;
+	overflow:auto;
+	padding-top: 5px;
+ 	position: absolute;
+}
+.buttonArea {
+	padding-top: 20px;
+	padding-left: 20px;
+}
+.selectAllSpan {
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+}
+#shareBtn {
+	float: right;
+	margin-right: 20px;
+}
+.button_n {
+	background: url("../../images/button/button-02-n.png") no-repeat;
+	height: 25px;
+	line-height: 25px;
+	width: 72px;
+	border: 0px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: white;
+}
+
+.button_f {
+	background: url("../../images/button/button-02-f.png") no-repeat;
+	height: 25px;
+	line-height: 25px;
+	width: 72px;
+	border: 0px;
+	font-family:'Microsoft YaHei' !important, simsun;
+	font-size: 12px;
+	color: white;
+}
+
+.labelSetting-css {
+	position: absolute;
+	height: 192px;
+	width: 391px;
+	background: white;
+	z-index: 999;
+}
+
+.labelSetting-td {
+	font-size: 12px;
+}
+
+.input_text_n {
+	background: url("../../images/login/textInput_n.png") no-repeat;
+	height: 14px;
+	padding-top:5px;
+	padding-bottom:5px;
+	font-size:12px;
+	width: 192px;
+	border: 0px;
+	padding-left: 6px;
+	padding-right:6px;
+	outline: none;
+	margin-left: 5px;
+	margin-bottom: 3px;
+	font-family: "宋体",Verdana, Arial,Sans;
+}
+
+.input_text_f {
+	background: url("../../images/login/textInput_p.png") no-repeat;
+	height: 14px;
+	padding-top:5px;
+	padding-bottom:5px;
+	font-size:12px;
+	width: 192px;
+	border: 0px;
+	padding-left: 6px;
+	padding-right:6px;
+	outline: none;
+	margin-left: 5px;
+	margin-bottom: 3px;
+	font-family: "宋体",Verdana, Arial,Sans;
+}
+a:hover {
+	text-decoration:underline;
+}
+
+.minicolors-theme-frameTitleConfig .minicolors-swatch {
+	top: 6px;
+	left: 6px;
+	width: 20px;
+	height: 20px;
+}
+.minicolors-theme-frameTitleConfig.minicolors-position-right .minicolors-swatch {
+	left: auto;
+	right: 5px;
+}
+.minicolors-theme-frameTitleConfig.minicolors {
+	display: inline-block;
+	height: 28px;
+	width:204px;
+	margin-left: -5px;
+}
+.minicolors-theme-frameTitleConfig .minicolors-input {
+	display: inline-block;
+	padding-left: 26px;
+}
+.minicolors-theme-frameTitleConfig.minicolors-position-right .minicolors-input {
+	padding-right: 26px;
+	padding-left: inherit;
+}
+.minicolors-theme-frameTitleConfig.minicolors-position-left .minicolors-panel{
+	left: 5px;
+}

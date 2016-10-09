@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- OM js和csss使用yuicompressor压缩ant脚本文件 -->
+<project name="OM" basedir="." default="clean">
+	<property name="charset" value="utf-8"/>
+	<!-- yuicompressor jar路径-->
+	<property name="yuicompressorJarPath" value="D:\MyEclipse工作目录\frameworkCommon\libs\compress\yuicompressor-2.4.7.jar"></property>
+	<!-- 存放合并后js临时目录 -->
+	<property name="jsTempDir" value="WebRoot/js/compress/js/temp"></property>
+	<!-- 存放压缩后js最终目录 -->
+	<property name="jsLastDir" value="WebRoot/js/compress/js"></property>
+	<!-- 存放合并后css临时目录 -->
+	<property name="cssTempDir" value="WebRoot/js/compress/css/temp"></property>
+	<!-- 存放压缩后css最终目录 -->
+	<property name="cssLastDir" value="WebRoot/css"></property>
+	<!-- 合并后js名称 -->
+	<property name="jsTempFileName" value="om-js-temp.min.js"></property>
+	<!-- 压缩后js名称 -->
+	<property name="jsLastFileName" value="om-js.min.js"></property>
+	<!-- 合并后css名称 -->
+	<property name="cssTempFileName" value="om-css-temp.min.css"></property>
+	<!-- 压缩后css名称 -->
+	<property name="cssLastFileName" value="om-css.min.css"></property>
+	
+	<!-- 创建js,css临时和最终目录 -->
+	<target name="init">
+		<mkdir dir="${jsTempDir}"/>
+		<mkdir dir="${cssTempDir}"/>
+	</target>
+	
+	<!-- 将需要打包的js和css文件整合放到临时目录的临时文件中 -->
+	<target name="buildAllJsAndCss" depends="init">
+		<concat destfile="${jsTempDir}/${jsTempFileName}" encoding="${charset}" outputencoding="${charset}">
+			<!-- 单个文件 -->
+			<path path="WebRoot/js/common/containSpecial.js"></path>
+			<path path="WebRoot/js/common/json2.js"></path>
+			<path path="WebRoot/js/common/util.js"></path>
+			<path path="WebRoot/js/common/name_limit.js"></path>
+			<path path="WebRoot/js/cookies.js"></path>	
+			<path path="WebRoot/js/global/httpUtil.js"></path>
+			<!-- 文件夹下所有文件 -->
+			<fileset dir="WebRoot/js/framework" includes="**/*.js"></fileset>
+		</concat>
+		<concat destfile="${cssTempDir}/${cssTempFileName}" encoding="${charset}" outputencoding="${charset}">
+			<path path="WebRoot/css/framework_all.css"></path>
+			<path path="WebRoot/css/framework_default.css"></path>
+		</concat>
+	</target>
+	
+	<!-- 压缩临时目录中的js和css文件 -->
+	<target name="compress" depends="buildAllJsAndCss">
+		<echo message="start compress"/>
+		<!-- fork="true" 表示在一个新的虚拟机中运行该类 -->
+	    <!-- failonerror="true" 表示当出现错误时自动停止 -->
+		<java jar="${yuicompressorJarPath}" fork="true" failonerror="true">
+			<!-- line-break <column> //指定的列数后插入一个换行符 -->
+			<!-- nomunge //压缩，不混淆-->
+			<!-- preserve-semi //保留所有分号-->
+			<!-- disable-optimizations //禁用所有微观优化-->
+			<arg line="--type js --charset ${charset} --disable-optimizations --nomunge --preserve-semi --line-break 500 ${jsTempDir}/${jsTempFileName} -o ${jsLastDir}/${jsLastFileName}" />
+		</java>
+		<java jar="${yuicompressorJarPath}" fork="true" failonerror="true">
+			<arg line="--type css --charset ${charset} --disable-optimizations --nomunge --preserve-semi --line-break 500 ${cssTempDir}/${cssTempFileName} -o ${cssLastDir}/${cssLastFileName}" />
+		</java>
+		<echo message="start end"/>
+	</target>
+	
+	<!-- 清理临时目录-->
+	<target name="clean" depends="compress">
+		<delete dir="${jsTempDir}"></delete>
+		<delete dir="${cssTempDir}"></delete>
+	</target>
+</project>

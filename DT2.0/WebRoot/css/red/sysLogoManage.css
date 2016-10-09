@@ -1,0 +1,299 @@
+@CHARSET "UTF-8";
+/** */
+@font-face {
+	font-family: 'FontAwesome';
+	src: url("../../fonts/fontawesome-webfont.eot");
+	src: url("../../fonts/fontawesome-webfont.eot?#iefix") format("embedded-opentype"), url("../../fonts/fontawesome-webfont.woff") format("woff"), url("../../fonts/fontawesome-webfont.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+[class*='icon-'] {
+	font-family: FontAwesome;
+	display: inline-block;
+	font-weight: normal;
+	font-style: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+body{
+	margin: 0px;
+	overflow-x: hidden;
+	font-size: 14px;
+	line-height: 1.6;
+	font-family: "Source Sans Pro","Segoe UI","Droid Sans",Tahoma,Arial,sans-serif
+}
+
+ul, ol, li {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dd, fieldset, textarea {
+	margin: 0;
+}
+input, textarea, button, a {
+	outline: 0;
+}
+a {
+	color: #fda316;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+
+.main_bd {
+	padding: 0 30px 40px;
+}
+
+.logo_config {
+	margin-top: 20px;
+}
+
+.logo_config .sub_title {
+	height: 40px;
+	line-height: 40px;
+	border-bottom: 1px solid #e7e7eb;
+	padding: 0 20px;
+	font-size: 14px;
+	font-weight: 400;
+	font-style: normal;
+	background-color: #f4f5f9;
+}
+
+.sys_setting_item {
+	border-bottom: 1px solid #e7e7eb;
+	padding: 18px 20px;
+}
+.sys_setting_item:first-child {
+	border-top-width: 0;
+}
+.sys_setting_item.item_step1 {
+	padding-bottom: 26px;
+}
+.sys_setting_item h4 {
+	float: left;
+	width: 100px;
+	margin-right: 20px;
+	font-weight: 400;
+	font-style: normal;
+	color: #8d8d8d;
+}
+.sys_setting_item .meta_opr {
+	float: right;
+	margin-left: 16px;
+	word-wrap: break-word;
+	word-break: break-all;
+	text-align: right;
+	color: #8d8d8d;
+}
+.sys_setting_item .meta_opr .desc {
+	text-align: left;
+}
+.sys_setting_item .error {
+	color: #ff0000;
+	padding-left: 20px;
+	display: table-cell;
+    float: none;
+    vertical-align: middle;
+}
+.sys_setting_item .span-error {
+	color: #ff0000;
+	padding-left: 20px;
+    vertical-align: middle;
+    display: table-cell;
+}
+.sys_setting_item .p-px {
+	display: table-cell;
+    float: none;
+    vertical-align: middle;
+}
+.sys_setting_item .meta_content {
+	display: table-cell;
+	vertical-align: top;
+	float: none;
+	width: auto;
+	word-wrap: break-word;
+	word-break: break-all;
+}
+.sys_setting_item .meta_text {
+	margin-right: 10px;
+	display: table-cell;
+	vertical-align: middle;
+}
+.sys_setting_item .next-line {
+	padding-left: 120px;
+}
+.sys_setting_item .meta_content span {
+	display: inline-table;
+}
+.sys_setting_item .meta_content .meta_content_s {
+	display: inline-table;
+}
+.sys_setting_item .logoBackgroud {
+	background: #d74737;
+}
+.sys_setting_item .content_editable {
+	border: 1px solid #f0f0f0;
+	padding: 2px 4px;
+	outline: none;
+	min-width: 300px;
+	min-height: 22px;
+}
+.sys_setting_item .span_content_editable {
+	border: 1px solid #f0f0f0;
+	padding: 2px 4px;
+	outline: none;
+	min-width: 50px;
+	min-height: 22px;
+}
+.sys_setting_item .meta_content span:nth-child(2) {
+	margin-bottom: 2px;
+}
+.sys_setting_item .meta_content .meta_content_s:nth-child(2) {
+	margin-bottom: 2px;
+}
+.right-gap {
+	margin-right: 10px;
+}
+#update_logo_form {
+	display: table-cell;
+	vertical-align: middle;
+	padding-left: 20px; 
+}
+/* end input */
+/** styleName list start **/
+.demo-color-variation{
+	list-style: none;
+	display: inline-block;
+	position: relative;
+	top: 5px;
+	padding-left: 0;
+}
+.demo-color-variation li{
+	float:left;
+	padding-right: 8px;
+}
+.demo-color-variation li a{
+	display: block;
+	height: 20px;
+	width: 20px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 60%;
+	cursor: pointer;
+	line-height: 20px;
+	text-align: center;
+	text-decoration: none;
+}
+.header-color-variation li a.color-dark{
+	background-color: #323a45;
+}
+.header-color-variation li a.color-default{
+	background-color: #2abba3;
+}
+.header-color-variation li a.color-blue{
+	background-color: #2a9cd5;
+}
+.header-color-variation li a.color-orange{
+	background-color: #f78a29;
+}
+.header-color-variation li a.color-deepblue{
+	background-color: #292ff7;
+}
+.header-color-variation li a.color-red{
+	background-color: #d74737;
+}
+.sidebar-color-variation li a.color-default{
+	background-color: #e5e7e9;
+}
+.sidebar-color-variation li a.color-gray{
+	background-color: #bbc2c7;
+}
+.sidebar-color-variation li a.color-dark{
+	background-color: #323a45;
+}
+.icon-ok{
+	color: white;
+	background: none;
+}
+/** styleName list end **/
+/**switch button start**/
+.container {
+	position: relative;
+	top: -20px;
+	left: 120px;
+	clear: both;
+}
+.switch {
+  height: 39px;
+  width: 268px;
+  background: #e5e7e9;
+  border-radius: 6px;
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.switch-label {
+  position: relative;
+  z-index: 2;
+  float: left;
+  width: 132px;
+  line-height: 35px;
+  font-size: 14px;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  top: 2px;
+}
+.switch-label:active {
+  font-weight: bold;
+}
+
+.switch-label-on {
+  padding-left: 2px;
+}
+
+.switch-label-off {
+  padding-right: 2px;
+}
+.switch-input {
+  display: none;
+}
+.switch-input:checked + .switch-label {
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 1px rgba(255, 255, 255, 0.25);
+  -webkit-transition: 0.15s ease-out;
+  -moz-transition: 0.15s ease-out;
+  -o-transition: 0.15s ease-out;
+  transition: 0.15s ease-out;
+}
+.switch-input:checked + .switch-label-off ~ .switch-selection {
+  left: 134px;
+}
+
+.switch-selection {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 2px;
+  left: 2px;
+  width: 132px;
+  height: 35px;
+  background: #d74737;;
+  border-radius: 6px;
+  color: white;
+  -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
+  -webkit-transition: left 0.15s ease-out;
+  -moz-transition: left 0.15s ease-out;
+  -o-transition: left 0.15s ease-out;
+  transition: left 0.15s ease-out;
+}
+.switch-label-selected{
+	font-weight: bold;
+  	color: white;
+}
+/**switch button end**/

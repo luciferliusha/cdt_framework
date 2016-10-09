@@ -1,0 +1,76 @@
+@CHARSET "UTF-8";
+/** home.jsp start*/
+body{
+	margin: 0px;
+	overflow-x: hidden;
+}
+.main_div .thumbnailViewParent{
+	position: absolute;
+	width: 2560px;
+}
+.thumbnailView{
+	float: left;
+	width: 876px;
+	margin-top: 10px;
+	position: relative;
+	margin-bottom: 10px;
+	padding-left: 74px;
+	padding-right: 74px;
+	margin-left: 128px;
+	margin-right: 128px;
+}
+.thumbnailView-item{
+	width: 250px;
+	height: 250px;
+	float: left;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	position: relative;
+	left: 0px;
+	top: 0px;
+	background-color: #2a9cd5;
+}
+.pre_page{
+	left: 128px;
+	position: fixed;
+	top: 290px;
+	width: 40px;
+	height: 40px;
+	background: #2a9cd5;
+	cursor: pointer;
+}
+.next_page{
+	right: 128px;
+	position: fixed;
+	top: 290px;
+	width: 40px;
+	height: 40px;
+	background: #2a9cd5;
+	cursor: pointer;
+}
+.pre_page:HOVER {
+	background: #d74737;
+}
+.next_page:HOVER {
+	background: #d74737;
+}
+.page_number{
+	width: 1280px;
+	height: 20px;
+	position: absolute;
+	top: 560px;
+}
+.page_number span{
+	margin: 8px;
+	padding: 0 4px;
+	cursor: pointer;
+}
+.page_number_n{
+	background: #2a9cd5;
+}
+.page_number_p{
+	background: #d74737;
+}
+/** home.jsp end*/

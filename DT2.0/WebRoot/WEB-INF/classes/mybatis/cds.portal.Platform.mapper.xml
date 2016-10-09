@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjcds.portal.mybatis.dao.PlatformDao">
+	<resultMap id="BaseResultMap" type="com.zjcds.portal.mybatis.bean.Platform">
+		<id column="PFID" property="pfId" jdbcType="DECIMAL"></id>
+		<result column="PARENTID" property="parentId" jdbcType="DECIMAL" />
+		<result column="PFNAME" property="pfName" jdbcType="VARCHAR" />
+		<result column="USERID" property="userId" jdbcType="VARCHAR" />
+		<result column="DIRID" property="dirId" jdbcType="VARCHAR" />
+		<result column="KEYWORD" property="keyWord" jdbcType="VARCHAR" />
+		<result column="FILENAME" property="fileName" jdbcType="VARCHAR" />
+		<result column="VISIBLE" property="visible" jdbcType="DECIMAL" />
+		<result column="ORDERBY" property="orderBy" jdbcType="DECIMAL" />
+		<result column="PICNAME" property="picName" jdbcType="VARCHAR" />
+		<result column="URL" property="url" jdbcType="VARCHAR" />
+		<result column="CREATEUSER" property="createUser" jdbcType="VARCHAR" />
+		<result column="CREATETIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="UPDATEUSER" property="updateUser" jdbcType="VARCHAR" />
+		<result column="UPDATETIME" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="TYPE" property="type" jdbcType="DECIMAL" />
+		<result column="DESCRIBE" property="describe" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="TreeResultMap" type="com.zjcds.portal.mybatis.bean.TreeBean">
+		<result column="PFNAME" property="name" jdbcType="VARCHAR" />
+		<result column="PFNAME" property="text" jdbcType="VARCHAR" />
+		<result column="STATE" property="state" jdbcType="DECIMAL" />
+		<result column="PFID" property="id" jdbcType="DECIMAL"/>
+		<result column="TYPE" property="type" jdbcType="DECIMAL"/>
+		<result column="PARENTID" property="parentId" jdbcType="DECIMAL"/>
+	</resultMap>
+	
+	<resultMap type="com.zjcds.portal.mybatis.bean.PlatformHot" id="platformHotMap">
+		<id column="PFID" property="pfId" jdbcType="DECIMAL"></id>
+		<result column="HOTNUM" property="hotNum" jdbcType="DECIMAL"/>
+	</resultMap>
+	
+	<resultMap id="sharedUserResultMap" type="java.util.Map">
+		<result column="USERID" property="id" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="platFormIndexMap" type="java.util.Map">
+		<result column="PFID" property="pfId" jdbcType="VARCHAR" />
+		<result column="PARENTID" property="parentId" jdbcType="VARCHAR" />
+		<result column="PFNAME" property="pfName" jdbcType="VARCHAR" />
+		<result column="KEYWORD" property="keyWord" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!-- 喜好订阅结果集 -->
+	<resultMap id="FavoriteResultMap" type="com.zjcds.portal.mybatis.bean.PlatformFav">
+		<result column="USERKEY" property="userKey" jdbcType="VARCHAR" />
+		<result column="PFID" property="pfId" jdbcType="DECIMAL" />
+	</resultMap>
+	
+	<!-- 解决方案访问日志结果集 -->
+	<resultMap id="PFLogResultMap" type="com.zjcds.portal.mybatis.bean.PlatformLog">
+		<result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+		<result column="LOG_TIME" property="logTime" jdbcType="VARCHAR" />
+		<result column="PFID" property="pfId" jdbcType="DECIMAL" />
+		<result column="PFNAME" property="pfName" jdbcType="VARCHAR" />
+		<result column="VISIT_NUM" property="visitNum" jdbcType="DECIMAL" />
+	</resultMap>
+	
+	
+	<!-- 获取解决方案热度信息  2013-8-7 -->
+	<select id="findPlatformHot" parameterType="int" resultMap="platformHotMap">
+		SELECT t.PFID,t.HOTNUM
+		FROM T_PLATFORM_HOT t
+		WHERE t.PFID = #{pfId,jdbcType=DECIMAL}
+	</select>
+	
+	<!-- 更新解决方案热度信息  2013-8-7 -->
+	<update id="updatePlatformHot" parameterType="com.zjcds.portal.mybatis.bean.PlatformHot">
+		UPDATE T_PLATFORM_HOT t
+		<set>
+			<if test="hotNum != null">
+				t.HOTNUM=#{hotNum,jdbcType=DECIMAL}
+			</if>
+		</set>
+		WHERE t.PFID = #{pfId,jdbcType=DECIMAL}
+	</update>
+	
+	<!-- 增加解决方案热度信息  2013-8-7 -->
+	<insert id="insertPlatformHot" parameterType="com.zjcds.portal.mybatis.bean.PlatformHot">
+		INSERT INTO T_PLATFORM_HOT(PFID,HOTNUM)
+		VALUES
+		(#{pfId,jdbcType=DECIMAL},#{hotNum,jdbcType=DECIMAL})
+	</insert>
+	
+	<!-- 根据平台ID删除平台 -->
+	<delete id="deletePlatformHot" parameterType="int">
+		delete from
+		T_PLATFORM_HOT where PFID=#{pfId,jdbcType=DECIMAL}
+    </delete>
+
+	<!-- 平台字段  2013-02-01 -->
+	<sql id="Base_Column_List">
+		PFID,PFNAME,USERID,DIRID,KEYWORD,FILENAME,VISIBLE,ORDERBY,PICNAME,URL,CREATEUSER,CREATETIME,UPDATEUSER,
+		UPDATETIME,PARENTID,TYPE,DESCRIBE
+	</sql>
+
+	<!-- 根据解决方案目录ID取得该目录下的解决方案 update 2013-04-09-->
+	<select id="getSubPFFile" resultMap="BaseResultMap"
+		parameterType="int">
+		select
+		<include refid="Base_Column_List" />
+		from T_PLATFORM
+		where parentId=#{pfId,jdbcType=DECIMAL}  and
+		VISIBLE=1
+		order by ORDERBY
+	</select>
+
+	<!-- 根据平台ID修改平台 -->
+	<update id="updatePlatFormFile" parameterType="com.zjcds.portal.mybatis.bean.Platform">
+		update T_PLATFORM
+		<set>
+			<if test="pfName != null">
+				PFNAME=#{pfName,jdbcType=VARCHAR},
+		    </if>
+			<if test="userId != null">
+				USERID=#{userId,jdbcType=VARCHAR},
+		    </if>
+			<if test="dirId != null">
+				DIRID=#{dirId,jdbcType=VARCHAR},
+		    </if>
+			<if test="keyWord != null">
+				KEYWORD=#{keyWord,jdbcType=VARCHAR},
+		    </if>
+			<if test="fileName != null">
+				FILENAME=#{fileName,jdbcType=VARCHAR},
+		    </if>
+			<if test="visible != null">
+				VISIBLE=#{visible,jdbcType=DECIMAL},
+		    </if>
+			<if test="orderBy != null">
+				ORDERBY=#{orderBy,jdbcType=DECIMAL},
+		    </if>
+			<if test="picName != null">
+				PICNAME=#{picName,jdbcType=VARCHAR},
+		    </if>
+			<if test="url != null">
+				URL=#{url,jdbcType=VARCHAR},
+		    </if>
+			<if test="updateUser != null">
+				UPDATEUSER=#{updateUser,jdbcType=VARCHAR},
+		    </if>
+			<if test="updateTime != null">
+				UPDATETIME=#{updateTime,jdbcType=DATE},
+		    </if>
+			<if test="parentId != null">
+				PARENTID = #{parentId,jdbcType=DECIMAL},
+		    </if>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=DECIMAL},
+		    </if>
+			<if test="describe != null">
+				DESCRIBE =#{describe,jdbcType=VARCHAR}
+		    </if>
+		</set>
+		where PFID=#{pfId,jdbcType=DECIMAL}
+	</update>
+
+	<!-- 根据平台ID删除平台 -->
+	<delete id="deletePlatFormFile" parameterType="int">
+		delete from
+		T_PLATFORM where PFID=#{pfId,jdbcType=DECIMAL} 
+    </delete>
+
+	<!-- 增加平台 -->
+	<insert id="addPlatFormFile" parameterType="com.zjcds.portal.mybatis.bean.Platform">
+		<!-- 从序列中查询出平台PFID -->
+		<selectKey keyProperty="pfId" resultType="int" order="BEFORE">
+			SELECT T_PLATFORM_sequence.NEXTVAL FROM DUAL
+    	</selectKey>
+		insert into
+		T_PLATFORM(PFID,PFNAME,USERID,DIRID,KEYWORD,FILENAME,VISIBLE,ORDERBY,PICNAME,URL,CREATEUSER,UPDATEUSER,PARENTID,TYPE,DESCRIBE)
+		values
+		(#{pfId,jdbcType=DECIMAL},#{pfName,jdbcType=VARCHAR},#{userId,jdbcType=VARCHAR},#{dirId,jdbcType=VARCHAR},#{keyWord,jdbcType=VARCHAR},
+		#{fileName,jdbcType=VARCHAR},#{visible,jdbcType=DECIMAL},#{orderBy,jdbcType=DECIMAL},#{picName,jdbcType=VARCHAR},#{url,jdbcType=VARCHAR},
+		#{createUser,jdbcType=VARCHAR},#{createUser,jdbcType=VARCHAR},#{parentId,jdbcType=DECIMAL},#{type,jdbcType=DECIMAL},#{describe,jdbcType=VARCHAR})
+	</insert>
+
+	<!-- 新增平台时，根据该平台下所在位置的最大排序 -->
+	<select id="getMaxOrderBy" parameterType="com.zjcds.portal.mybatis.bean.Platform" resultType="int">
+		SELECT nvl(max(ORDERBY), -1)+1 ORDERBY FROM T_PLATFORM where PARENTID = #{parentId,jdbcType=DECIMAL}
+	</select>
+	
+	<!-- 根据平台ID查询平台 -->
+	<select id="readPFFile" resultType="com.zjcds.portal.mybatis.bean.Platform"
+		parameterType="int">
+		select
+		<include refid="Base_Column_List" />
+		from T_PLATFORM where PFID=#{fileId,jdbcType=DECIMAL}
+	</select>
+	<!-- 根据关键字key搜索平台 -->
+	<select id="searchPlatForm" resultMap="BaseResultMap"
+		parameterType="int">
+		select
+		<include refid="Base_Column_List" />
+		from T_PLATFORM
+		WHERE (PFNAME like CONCAT(CONCAT('%', #{key}), '%') or KEYWORD like
+		CONCAT(CONCAT('%', #{key}), '%')) and VISIBLE=1
+		order by ORDERBY
+	</select>
+
+
+	<!-- 根据目录ID取得所有的下一级目录和该目录下解决方案 -->
+	<select id="getSubPFInfo" resultMap="BaseResultMap"
+		parameterType="int">
+		select
+		<include refid="Base_Column_List" />
+		from T_PLATFORM where PARENTID = #{pfId,jdbcType=DECIMAL} order by
+		ORDERBY
+	</select>
+	<!-- 根据目录ID取得下一级目录和解决方案的总数目 -->
+	<select id="getSubPFInfoCount" resultType="int" parameterType="int">
+		select count(1) from T_PLATFORM where PARENTID =
+		#{parentId,jdbcType=DECIMAL}
+	</select>
+	<!-- 根据目录ID取得该用户所有的下一级目录和该目录下解决方案 -->
+	<select id="getUserSubPFInfo" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from T_PLATFORM 
+		<where>
+			PARENTID = #{pfId,jdbcType=DECIMAL} 
+			<if test="userId != null and userId != ''" >
+				and CREATEUSER = #{userId,jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by TYPE,ORDERBY
+	</select>
+	<!-- 根据目录ID取得下一级目录和解决方案的总数目 -->
+	<select id="getUserSubPFInfoCount" resultType="int" parameterType="java.util.Map">
+		select count(1) from T_PLATFORM 
+		<where>
+			PARENTID = #{parentId,jdbcType=DECIMAL} 
+			<if test="userId != null and userId != ''" >
+				and CREATEUSER = #{userId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 根据平台ID,用户id判断是否为自己的平台 -->
+	<select id="checkPFFile" resultType="int" parameterType="java.util.Map">
+		select count(1)
+		from T_PLATFORM where PFID=#{pfId,jdbcType=DECIMAL} and CREATEUSER = #{userId,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 根据目录ID取得系统管理员所有的下一级目录和该目录下解决方案 -->
+	<select id="getAdminSubPFInfo" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from T_PLATFORM 
+		<where>
+			PARENTID = #{pfId,jdbcType=DECIMAL} 
+			and (CREATEUSER is null or CREATEUSER = '0')
+		</where>
+		order by TYPE,ORDERBY
+	</select>
+	
+	<!-- ******************分享(发布)******************** -->
+	<!-- 分享给该用户的解决方案 -->
+	<select id="getSharedPFInfo" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select pf.PFID,pf.PFNAME,pf.VISIBLE,pf.ORDERBY,pf.CREATEUSER,pf.CREATETIME,pf.UPDATEUSER,
+		pf.UPDATETIME,pf.PARENTID,pf.TYPE,pf.DESCRIBE 
+	 	from T_PLATFORM pf,T_PLATFORM_SHARED pfs
+		<where>
+			pf.pfid = pfs.pfid and (pfs.USERID = #{userId,jdbcType=VARCHAR} or pfs.USERID=-999)
+		</where>
+		order by pfs.SHAREDATE desc
+	</select>
+	<!-- 分享给该用户的解决方案的总数目 -->
+	<select id="getSharedPFCount" resultType="int" parameterType="java.lang.String">
+		select count(1) from T_PLATFORM_SHARED 
+		<where>
+			USERID = #{userId,jdbcType=VARCHAR} or USERID = -999
+		</where>
+	</select>
+	<!-- 操作分享平台 -->
+	<select id="operateSharedPF" parameterType="java.util.Map">
+		<if test="type == 0"><!-- 新增 -->
+		BEGIN
+		    <if test="userId == -999">
+			delete from T_PLATFORM_SHARED where PFID=#{pfId,jdbcType=DECIMAL};
+			</if>
+			insert into T_PLATFORM_SHARED(PFID,USERID)
+			values(#{pfId,jdbcType=DECIMAL},#{userId,jdbcType=VARCHAR});
+		END;
+		</if>
+		<if test="type == 1"><!-- 删除 -->
+			delete from T_PLATFORM_SHARED where PFID = #{pfId,jdbcType=DECIMAL} and USERID = #{userId,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<!-- 根据平台ID删除分享的平台 -->
+	<delete id="deleteSharedPlatForm" parameterType="int">
+		delete from
+		T_PLATFORM_SHARED where PFID=#{pfId,jdbcType=DECIMAL}
+    </delete>
+    <!-- 某解决方案的分享者们 -->
+	<select id="getSharedUsersByPF" resultMap="sharedUserResultMap" parameterType="int">
+		select USERID from T_PLATFORM_SHARED 
+		<where>
+			PFID = #{pfId,jdbcType=DECIMAL}
+		</where>
+	</select>
+	<!-- 获取有几个用户的解决方案 -->
+	<select id="getAllOtherUserPF" resultType="String" parameterType="String">
+		select t.createuser from t_platform t
+		where t.createuser is not null and t.createuser != '0'
+		group by t.createuser
+	</select>
+	
+	<!-- 根据ID修改describe -->
+	<update id="updateDescribeById" parameterType="com.zjcds.portal.mybatis.bean.Platform">
+		update T_PLATFORM
+		<set>
+			<if test="describe != null">
+				DESCRIBE = #{describe,jdbcType=VARCHAR},
+	  		</if>
+	  		<if test="updateUser != null">
+				UPDATEUSER = #{updateUser,jdbcType=VARCHAR},
+	  		</if>
+	  		<if test="updateTime != null">
+				UPDATETIME = #{updateTime,jdbcType=TIMESTAMP}
+	  		</if>
+		</set>
+		<where>
+			PFID = #{pfId,jdbcType=DECIMAL}
+	  	</where>
+	</update>
+
+	<!-- 取得所有的解决方案 -->
+	<select id="getAllPF" resultMap="BaseResultMap">
+	select t.* from T_PLATFORM t where t.TYPE=0 
+	</select>
+
+	<!-- 取得解决方案组树 -->
+	<select id="getPFDirTree" resultMap="TreeResultMap" parameterType="com.zjcds.portal.mybatis.bean.TreeBean">
+		select PFID,PARENTID,PFNAME,STATE
+		from (
+		select PFID,PARENTID,PFNAME,
+		 CASE when exists (select t1.PFID from t_platform t1 where t1.PARENTID = t.PFID and t1.type = 0) then 'closed'
+		     else '' end STATE
+		from t_platform t
+		where t.type = 0
+		order by ORDERBY
+		) tt
+		<where>
+			<if test="id != null">
+				PARENTID=#{id,jdbcType=DECIMAL}
+			</if>
+			<if test="id == null">
+				PARENTID = 0
+			</if>
+		</where>
+	</select>
+	
+	<!-- 取得解决方案和解决方案组构成的树 -->
+	<select id="getPFTree" resultMap="TreeResultMap" parameterType="com.zjcds.portal.mybatis.bean.TreeBean">
+		select PFID,PARENTID,PFNAME,STATE,TYPE
+	    from (
+	    select PFID,PARENTID,PFNAME,TYPE,
+	     CASE when exists (select t1.PFID from t_platform t1 where t1.PARENTID = t.PFID) then 'closed'
+	         else '' end STATE
+	    from t_platform t
+	    order by ORDERBY
+	    ) tt
+		<where>
+			<if test="id != null">
+				PARENTID=#{id,jdbcType=DECIMAL}
+			</if>
+			<if test="id == null">
+				PARENTID = 0
+			</if>
+		</where>
+	</select>
+	
+	<!-- 取得用户的喜好的解决方案 -->
+	<select id="getFavoritePlatForm" resultMap="FavoriteResultMap" parameterType="com.zjcds.portal.mybatis.bean.PlatformFav">
+		select distinct USERKEY,PFID
+		from T_CDT_SUBSCRIBE
+		where USERKEY = #{userKey,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 递归取得其所有的父解决方案,为了导航栏的展现 -->
+	<select id="getFavPlatFormList" resultMap="FavoriteResultMap" parameterType="com.zjcds.portal.mybatis.bean.PlatformFav">
+		select distinct USERKEY,t1.PFID
+		from T_CDT_SUBSCRIBE t, T_PLATFORM t1
+		where USERKEY = #{userKey,jdbcType=VARCHAR}
+		start with t1.PFID = t.PFID and USERKEY = #{userKey,jdbcType=VARCHAR} connect by prior t1.PARENTID = t1.PFID
+	</select>
+
+	<!-- 保存用户的喜好的解决方案 -->
+	<insert id="saveFavoritePlatForm" parameterType="com.zjcds.portal.mybatis.bean.PlatformFav">
+		INSERT INTO T_CDT_SUBSCRIBE(USERKEY,PFID)
+		VALUES
+		(#{userKey,jdbcType=VARCHAR},#{pfId,jdbcType=DECIMAL})
+	</insert>
+	
+	<!-- 删除用户的喜好的解决方案 -->
+	<delete id="deleteFavoritePlatForm" parameterType="com.zjcds.portal.mybatis.bean.PlatformFav">
+		delete from
+		T_CDT_SUBSCRIBE
+		where USERKEY = #{userKey,jdbcType=VARCHAR} and PFID = #{pfId,jdbcType=DECIMAL}
+    </delete>
+    
+    <!-- 删除用户的喜好的解决方案 -->
+	<delete id="deleteFavoriteByPfId" parameterType="int">
+		delete from
+		T_CDT_SUBSCRIBE
+		where PFID = #{pfId,jdbcType=DECIMAL}
+    </delete>
+    
+    <!-- 保存解决方案访问日志 -->
+	<insert id="savePlatFormLog" parameterType="com.zjcds.portal.mybatis.bean.PlatformLog">
+		INSERT INTO T_CDT_PLATFORM_LOG(USER_NAME,PFID)
+		VALUES
+		(#{userName,jdbcType=VARCHAR},#{pfId,jdbcType=DECIMAL})
+	</insert>
+	
+	<!-- 根据解决方案ID删除解决方案日志（删除解决方案级联删除） -->
+	<delete id="deletePFLogByPfId" parameterType="int">
+		delete from
+		T_CDT_PLATFORM_LOG
+		where PFID = #{pfId,jdbcType=DECIMAL}
+    </delete>
+    
+    <!-- 取得解决方案日志 -->
+	<select id="getPlatFormLog" resultMap="PFLogResultMap" parameterType="com.zjcds.portal.mybatis.bean.PlatformLog">
+		SELECT T.USER_NAME,TO_CHAR(T.LOG_TIME,'YYYY-MM-DD HH24:MI:SS') LOG_TIME,T.PFID,PF.PFNAME
+	    FROM T_CDT_PLATFORM_LOG T 
+	    LEFT JOIN T_PLATFORM PF ON T.PFID = PF.PFID
+	    <where>
+	    	<if test="logTimeStart != null and logTimeStart != ''" >
+	        	and T.LOG_TIME <![CDATA[ >= ]]> to_date(#{logTimeStart,jdbcType=VARCHAR}, 'YYYY-MM-DD HH24:MI:SS')
+	      	</if>
+	      	<if test="logTimeEnd != null and logTimeEnd != ''" >
+	        	and T.LOG_TIME <![CDATA[ <= ]]> to_date(#{logTimeEnd,jdbcType=VARCHAR}, 'YYYY-MM-DD HH24:MI:SS')
+	      	</if>
+	      	<if test="pfName != null and pfName != ''" >
+	        	and PF.pfName = #{pfName}
+	      	</if>
+	    </where>
+	    order by T.LOG_TIME desc
+	</select>
+	
+	<!-- 取得解决方案日志 -->
+	<select id="getPlatFormLogNum" resultMap="PFLogResultMap" parameterType="com.zjcds.portal.mybatis.bean.PlatformLog">
+		SELECT PF.PFNAME, COUNT(T.PFID) VISIT_NUM
+	    FROM T_CDT_PLATFORM_LOG T 
+	    LEFT JOIN T_PLATFORM PF ON T.PFID = PF.PFID
+	    <where>
+	    	<if test="logTimeStart != null and logTimeStart != ''" >
+	        	and T.LOG_TIME <![CDATA[ >= ]]> to_date(#{logTimeStart,jdbcType=VARCHAR}, 'YYYY-MM-DD HH24:MI:SS')
+	      	</if>
+	      	<if test="logTimeEnd != null and logTimeEnd != ''" >
+	        	and T.LOG_TIME <![CDATA[ <= ]]> to_date(#{logTimeEnd,jdbcType=VARCHAR}, 'YYYY-MM-DD HH24:MI:SS')
+	      	</if>
+	    </where>
+	    GROUP BY PF.PFNAME
+	    ORDER BY VISIT_NUM desc
+	</select>
+	
+	<!-- 获取解决方案全部子目录 -->
+	<select id="getPlatFormMenus" resultMap="platFormIndexMap">
+		select pfid,pfname,keyword from T_PLATFORM  where type=1
+	</select>
+	
+	<!-- 获取第一层解决方案组和解决方案 -->
+	<select id="getPlatFormMenu" resultMap="platFormIndexMap">
+		select pfid,pfname,keyword from T_PLATFORM  where parentid=0 order by ORDERBY
+	</select>
+	
+	<!-- 获取解决方案父目录 -->
+	<!-- wmsys.wm_concat(pfid) 该方法在不同版本的数据库下，返回类型不一致，有的是clob类型-->
+	<select id="getPlatFormMenusParentId" resultType="java.util.Map" parameterType="java.util.Map">
+		select pfid as parentId from T_PLATFORM t
+		start with pfid=#{pfId,jdbcType=DECIMAL}
+	    connect by prior parentid = pfid
+	</select>
+
+	<!-- 根据解决方案名称查询父ID -->
+	<select id="getPlatFormParentIdByName" resultType="java.util.Map" parameterType="java.util.Map">
+		select pfid as parentId from T_PLATFORM t
+		start with pfname=#{pfName,jdbcType=VARCHAR}
+	    connect by prior parentid = pfid
+	</select>
+
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!--配置项的顺序 by huangwb 2012-02-06 -->
+<!--ELEMENT configuration (properties?, settings?, typeAliases?, typeHandlers?, objectFactory?, plugins?, environments?, databaseIdProvider?, mappers?)-->
+	<!--  dialect: derby, oracle, mysql 
+	<properties>
+		<property name="dialect" value="mysql"/>
+	</properties>
+	-->
+
+	<settings>
+	  <setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+
+	<plugins>
+		<plugin interceptor="com.cds.framework.dao.paging.PaginationInterceptor"/>
+	</plugins>
+<!-- 
+	<mappers>
+		<mapper resource="mybatis/cds.common.version.mapper.xml" />
+	</mappers>
+ -->
+</configuration>

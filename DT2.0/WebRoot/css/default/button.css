@@ -1,0 +1,86 @@
+@CHARSET "UTF-8";
+.button-tool {
+	font-family: simsun;
+	font-size: 14px;
+	font-weight: bold;
+	color: #006964;
+	cursor: pointer;
+}
+
+.button-tool-normal .but-left {
+	float: left;
+	height: 26px;
+	width: 5px;
+	background-image: url("../../images/button/button-n-l.gif");
+	background-repeat: no-repeat;
+}
+
+.button-tool-normal .but-mid {
+	float: left;
+	height: 26px;
+	background-image: url("../../images/button/button-n-m.gif");
+	background-repeat: repeat-x;
+	padding-top:7px;
+	padding-left: 6px;
+	padding-right: 4px;
+}
+
+.button-tool-normal .but-right {
+	float: left;
+	height: 26px;
+	width: 25px;
+	background-image: url("../../images/button/button-tool-n.gif");
+	background-repeat: no-repeat;
+}
+
+.button-tool-hover .but-left {
+	float: left;
+	height: 26px;
+	width: 5px;
+	background-image: url("../../images/button/button-f-l.gif");
+	background-repeat: no-repeat;
+}
+
+.button-tool-hover .but-mid {
+	float: left;
+	height: 26px;
+	background-image: url("../../images/button/button-f-m.gif");
+	background-repeat: repeat-x;
+	padding-top:7px;
+	padding-left: 6px;
+	padding-right: 4px;
+}
+
+.button-tool-hover .but-right {
+	float: left;
+	height: 26px;
+	width: 25px;
+	background-image: url("../../images/button/button-tool-f.gif");
+	background-repeat: no-repeat;
+}
+
+.button-tool-down .but-left {
+	float: left;
+	height: 26px;
+	width: 5px;
+	background-image: url("../../images/button/button-p-l.gif");
+	background-repeat: no-repeat;
+}
+
+.button-tool-down .but-mid {
+	float: left;
+	height: 26px;
+	background-image: url("../../images/button/button-p-m.gif");
+	background-repeat: repeat-x;
+	padding-top:7px;
+	padding-left: 6px;
+	padding-right: 4px;
+}
+
+.button-tool-down .but-right {
+	float: left;
+	height: 26px;
+	width: 25px;
+	background-image: url("../../images/button/button-tool-p.gif");
+	background-repeat: no-repeat;
+}

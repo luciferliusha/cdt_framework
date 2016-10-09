@@ -1,0 +1,461 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <title>cds-ui-basic.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="../css/font-awesome/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../js/libs/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../css/cds-ui-css/cds-ui-base.css">
+    <link rel="stylesheet" type="text/css" href="../css/cds-ui-css/cds-theme-default.css">
+    <link rel="stylesheet" type="text/css" href="../css/cds-ui-css/others.css">
+	<link rel="stylesheet" type="text/css" href="../js/libs/mCustomScrollbar/jquery.mCustomScrollbar.css"/>
+	<script type="text/javascript" src="../js/libs/jquery/jquery-1.7.2.js"></script>
+	<script type="text/javascript" src="../js/libs/easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../js/libs/jquery/jquery-ui.js"></script>
+	<script type="text/javascript" src="../js/libs/mCustomScrollbar/jquery.mousewheel.js"></script>
+	<script type="text/javascript" src="../js/libs/mCustomScrollbar/jquery.mCustomScrollbar.js"></script>
+	<script type="text/javascript" src="../js/libs/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="../js/libs/spin.js/spin.min.js"></script>
+	<script>
+		$(function(){
+			var $request=(function request(){
+		       var sSearch=location.search;
+		       var oParam={};
+		       sSearch=sSearch.substr(1,sSearch.length);
+		       var params=sSearch.split("&");  
+		       for(var i = 0; i < params.length; i++){
+			       var param = params[i].split("=");
+			       var key=param[0];
+			       var value=param[1];
+			       if(key in oParam){
+			         (oParam[key].constructor==Array)?oParam[key].push(value):oParam[key]=[oParam[key],value];
+			       }
+			       else{
+			        oParam[key]=value;
+			       }
+		       }
+		       return (function(sParamName){ return (oParam[sParamName])?oParam[sParamName]:""});
+		    })();
+			var colorStyle = $request("colorStyle");
+			$("#showTable .cds-segment>li").click(function(){
+				$("#showTable .cds-segment").find(".segment-active").removeClass("segment-active");
+				$(this).addClass("segment-active");
+			});
+			$("#showTable .cds-option>li").click(function(){
+				$("#showTable .cds-option").find(".option-active").removeClass("option-active");
+				$(this).addClass("option-active");
+			});
+			$("#info-list-box .cds-listbox>ul").mCustomScrollbar();
+			$("#cds-stepper .cds-stepper>li>a.stepper-control").click(function(){
+				var type = ($(this).attr("name")=="stepper-plus")?true:false;
+				var $number = $("#cds-stepper .cds-stepper").find(".stepper-number");
+				if(type){
+					$number.val(parseInt($number.val())+1);
+				}else{
+					$number.val(parseInt($number.val())-1);
+				}
+			});
+            $('#cds-slider .cds-slider .slider-handle').draggable({
+                containment: 'parent',
+                axis: 'x',
+                drag: function(e, ui){
+                
+                    /* The drag function is called on every drag movement, no matter how minute */
+                    
+                    if (!this.par) {
+                        /* Initializing the variables only on the first drag move for performance */
+                        
+                        this.par = $(this).parent();
+                        this.parHeight = this.par.height();
+                        this.height = $(this).height();
+                        this.color = $.trim(this.par.attr('class').replace('colorful-slider', ''));
+                    }
+                }
+            });
+            $("#cds-progress .progress-control>li").click(function(){
+            	$("#cds-progress .cds-progress>.progress-bar").width($(this).attr("value")+"%");
+            });
+            var opts = {
+         		lines: 6, // The number of lines to draw
+         		length: 10, // The length of each line
+         		width: 5, // The line thickness
+         		radius: 10, // The radius of the inner circle
+         		corners: 0,
+         		rotate: 30,
+         		//color: '#000', // #rbg or #rrggbb
+         		speed: 1, // Rounds per second
+         		trail: 60, // Afterglow percentage
+         		shadow: false // Whether to render a shadow
+         	};
+        	var target = document.getElementById('cds-progress-circle');
+        	var spinner = new Spinner(opts).spin(target);
+		});		
+	</script>
+  </head>
+  
+  <body>
+  <div class="block">
+  	<div class="info_bar">基础按钮</div>
+  	<div class="display">
+	  	<table id="basic-button">
+	  		<tr>
+	  			<td>超大</td>
+	  			<td>大</td>
+	  			<td>标准</td>
+	  			<td>小</td>
+	  		</tr>
+	  		<tr>
+	  			<td><button class="cds-button cds-button-giant-shape">Static</button></td>
+	  			<td><button class="cds-button cds-button-big-shape">Static</button></td>
+	  			<td><button class="cds-button">Static</button></td>
+	  			<td><button class="cds-button cds-button-small-shape">Static</button></td>
+	  		</tr>
+	  		<tr>
+	  			<td><button class="cds-button cds-button-giant-shape" disabled>Static</button></td>
+	  			<td><button class="cds-button cds-button-big-shape" disabled>Static</button></td>
+	  			<td><button class="cds-button" disabled>Static</button></td>
+	  			<td><button class="cds-button cds-button-small-shape" disabled>Static</button></td>
+	  		</tr>
+	  		<tr>
+	  			<td><button class="cds-button cds-button-giant-shape cds-button-type-success">Success</button></td>
+	  			<td><button class="cds-button cds-button-giant-shape cds-button-type-edit">Edit</button></td>
+	  			<td><button class="cds-button cds-button-giant-shape cds-button-type-warning">Warning</button></td>
+	  			<td><button class="cds-button cds-button-giant-shape cds-button-type-infomation">Infomation</button></td>
+	  		</tr>
+	  		<tr>
+	  			<td><button class="cds-button cds-button-giant-shape cds-button-type-danger">Danger</button></td>
+	  			<td><button class="cds-button cds-button-giant-shape cds-button-type-more">More</button></td>
+	  			<td><button class="cds-button cds-button-giant-shape cds-button-type-purple">Purple</button></td>
+	  			<td><button class="cds-button cds-button-giant-shape cds-button-type-magenta">Magenta</button></td>
+	  		</tr>
+	  	</table>
+  	</div>
+  	</div>
+  	<div class="block">
+  		<div class="info_bar">复选框和单选框</div>
+  		<div class="display">
+  			<table id="checkbox-and-radio">
+  				<tr>
+  					<td><div class="cds-checkbox"><input type="checkbox" checked><label><i class="icon-ok"></i></label></div></td>
+  					<td><div class="cds-checkbox cds-checkbox-small-type"><input type="checkbox" checked><label><i class="icon-ok"></i></label></div></td>
+  					<td><div class="cds-checkbox cds-checkbox-type-green"><input type="checkbox" checked><label><i class="icon-ok"></i></label></div></td>
+  					<td><div class="cds-checkbox cds-checkbox-small-type cds-checkbox-type-green"><input type="checkbox" checked><label><i class="icon-ok"></i></label></div></td>
+  				</tr>
+  				<tr>
+  					<td><div class="cds-checkbox"><input type="checkbox" disabled checked><label><i class="icon-ok"></i></label></div></td>
+  					<td><div class="cds-checkbox cds-checkbox-small-type"><input type="checkbox" disabled><label><i class="icon-ok"></i></label></div></td>
+  					<td><div class="cds-checkbox"><input type="checkbox" disabled checked><label><i class="icon-ok"></i></label></div></td>
+  					<td><div class="cds-checkbox cds-checkbox-small-type"><input type="checkbox" disabled><label><i class="icon-ok"></i></label></div></td>
+  				</tr>
+  				<tr>
+  					<td><div class="cds-radio"><input type="radio" name="opinions"><label><i></i></label></div></td>
+  					<td><div class="cds-radio cds-radio-small-type"><input type="radio" name="opinions"><label><i></i></label></div></td>
+  					<td><div class="cds-radio cds-radio-type-green"><input type="radio" name="opinions"><label><i></i></label></div></td>
+  					<td><div class="cds-radio cds-radio-small-type cds-radio-type-green"><input type="radio" name="opinions"><label><i></i></label></div></td>
+  				</tr>
+  				<tr>
+  					<td><div class="cds-radio"><input type="radio" disabled><label><i></i></label></div></td>
+  					<td><div class="cds-radio cds-radio-small-type"><input type="radio" disabled><label><i></i></label></div></td>
+  					<td><div class="cds-radio cds-radio-type-green"><input type="radio" disabled><label><i style="display: block;"></i></label></div></td>
+  					<td><div class="cds-radio cds-radio-small-type cds-radio-type-green"><input type="radio" disabled><label><i style="display: block;"></i></label></div></td>
+  				</tr>
+  			</table>
+  		</div>
+  	</div>
+  	<div class="block">
+  		<div class="info_bar">开关</div>
+  		<div class="display">
+  			<table id="switch-on">
+  				<tr>
+  					<td><div class="cds-switch"><input type="checkbox"><label><i></i></label></div></td>
+  					<td><div class="cds-switch"><input type="checkbox" disabled><label><i></i></label></div></td>
+  				</tr>
+  				<tr>
+  					<td><div class="cds-switch cds-switch-square"><input type="checkbox"><label><i></i></label></div></td>
+  					<td><div class="cds-switch cds-switch-square"><input type="checkbox" disabled><label><i></i></label></div></td>
+  				</tr>
+  			</table>
+  		</div>
+  	</div>
+	<div class="block">
+  		<div class="info_bar">分段控件</div>
+  		<div class="display">
+  			<table id="section-component">
+  				<tr><td><ul class="cds-segment"><li class="segment-active"><a>segment_1</a></li><li><a>segment_2</a></li><li><a>segment_3</a></li></ul></td></tr>
+  				<tr><td><ul class="cds-segment cds-segment-green"><li class="segment-active"><a>segment_1</a></li><li><a>segment_2</a></li><li><a>segment_3</a></li></ul></td></tr>
+  				<tr><td><ul class="cds-segment cds-segment-blue"><li class="segment-active"><a>segment_1</a></li><li><a>segment_2</a></li><li><a>segment_3</a></li></ul></td></tr>
+  			</table>
+		</div>
+	</div>
+	<div class="block">
+  		<div class="info_bar">选项卡</div>
+  		<div class="display">
+  			<table id="section-bar">
+  				<tr><td><ul class="cds-option"><li class="option-active"><a>First&nbspTab</a></li><li><a>Second</a></li><li><a>Third</a></li></ul></td></tr>
+  			</table>
+		</div>
+	</div>
+	<div class="block">
+  		<div class="info_bar">搜索框</div>
+  		<div class="display">
+  			<table id="search-box">
+  				<tr><td><div class="cds-search"><input class="cds-input" placeholder="Search..." type="input" name="search"/><i class="icon-search"></i></div></td></tr>
+  			</table>
+		</div>
+	</div>
+	<div class="block">
+  		<div class="info_bar">文本框</div>
+  		<div class="display">
+  			<table><tr>
+  				<td style="width: 50%;">
+  					<table id="text-input">
+		  				<tr><td><input class="cds-input" placeholder="Text Input" type="input"/></td></tr>
+		  				<tr><td><input class="cds-input cds-input-active" placeholder="Text Input" type="input" value="Active"/></td></tr>
+		  				<tr><td><input class="cds-input cds-input-error" placeholder="Text Input" type="input" value="Error"/></td></tr>
+		  				<tr><td><input class="cds-input" placeholder="Text Input" type="input" disabled/></td></tr>
+		  			</table>
+  				</td>
+  				<td style="width: 50%;">
+  					<table id="textarea-input">
+						<tr><td><textarea style="width: 200px; height: 200px;">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</textarea></td></tr>
+		  			</table>
+  				</td>
+			</tr></table>
+		</div>
+	</div>
+	<div class="block">
+  		<div class="info_bar">文字链接</div>
+  		<div class="display">
+  			<table id="text-link"><tr>
+  				<td><a href="#" class="cds-hyperlink">Text&nbspHyperlink</a></td>
+			</tr></table>
+		</div>
+	</div>
+	<div class="block">
+  		<div class="info_bar">下拉列表</div>
+  		<div class="display">
+  			<table id="select-list"><tr>
+  				<td><select style="width:200px;">
+					<option value="Unselect">Unselect</option>
+					<option value="select">select</option>
+				</select></td>
+  				<td><select class="easyui-combobox" style="width:200px;">
+					<option value="Unselect">Unselect</option>
+					<option value="select">select</option>
+				</select></td>
+			</tr></table>
+		</div>
+	</div>
+	<div class="block">
+  		<div class="info_bar">列表框</div>
+  		<div class="display">
+  			<table id="info-list-box"><tr>
+  				<td><div class="cds-listbox">
+				<div name="title">List Box</div>
+				<ul style="height:224px;">
+				<li><a>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
+				<li><a>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
+				<li><a>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
+				<li><a>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
+				<li><a>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
+				<li><a>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
+				<li><a>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
+				<li><a>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
+				</ul></div>
+				</td>
+				<td><div class="cds-listbox">
+				<div name="title">List Box</div>
+				<ul style="height:224px;">
+				<li><div class="cds-checkbox"><input type="checkbox" checked><label><i class="icon-ok"></i></label></div><a>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
+				<li><div class="cds-checkbox"><input type="checkbox" checked><label><i class="icon-ok"></i></label></div><a>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
+				<li><div class="cds-checkbox"><input type="checkbox" checked><label><i class="icon-ok"></i></label></div><a>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
+				<li><div class="cds-checkbox"><input type="checkbox" checked><label><i class="icon-ok"></i></label></div><a>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
+				<li><div class="cds-checkbox"><input type="checkbox" checked><label><i class="icon-ok"></i></label></div><a>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
+				<li><div class="cds-checkbox"><input type="checkbox" checked><label><i class="icon-ok"></i></label></div><a>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
+				<li><div class="cds-checkbox"><input type="checkbox" disabled checked><label><i class="icon-ok"></i></label></div><a>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
+				<li><div class="cds-checkbox"><input type="checkbox" disabled><label><i class="icon-ok"></i></label></div><a>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
+				</ul></div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<ul class="cds-transform-list">
+						<li><div class="cds-listbox" style="width: 250px;">
+							<div name="title">Available</div>
+							<ul style="height:271px;">
+								<li><i class="icon-globe"></i><a>XXXXXXXX</a></li>
+								<li><i class="icon-globe"></i><a>XXXXXXXXXXXX</a></li>
+								<li><i class="icon-globe"></i><a>XXXXXXX</a></li>
+								<li><i class="icon-globe"></i><a>XXXXXX</a></li>
+								<li><i class="icon-globe"></i><a>XXXXXXXXXXX</a></li>
+								<li><i class="icon-globe"></i><a>XXXX</a></li>
+								<li><i class="icon-globe"></i><a>XXXXXXXXXXXXXXX</a></li>
+								<li><i class="icon-globe"></i><a>XXXXXXXXXX</a></li>
+							</ul>
+						</div></li>
+						<li><div class="transform-buttons">
+							<button class="cds-button cds-button-type-infomation">Add -></button>
+							<button class="cds-button cds-button-type-infomation"><- Remove</button>
+						</div></li>
+						<li><div class="cds-listbox" style="width: 250px;">
+							<div name="title">Available</div>
+							<ul style="height:271px;">
+								<li><i class="icon-globe"></i><a>XXXXXXXX</a></li>
+								<li><i class="icon-globe"></i><a>XXXXXXXXXXXX</a></li>
+								<li><i class="icon-globe"></i><a>XXXXXXX</a></li>
+								<li><i class="icon-globe"></i><a>XXXXXX</a></li>
+								<li><i class="icon-globe"></i><a>XXXXXXXXXXX</a></li>
+								<li><i class="icon-globe"></i><a>XXXX</a></li>
+								<li><i class="icon-globe"></i><a>XXXXXXXXXXXXXXX</a></li>
+								<li><i class="icon-globe"></i><a>XXXXXXXXXX</a></li>
+							</ul>
+						</div></li>
+					</ul>
+				</td>
+			</tr></table>
+		</div>
+	</div>
+	<div class="block">
+  		<div class="info_bar">列表</div>
+  		<div class="display">
+  			<table id="info-list"><tr>
+  				<td>
+  					<div style="font-weight: bold;text-indent: 6px;font-size: 20px;line-height: 35px;">Accordion</div>
+					<ul class="cds-accordion">
+						<li>
+							<div class="accordion-title"><i class="icon-minus"></i>Title goes here</div>
+							<div class="accordion-content">XXXX XXXXXX XXXXXXXXX XXXXXXXXX XXXXX XXXXXXX</div>
+						</li>
+						<li>
+							<div class="accordion-title"><i class="icon-plus"></i>Title goes here</div>
+							<div class="accordion-content" style="display: none;">XXXXXX XXXXXXXXXX X XXXXXX XXXXXX XXXXXXXXXXX XXXXX XXXXXXXX XXXX XXXXXX XXXX XXXX XXXX XXXXX</div>
+						</li>
+						<li>
+							<div class="accordion-title"><i class="icon-minus"></i>Title goes here</div>
+							<div class="accordion-content">X XX XXXXXXXXX XXXXX XX XXXX XX XXXXXXX XXXXX XXXXX XXXXXX XXXXXXXXX XXXXX XXXXXXX XXXXXXX XXXXXXX XXXXXXXX XXXXX XXXX XXXXXXX XXXXX XXXXXX</div>
+						</li>
+					</ul>
+  				</td>
+				<td>
+  					<div style="font-weight: bold;text-indent: 6px;font-size: 20px;line-height: 35px;">Lists</div>
+					<ul class="cds-lists">
+						<li><div class="lists-content"><i class="icon-film"></i>Content goes here</div></li>
+						<li><div class="lists-content"><i class="icon-truck"></i>Content goes here</div></li>
+						<li><div class="lists-content"><i class="icon-legal"></i>Content goes here</div></li>
+						<li><div class="lists-content"><i class="icon-cogs"></i>Content goes here</div></li>
+						<li><div class="lists-content"><i class="icon-stethoscope"></i>Content goes here</div></li>
+						<li><div class="lists-content"><i class="icon-coffee"></i>Content goes here</div></li>
+						<li><div class="lists-content"><i class="icon-food"></i>Content goes here</div></li>
+					</ul>
+  				</td>
+  			</tr></table>
+		</div>
+	</div>
+	<div class="block">
+  		<div class="info_bar">选择器</div>
+  		<div class="display">
+  			<table id="cds-date-selection"><tr>
+  				<td><input type="text" class="Wdate" onClick="WdatePicker()"/></td>
+  			</tr></table>
+		</div>
+	</div>
+	<div class="block">
+  		<div class="info_bar">面包屑导航</div>
+  		<div class="display">
+  			<table id="cds-date-selection"><tr>
+  				<td><ul class="cds-breadcrumb">
+					<li class="cds-hyperlink"><a>Home</a></li>
+					<li class="cds-hyperlink"><a>User</a></li>
+					<li class="cds-hyperlink"><a>Library</a></li>
+					<li class="cds-hyperlink cds-hyperlink-disabled"><a>Data</a></li>
+				</ul></td>
+  			</tr></table>
+		</div>
+	</div>
+	<div class="block">
+  		<div class="info_bar">页码指示器</div>
+  		<div class="display">
+  			<table id="cds-pagination"><tr>
+  				<td><ul class="cds-pagination">
+					<li class="pagination-disabled"><a class="icon-angle-left"></a></li>
+					<li class="pagination-active"><a class="pagemin">1</a></li>
+					<li><a>2</a></li>
+					<li><a>3</a></li>
+					<li><a>4</a></li>
+					<li><a>...</a></li>
+					<li><a class="pagemax">20</a></li>
+					<li><a class="icon-angle-right"></a></li>
+				</ul></td>
+				<td><ul class="cds-pagination cds-pagination-without-background">
+					<li class="pagination-disabled"><a class="icon-angle-left"></a></li>
+					<li class="pagination-active"><a class="pagemin">1</a></li>
+					<li><a>2</a></li>
+					<li><a>3</a></li>
+					<li><a>4</a></li>
+					<li><a>...</a></li>
+					<li><a class="pagemax">99</a></li>
+					<li><a class="icon-angle-right"></a></li>
+				</ul></td>
+  			</tr></table>
+		</div>
+	</div>
+	<div class="block">
+  		<div class="info_bar">滚动条</div>
+  		<div class="display">
+  			<table id="cds-scrollbar"><tr>
+  				<td>详见 上方列表框</td>
+  			</tr></table>
+		</div>
+	</div>
+	<div class="block">
+  		<div class="info_bar">步进器</div>
+  		<div class="display">
+  			<table id="cds-stepper"><tr>
+  				<td><ul class="cds-stepper">
+					<li><a class="stepper-control icon-plus" name="stepper-plus"></a></li>
+					<li><input class="stepper-number" value="100"/></li>
+					<li><a class="stepper-control icon-minus" name="stepper-minus"></a></li>
+				</ul></td>
+  			</tr></table>
+		</div>
+	</div>
+	<div class="block">
+  		<div class="info_bar">滑块</div>
+  		<div class="display">
+  			<table id="cds-slider"><tr>
+  				<td><div class="cds-slider"><div class="slider-bar"></div><div class="slider-handle"></div></div></td>
+  				<td><div class="cds-slider cds-slider-green"><div class="slider-bar"></div><div class="slider-handle"></div></div></td>
+  			</tr></table>
+		</div>
+	</div>
+	<div class="block">
+  		<div class="info_bar">进度活动指示器</div>
+  		<div class="display">
+  			<table id="cds-progress"><tr>
+  				<td>
+  					<ul class="progress-control">
+						<li value="0"><button class="cds-button">0%</button></li>
+						<li value="25"><button class="cds-button">25%</button></li>
+						<li value="50"><button class="cds-button">50%</button></li>
+						<li value="75"><button class="cds-button">75%</button></li>
+						<li value="100"><button class="cds-button">100%</button></li>
+					</ul>
+					<div class="cds-progress" style="margin: 10px auto;">
+						<div class="progress-bar"></div>
+					</div>
+					<div class="cds-progress cds-progress-big" style="margin: 10px auto;">
+						<div class="progress-bar"></div>
+					</div>
+					<div class="cds-progress cds-progress-large" style="margin: 10px auto;">
+						<div class="progress-bar"></div>
+					</div>
+					<div id="cds-progress-circle" style="position: relative;height: 50px;"></div>
+  				</td>
+  			</tr></table>
+		</div>
+	</div>
+  </body>
+</html>

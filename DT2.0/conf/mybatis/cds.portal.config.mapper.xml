@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjcds.portal.mybatis.dao.ConfigDao">
+
+	<resultMap id="BaseResultMap" type="com.zjcds.portal.mybatis.bean.Config">
+		<id column="ID" property="id" jdbcType="DECIMAL"></id>
+		<result column="CONFIG_NAME_CN" property="nameCn" jdbcType="VARCHAR" />
+		<result column="CONFIG_NAME_EN" property="nameEn" jdbcType="VARCHAR" />
+		<result column="CONFIG_PARAM_TYPE" property="paramType" jdbcType="VARCHAR" />
+		<result column="CONFIG_PARAM_TYPE_ID" property="paramTypeId" jdbcType="DECIMAL" />
+		<result column="CONFIG_PARAM_VALUE" property="paramValue" jdbcType="VARCHAR" />
+		<result column="CONFIG_DATA_TYPE" property="dataType" jdbcType="VARCHAR" />
+		<result column="CONFIG_DATA_TYPE_ID" property="dataTypeId" jdbcType="DECIMAL" />
+		<result column="CONFIG_ENABLED_FLAG" property="enabledFlag" jdbcType="DECIMAL" />
+		<result column="CONFIG_DESCRIBE" property="describe" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<sql id="joinSelect">
+	    select c.ID,
+	           c.CONFIG_NAME_CN,
+	           c.CONFIG_NAME_EN,
+	           p.NAME CONFIG_PARAM_TYPE,
+	           c.CONFIG_PARAM_TYPE_ID,
+	           c.CONFIG_PARAM_VALUE,
+	           d.NAME CONFIG_DATA_TYPE,
+	           c.CONFIG_DATA_TYPE_ID,
+	           c.CONFIG_ENABLED_FLAG,
+	           c.CONFIG_DESCRIBE
+	      from T_CDT_CONFIG c
+	     inner join T_CDT_CONFIG_DATA_TYPE d
+	        on c.CONFIG_DATA_TYPE_ID = d.ID
+	     inner join T_CDT_CONFIG_PARAM_TYPE p
+	        on c.CONFIG_PARAM_TYPE_ID = p.ID
+	        <!-- 别名分别为：c、d、p 代表Config,Data,Param -->
+	</sql>
+
+
+	<!-- 获取所有的配置 -->
+	<select id="getAllConfig" resultMap="BaseResultMap">
+	    <include refid="joinSelect"/>
+	     order by c.ID
+	</select>
+
+	<!-- 根据配置ID修改配置 -->
+	<update id="updateConfig" parameterType="com.zjcds.portal.mybatis.bean.Config">
+		update T_CDT_CONFIG
+		<set>
+			<if test="nameCn != null">
+				CONFIG_NAME_CN=#{nameCn,jdbcType=VARCHAR},
+		    </if>
+			<if test="nameEn != null">
+				CONFIG_NAME_EN=#{nameEn,jdbcType=VARCHAR},
+		    </if>
+		    <if test="paramTypeId != null">
+				CONFIG_PARAM_TYPE_ID=#{paramTypeId,jdbcType=DECIMAL},
+		    </if>
+		    <if test="paramValue != null">
+				CONFIG_PARAM_VALUE=#{paramValue,jdbcType=DECIMAL},
+		    </if>
+		    <if test="dataTypeId != null">
+				CONFIG_DATA_TYPE_ID=#{dataTypeId,jdbcType=DECIMAL},
+		    </if>
+		    <if test="enabledFlag != null">
+				CONFIG_ENABLED_FLAG=#{enabledFlag,jdbcType=DECIMAL},
+		    </if>
+			<if test="describe != null">
+				CONFIG_DESCRIBE=#{describe,jdbcType=VARCHAR},
+		    </if>
+		</set>
+		where ID=#{id,jdbcType=DECIMAL}
+	</update>
+
+	<!-- 批量删除配置 -->
+	<delete id="deleteConfig">
+		delete from
+		T_CDT_CONFIG where ID IN 
+		<foreach item="idItem" collection="array" open="(" separator="," close=")">
+			#{idItem}
+		</foreach>
+    </delete>
+    
+    <!-- 根据配置ID删除配置 -->
+	<delete id="deleteConfigById" parameterType="com.zjcds.portal.mybatis.bean.Config">
+		delete from
+		T_CDT_CONFIG where ID = #{id,jdbcType=DECIMAL}
+    </delete>
+
+	<!-- 增加配置 -->
+	<insert id="addConfig" parameterType="com.zjcds.portal.mybatis.bean.Config">
+	
+		<!-- 从序列中查询出模板ID -->
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT T_CDT_CONFIG_SEQUENCE.NEXTVAL FROM DUAL
+    	</selectKey>
+	
+		insert into
+		T_CDT_CONFIG(
+			ID,CONFIG_NAME_CN,CONFIG_NAME_EN,
+			CONFIG_PARAM_TYPE_ID,CONFIG_PARAM_VALUE,
+			CONFIG_DATA_TYPE_ID,CONFIG_ENABLED_FLAG,CONFIG_DESCRIBE)
+		values(
+			#{id,jdbcType=DECIMAL},#{nameCn,jdbcType=VARCHAR},#{nameEn,jdbcType=VARCHAR},
+			#{paramTypeId,jdbcType=DECIMAL},#{paramValue,jdbcType=DECIMAL},
+			#{dataTypeId,jdbcType=DECIMAL},#{enabledFlag,jdbcType=DECIMAL},#{describe,jdbcType=VARCHAR})
+	</insert>
+	
+	<!-- 根据配置ID获取配置 -->
+	<select id="getConfigById" resultMap="BaseResultMap" parameterType="com.zjcds.portal.mybatis.bean.Config">
+		<include refid="joinSelect"/>
+		where c.ID = #{id,jdbcType=DECIMAL}
+	</select>
+	
+	<!-- 根据英文名称获取配置 -->
+	<select id="getConfigByNameEn" resultMap="BaseResultMap" parameterType="com.zjcds.portal.mybatis.bean.Config">
+		<include refid="joinSelect"/>
+		where c.CONFIG_NAME_EN = #{nameEn,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 根据参数名称或英文名称模糊查询获取配置 -->
+	<select id="getConfigsByName" resultMap="BaseResultMap" parameterType="com.zjcds.portal.mybatis.bean.Config">
+		<include refid="joinSelect"/>
+		<where>
+			<if test="nameCn!=null and nameCn!=''">
+				c.CONFIG_NAME_CN like '%'||#{nameCn,jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="nameEn!=null and nameEn!=''">
+				or c.CONFIG_NAME_EN like '%'||#{nameEn,jdbcType=VARCHAR}||'%'
+			</if>
+		</where>
+	</select>
+	
+	<!-- 查询 -->
+	<select id="getConfigList" resultMap="BaseResultMap">
+		<include refid="joinSelect"/>
+		<where>
+			<if test="nameCn!=null and nameCn!=''">
+				c.CONFIG_NAME_CN like '%'||#{nameCn,jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="nameEn!=null and nameEn!=''">
+				or c.CONFIG_NAME_EN like '%'||#{nameEn,jdbcType=VARCHAR}||'%'
+			</if>
+		</where>
+	</select>
+	
+	<!-- 获取参数类型 -->
+	<select id="getParamType" resultType="java.util.Map">
+	    select * from T_CDT_CONFIG_PARAM_TYPE ORDER BY ID
+	</select>
+	
+	<!-- 获取数据类型 -->
+	<select id="getDataType" resultType="java.util.Map">
+	    select * from T_CDT_CONFIG_DATA_TYPE ORDER BY ID
+	</select>
+	
+</mapper>

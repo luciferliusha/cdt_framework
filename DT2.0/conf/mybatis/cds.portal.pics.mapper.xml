@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjcds.portal.mybatis.dao.PicsDao">
+
+	<resultMap id="BaseResultMap" type="com.zjcds.portal.mybatis.bean.Pics">
+		<id column="PIC_ID" property="picId" jdbcType="DECIMAL"></id>
+		<result column="PIC_NAME" property="picName" jdbcType="VARCHAR" />
+		<result column="PIC" property="pic" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+	<!-- 获取所有的图标 -->
+	<select id="getAllPics" resultMap="BaseResultMap">
+		select
+		PIC_ID, PIC_NAME, PIC
+		from T_CDT_PICS
+		order by PIC_ID
+	</select>
+
+	<!-- 根据图标ID修改图标 -->
+	<update id="updatePics" parameterType="com.zjcds.portal.mybatis.bean.Pics">
+		update T_CDT_PICS
+		<set>
+			<if test="picName != null">
+				PIC_NAME=#{picName,jdbcType=VARCHAR},
+		    </if>
+ 		    <if test="pic != null">
+				PIC=#{pic,jdbcType=VARCHAR},
+		    </if> 
+		</set>
+		where PIC_ID=#{picId,jdbcType=DECIMAL}
+	</update>
+
+	<!-- 批量删除图标 -->
+	<delete id="deletePics">
+		delete from
+		T_CDT_PICS where PIC_ID IN 
+		<foreach item="idItem" collection="array" open="(" separator="," close=")">
+			#{idItem}
+		</foreach>
+    </delete>
+
+	<!-- 增加图标 -->
+	<insert id="addPics" parameterType="com.zjcds.portal.mybatis.bean.Pics">
+		<!-- 从序列中查询出图标PFID -->
+		<selectKey keyProperty="picId" resultType="int" order="BEFORE">
+			SELECT T_CDT_INCON_TMP_SEQUENCE.NEXTVAL FROM DUAL
+    	</selectKey>
+		insert into
+		T_CDT_PICS(PIC_ID,PIC_NAME,PIC)
+		values
+		(#{picId,jdbcType=DECIMAL},#{picName,jdbcType=VARCHAR},#{pic,jdbcType=VARCHAR})
+	</insert>
+	
+	<!-- 根据图标ID获取图标 -->
+	<select id="getPicById" resultMap="BaseResultMap" parameterType="com.zjcds.portal.mybatis.bean.Pics">
+		select
+		PIC_ID, PIC_NAME, PIC
+		from T_CDT_PICS
+		where PIC_ID = #{picId,jdbcType=DECIMAL}
+	</select>
+
+</mapper>
